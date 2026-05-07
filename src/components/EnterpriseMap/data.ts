@@ -22,6 +22,12 @@ export interface Layer {
   descEn: string;
   resultPt: string;
   resultEn: string;
+  /** Research-backed bottleneck — short sentence with embedded time/cost loss */
+  gargaloPt: string;
+  gargaloEn: string;
+  /** Punchy metric (≤16 chars) extracted from the gargalo, shown on the card in red phase */
+  gargaloMetricPt: string;
+  gargaloMetricEn: string;
 }
 
 export interface Sector {
@@ -30,8 +36,54 @@ export interface Sector {
   nameEn: string;
   icon: LucideIcon;
   order: number;
+  /** Sector-wide industry stat (1 sentence) used in modal "Realidade do Mercado" block */
+  industryStatPt: string;
+  industryStatEn: string;
+  /** Citation for the industry stat above */
+  sourcePt: string;
+  sourceEn: string;
   layers: { op: Layer; tat: Layer; est: Layer };
 }
+
+/**
+ * Methodology phase metadata — drives the journey strip in the SectorModal.
+ * Locked palette: Padronização=blue, Operação Assistida=orange, Automação=green.
+ */
+export const METHODOLOGY_STEPS = [
+  {
+    key: "padronizacao",
+    labelPt: "Padronização",
+    labelEn: "Standardization",
+    descPt: "Mapeamos e documentamos o processo atual com SOPs auditáveis.",
+    descEn: "We map and document the current process with auditable SOPs.",
+    color: "#3b82f6",
+    bg: "rgba(59,130,246,0.12)",
+    border: "rgba(59,130,246,0.4)",
+    icon: "▢",
+  },
+  {
+    key: "operacao_assistida",
+    labelPt: "Operação Assistida",
+    labelEn: "Assisted Operation",
+    descPt: "IA assiste o time com humano in-the-loop nas decisões críticas.",
+    descEn: "AI assists the team with humans in-the-loop on critical decisions.",
+    color: "#f97316",
+    bg: "rgba(249,115,22,0.12)",
+    border: "rgba(249,115,22,0.4)",
+    icon: "◐",
+  },
+  {
+    key: "automacao",
+    labelPt: "Automação",
+    labelEn: "Automation",
+    descPt: "Processo executa autônomo com guardrails e supervisão contínua.",
+    descEn: "The process runs autonomously with guardrails and continuous supervision.",
+    color: "#22c55e",
+    bg: "rgba(34,197,94,0.12)",
+    border: "rgba(34,197,94,0.4)",
+    icon: "✓",
+  },
+] as const;
 
 export const LAYER_STYLE: Record<
   LayerKey,
@@ -73,6 +125,12 @@ export const sectors: Sector[] = [
     nameEn: "Marketing",
     icon: Megaphone,
     order: 1,
+    industryStatPt:
+      "Profissionais de marketing gastam em média 21h/semana em tarefas manuais — produção de conteúdo, relatórios e atualização de planilhas.",
+    industryStatEn:
+      "Marketing professionals spend an average of 21h/week on manual work — content production, reports, and spreadsheet updates.",
+    sourcePt: "Asana — Anatomy of Work 2023",
+    sourceEn: "Asana — Anatomy of Work 2023",
     layers: {
       op: {
         key: "operacional",
@@ -82,6 +140,12 @@ export const sectors: Sector[] = [
         descEn: "AI-driven SEO content generation and scheduling",
         resultPt: "-3h/dia",
         resultEn: "-3h/day",
+        gargaloPt:
+          "Criação manual de conteúdo SEO consome 8-12h/semana por profissional, com gargalo de revisão e publicação.",
+        gargaloEn:
+          "Manual SEO content creation eats 8-12h/week per professional, bottlenecked at review and publishing.",
+        gargaloMetricPt: "8-12h/sem",
+        gargaloMetricEn: "8-12h/wk",
       },
       tat: {
         key: "tatico",
@@ -91,6 +155,12 @@ export const sectors: Sector[] = [
         descEn: "Multi-touch AI attribution across channels",
         resultPt: "-25% CAC",
         resultEn: "-25% CAC",
+        gargaloPt:
+          "Atribuição last-click sub-estima canais de topo de funil — orçamento mal alocado infla o CAC em 25-30%.",
+        gargaloEn:
+          "Last-click attribution underestimates top-of-funnel channels — misallocated budget inflates CAC by 25-30%.",
+        gargaloMetricPt: "+30% CAC",
+        gargaloMetricEn: "+30% CAC",
       },
       est: {
         key: "estrategico",
@@ -100,6 +170,12 @@ export const sectors: Sector[] = [
         descEn: "Macro scenarios & market positioning",
         resultPt: "+12% mkt share",
         resultEn: "+12% mkt share",
+        gargaloPt:
+          "Decisões de posicionamento sem inteligência de mercado em tempo real geram 6-12 meses de atraso competitivo.",
+        gargaloEn:
+          "Positioning decisions without real-time market intelligence cause 6-12 months of competitive lag.",
+        gargaloMetricPt: "6-12 meses",
+        gargaloMetricEn: "6-12 months",
       },
     },
   },
@@ -109,6 +185,12 @@ export const sectors: Sector[] = [
     nameEn: "Sales",
     icon: Zap,
     order: 2,
+    industryStatPt:
+      "Vendedores gastam apenas 28% do tempo efetivamente vendendo — 72% é absorvido por tarefas administrativas e atualização de CRM.",
+    industryStatEn:
+      "Salespeople spend only 28% of their time actually selling — 72% is consumed by admin work and CRM updates.",
+    sourcePt: "Salesforce — State of Sales 2022",
+    sourceEn: "Salesforce — State of Sales 2022",
     layers: {
       op: {
         key: "operacional",
@@ -118,6 +200,12 @@ export const sectors: Sector[] = [
         descEn: "AI lead qualification and 24/7 response",
         resultPt: "+R$ 18k/mês",
         resultEn: "+$3.5k/mo",
+        gargaloPt:
+          "Resposta a leads acima de 5min reduz conversão em até 21x — leads frios desperdiçam R$ 18-30k/mês em pipeline.",
+        gargaloEn:
+          "Lead response over 5 minutes drops conversion up to 21× — cold leads waste $3-6k/mo in lost pipeline.",
+        gargaloMetricPt: "−R$ 18-30k/mês",
+        gargaloMetricEn: "−$3-6k/mo",
       },
       tat: {
         key: "tatico",
@@ -127,6 +215,12 @@ export const sectors: Sector[] = [
         descEn: "Pipeline forecasting and AI prioritization",
         resultPt: "+30% conversão",
         resultEn: "+30% conversion",
+        gargaloPt:
+          "78% dos forecasts de pipeline são imprecisos — priorização errada custa 15-20% das metas trimestrais.",
+        gargaloEn:
+          "78% of pipeline forecasts are inaccurate — wrong prioritization costs 15-20% of quarterly targets.",
+        gargaloMetricPt: "78% imprecisos",
+        gargaloMetricEn: "78% off",
       },
       est: {
         key: "estrategico",
@@ -136,6 +230,12 @@ export const sectors: Sector[] = [
         descEn: "TAM identification and market expansion",
         resultPt: "+R$ 2M/ano",
         resultEn: "+$400k/yr",
+        gargaloPt:
+          "Empresas sem mapeamento sistemático de TAM perdem ~35% das oportunidades adjacentes ao core.",
+        gargaloEn:
+          "Companies without systematic TAM mapping miss ~35% of adjacent-to-core opportunities.",
+        gargaloMetricPt: "−35% TAM",
+        gargaloMetricEn: "−35% TAM",
       },
     },
   },
@@ -145,6 +245,12 @@ export const sectors: Sector[] = [
     nameEn: "Customer Support",
     icon: Headset,
     order: 3,
+    industryStatPt:
+      "70% dos tickets de suporte são repetitivos e poderiam ser resolvidos sem intervenção humana.",
+    industryStatEn:
+      "70% of support tickets are repetitive and solvable without human intervention.",
+    sourcePt: "Zendesk — CX Trends 2024",
+    sourceEn: "Zendesk — CX Trends 2024",
     layers: {
       op: {
         key: "operacional",
@@ -154,6 +260,12 @@ export const sectors: Sector[] = [
         descEn: "Initial triage and automated responses",
         resultPt: "-70% tempo",
         resultEn: "-70% time",
+        gargaloPt:
+          "Agentes humanos gastam ~60% do tempo em triagem N1 — R$ 12-18k/mês desperdiçados em tarefas repetitivas.",
+        gargaloEn:
+          "Human agents spend ~60% of time on L1 triage — $2.5-3.5k/mo wasted on repetitive work.",
+        gargaloMetricPt: "−R$ 12-18k/mês",
+        gargaloMetricEn: "−$2.5-3.5k/mo",
       },
       tat: {
         key: "tatico",
@@ -163,6 +275,12 @@ export const sectors: Sector[] = [
         descEn: "Proactive cancellation risk detection",
         resultPt: "-15% churn",
         resultEn: "-15% churn",
+        gargaloPt:
+          "Detecção tardia de risco de cancelamento custa 5-7x mais que prevenção proativa.",
+        gargaloEn:
+          "Late churn-risk detection costs 5-7× more than proactive prevention.",
+        gargaloMetricPt: "5-7× custo",
+        gargaloMetricEn: "5-7× cost",
       },
       est: {
         key: "estrategico",
@@ -172,6 +290,12 @@ export const sectors: Sector[] = [
         descEn: "Product insights from feedback patterns",
         resultPt: "+R$ 800k/ano",
         resultEn: "+$160k/yr",
+        gargaloPt:
+          "Feedback de milhares de tickets enterrado sem análise sistemática — produto evolui por achismo.",
+        gargaloEn:
+          "Feedback from thousands of tickets buried without systematic analysis — product evolves on guesswork.",
+        gargaloMetricPt: "−R$ 800k/ano",
+        gargaloMetricEn: "−$160k/yr",
       },
     },
   },
@@ -181,6 +305,12 @@ export const sectors: Sector[] = [
     nameEn: "Finance",
     icon: TrendingUp,
     order: 4,
+    industryStatPt:
+      "Departamentos financeiros gastam 40-60% do tempo em tarefas de conciliação manual e fechamento contábil.",
+    industryStatEn:
+      "Finance departments spend 40-60% of their time on manual reconciliation and book-closing tasks.",
+    sourcePt: "Deloitte — Finance Operations Survey 2023",
+    sourceEn: "Deloitte — Finance Operations Survey 2023",
     layers: {
       op: {
         key: "operacional",
@@ -190,6 +320,12 @@ export const sectors: Sector[] = [
         descEn: "Bank reconciliation and AP/AR automation",
         resultPt: "+R$ 13,5k/mês",
         resultEn: "+$2.5k/mo",
+        gargaloPt:
+          "Conciliação bancária manual: 15-20h/semana, taxa de erro de 3-5%, retrabalho de R$ 8-15k/mês.",
+        gargaloEn:
+          "Manual bank reconciliation: 15-20h/week, 3-5% error rate, $1.5-3k/mo of rework.",
+        gargaloMetricPt: "15-20h/sem",
+        gargaloMetricEn: "15-20h/wk",
       },
       tat: {
         key: "tatico",
@@ -199,6 +335,12 @@ export const sectors: Sector[] = [
         descEn: "Real-time cash flow forecasting",
         resultPt: "-30% capital giro",
         resultEn: "-30% working capital",
+        gargaloPt:
+          "Forecast mensal vs. diário deixa a empresa 30 dias atrasada — capital de giro 30% acima do necessário.",
+        gargaloEn:
+          "Monthly vs. daily forecast leaves the company 30 days behind — working capital 30% higher than needed.",
+        gargaloMetricPt: "+30% giro",
+        gargaloMetricEn: "+30% capital",
       },
       est: {
         key: "estrategico",
@@ -208,6 +350,12 @@ export const sectors: Sector[] = [
         descEn: "M&A scenarios and strategic allocation",
         resultPt: "+R$ 2M/ano",
         resultEn: "+$400k/yr",
+        gargaloPt:
+          "Cenários de M&A em planilhas demoram semanas e não são reproduzíveis — decisões com dados parciais.",
+        gargaloEn:
+          "M&A scenarios in spreadsheets take weeks and aren't reproducible — decisions made on partial data.",
+        gargaloMetricPt: "Semanas/decisão",
+        gargaloMetricEn: "Weeks/decision",
       },
     },
   },
@@ -217,6 +365,12 @@ export const sectors: Sector[] = [
     nameEn: "Executive",
     icon: Briefcase,
     order: 5,
+    industryStatPt:
+      "Executivos gastam em média 40% do tempo em reuniões de status e atualização — não em decisão estratégica.",
+    industryStatEn:
+      "Executives spend an average of 40% of their time on status updates and meetings — not strategic decisions.",
+    sourcePt: "Harvard Business Review — Time, Talent and Energy",
+    sourceEn: "Harvard Business Review — Time, Talent and Energy",
     layers: {
       op: {
         key: "operacional",
@@ -226,6 +380,12 @@ export const sectors: Sector[] = [
         descEn: "Critical KPIs in real time",
         resultPt: "10× decisão",
         resultEn: "10× decisions",
+        gargaloPt:
+          "Decisões baseadas em dados de 1-2 semanas atrás — janela de oportunidade frequentemente já fechada.",
+        gargaloEn:
+          "Decisions based on 1-2 week-old data — opportunity window often already closed.",
+        gargaloMetricPt: "1-2 sem atraso",
+        gargaloMetricEn: "1-2wk lag",
       },
       tat: {
         key: "tatico",
@@ -235,6 +395,12 @@ export const sectors: Sector[] = [
         descEn: "Variance alerts with root cause",
         resultPt: "+R$ 88k/mês",
         resultEn: "+$15k/mo",
+        gargaloPt:
+          "Variâncias detectadas só no fechamento mensal — root cause demora dias e custa R$ 80-120k/mês.",
+        gargaloEn:
+          "Variances detected only at month-end close — root cause takes days, costing $15-22k/mo.",
+        gargaloMetricPt: "−R$ 80-120k/mês",
+        gargaloMetricEn: "−$15-22k/mo",
       },
       est: {
         key: "estrategico",
@@ -244,6 +410,12 @@ export const sectors: Sector[] = [
         descEn: "AI-driven scenario planning",
         resultPt: "+R$ 5M/ano",
         resultEn: "+$1M/yr",
+        gargaloPt:
+          "Cenários macro atualizados uma vez por trimestre — risco macro mal gerenciado e oportunidades perdidas.",
+        gargaloEn:
+          "Macro scenarios updated once a quarter — poorly managed macro risk and missed opportunities.",
+        gargaloMetricPt: "1×/trimestre",
+        gargaloMetricEn: "1×/quarter",
       },
     },
   },
@@ -253,6 +425,12 @@ export const sectors: Sector[] = [
     nameEn: "Operations",
     icon: Cog,
     order: 6,
+    industryStatPt:
+      "Empresas perdem 20-30% da receita anual por ineficiências de processo não-mapeadas e gargalos invisíveis.",
+    industryStatEn:
+      "Companies lose 20-30% of annual revenue to unmapped process inefficiencies and invisible bottlenecks.",
+    sourcePt: "IDC — State of Process Excellence 2022",
+    sourceEn: "IDC — State of Process Excellence 2022",
     layers: {
       op: {
         key: "operacional",
@@ -262,6 +440,12 @@ export const sectors: Sector[] = [
         descEn: "AI-generated process mapping & SOPs",
         resultPt: "-50% onboarding",
         resultEn: "-50% onboarding",
+        gargaloPt:
+          "SOPs em wikis estagnados — 65% dos novos contratados não os usam, onboarding 50% mais lento.",
+        gargaloEn:
+          "Stale wiki SOPs — 65% of new hires don't use them, onboarding 50% slower.",
+        gargaloMetricPt: "65% não usam",
+        gargaloMetricEn: "65% skip",
       },
       tat: {
         key: "tatico",
@@ -271,6 +455,12 @@ export const sectors: Sector[] = [
         descEn: "Hidden bottleneck detection",
         resultPt: "+35% throughput",
         resultEn: "+35% throughput",
+        gargaloPt:
+          "Gargalos invisíveis identificados só após impacto financeiro — perda média de 15-25% de throughput.",
+        gargaloEn:
+          "Invisible bottlenecks identified only after financial impact — average 15-25% throughput loss.",
+        gargaloMetricPt: "−15-25% throughput",
+        gargaloMetricEn: "−15-25% output",
       },
       est: {
         key: "estrategico",
@@ -280,6 +470,12 @@ export const sectors: Sector[] = [
         descEn: "Future capacity simulation",
         resultPt: "-25% CapEx",
         resultEn: "-25% CapEx",
+        gargaloPt:
+          "Planejamento de capacidade por intuição infla CapEx em ~25% e gera ociosidade ou subdimensionamento.",
+        gargaloEn:
+          "Intuition-based capacity planning inflates CapEx by ~25% and creates idle assets or under-sizing.",
+        gargaloMetricPt: "+25% CapEx",
+        gargaloMetricEn: "+25% CapEx",
       },
     },
   },
@@ -289,6 +485,12 @@ export const sectors: Sector[] = [
     nameEn: "HR",
     icon: Users,
     order: 7,
+    industryStatPt:
+      "Recrutadores gastam em média 23h/semana em tarefas administrativas — não em construção de relacionamento com candidatos.",
+    industryStatEn:
+      "Recruiters spend an average of 23h/week on administrative tasks — not on candidate relationship-building.",
+    sourcePt: "SHRM — Talent Acquisition Benchmarking 2023",
+    sourceEn: "SHRM — Talent Acquisition Benchmarking 2023",
     layers: {
       op: {
         key: "operacional",
@@ -298,6 +500,12 @@ export const sectors: Sector[] = [
         descEn: "Automated resume screening",
         resultPt: "Semanas → horas",
         resultEn: "Weeks → hours",
+        gargaloPt:
+          "Triagem manual demora semanas — 40% dos top candidates aceitam outras ofertas no caminho.",
+        gargaloEn:
+          "Manual screening takes weeks — 40% of top candidates accept other offers along the way.",
+        gargaloMetricPt: "Semanas",
+        gargaloMetricEn: "Weeks",
       },
       tat: {
         key: "tatico",
@@ -307,6 +515,12 @@ export const sectors: Sector[] = [
         descEn: "Predictive exit-risk analysis",
         resultPt: "-20% turnover",
         resultEn: "-20% turnover",
+        gargaloPt:
+          "Turnover não-previsto custa 1,5-2x o salário anual do profissional perdido em recolocação e produtividade.",
+        gargaloEn:
+          "Unforecasted turnover costs 1.5-2× the annual salary of the lost professional in replacement and productivity.",
+        gargaloMetricPt: "1,5-2× salário",
+        gargaloMetricEn: "1.5-2× salary",
       },
       est: {
         key: "estrategico",
@@ -316,6 +530,12 @@ export const sectors: Sector[] = [
         descEn: "Long-term talent planning",
         resultPt: "-15% custo talento",
         resultEn: "-15% talent cost",
+        gargaloPt:
+          "Planejamento de força de trabalho reativo gera contratações emergenciais ~35% mais caras.",
+        gargaloEn:
+          "Reactive workforce planning leads to emergency hires ~35% more expensive.",
+        gargaloMetricPt: "+35% custo",
+        gargaloMetricEn: "+35% cost",
       },
     },
   },
@@ -325,6 +545,12 @@ export const sectors: Sector[] = [
     nameEn: "IT & Security",
     icon: ShieldCheck,
     order: 8,
+    industryStatPt:
+      "60-70% dos chamados de N1 são repetitivos e tecnicamente automatizáveis — mas seguem consumindo o time humano.",
+    industryStatEn:
+      "60-70% of L1 tickets are repetitive and technically automatable — yet still consume human time.",
+    sourcePt: "Gartner — Service Desk Research 2023",
+    sourceEn: "Gartner — Service Desk Research 2023",
     layers: {
       op: {
         key: "operacional",
@@ -334,6 +560,12 @@ export const sectors: Sector[] = [
         descEn: "Autonomous L1 ticket resolution",
         resultPt: "80% sem humano",
         resultEn: "80% no-touch",
+        gargaloPt:
+          "Atendimento N1 manual: tempo médio 4-6h, satisfação <60%, custo de R$ 50-80 por ticket.",
+        gargaloEn:
+          "Manual L1 support: average time 4-6h, satisfaction <60%, cost of $10-15 per ticket.",
+        gargaloMetricPt: "4-6h MTTR",
+        gargaloMetricEn: "4-6h MTTR",
       },
       tat: {
         key: "tatico",
@@ -343,6 +575,12 @@ export const sectors: Sector[] = [
         descEn: "Proactive incident detection",
         resultPt: "-60% incidentes",
         resultEn: "-60% incidents",
+        gargaloPt:
+          "Incidentes detectados via reclamação de usuário: MTTR 3-5x maior, perda média R$ 25-40k por incidente.",
+        gargaloEn:
+          "Incidents detected via user complaint: MTTR 3-5× higher, average loss $5-8k per incident.",
+        gargaloMetricPt: "−R$ 25-40k/inc",
+        gargaloMetricEn: "−$5-8k/inc",
       },
       est: {
         key: "estrategico",
@@ -352,6 +590,12 @@ export const sectors: Sector[] = [
         descEn: "Adaptive security architecture",
         resultPt: "Compliance contínuo",
         resultEn: "Continuous compliance",
+        gargaloPt:
+          "Compliance via auditoria manual trimestral: até 90 dias de exposição entre revisões.",
+        gargaloEn:
+          "Compliance via manual quarterly audit: up to 90 days of exposure between reviews.",
+        gargaloMetricPt: "90 dias expostos",
+        gargaloMetricEn: "90d exposed",
       },
     },
   },

@@ -40,12 +40,13 @@ const layers = [
     subtitlePt: "De Execução Manual para Fluxo Contínuo 24/7",
     subtitleEn: "From Manual Execution to 24/7 Continuous Flow",
     classes: {
-      text: "text-success",
-      bg: "bg-success",
-      border: "border-success/30",
-      bgSubtle: "bg-success/5",
-      shadow: "shadow-[0_0_30px_rgba(16,185,129,0.2)]",
-      gradient: "from-success/20 to-transparent",
+      text: "text-bronze",
+      bg: "bg-bronze",
+      border: "border-bronze/30",
+      bgSubtle: "bg-bronze/5",
+      shadow: "shadow-[0_0_30px_rgba(205,127,50,0.25)]",
+      gradient: "from-bronze/20 to-transparent",
+      glow: "rgba(205,127,50,0.18)",
     },
     icon: Zap,
     departments: [
@@ -77,12 +78,13 @@ const layers = [
     subtitlePt: "De Gestores de Crise para Arquitetos de Processos",
     subtitleEn: "From Crisis Managers to Process Architects",
     classes: {
-      text: "text-accent",
-      bg: "bg-accent",
-      border: "border-accent/30",
-      bgSubtle: "bg-accent/5",
-      shadow: "shadow-[0_0_30px_rgba(139,92,246,0.2)]",
-      gradient: "from-accent/20 to-transparent",
+      text: "text-silver",
+      bg: "bg-silver",
+      border: "border-silver/30",
+      bgSubtle: "bg-silver/5",
+      shadow: "shadow-[0_0_30px_rgba(192,200,208,0.25)]",
+      gradient: "from-silver/20 to-transparent",
+      glow: "rgba(192,200,208,0.18)",
     },
     icon: BarChart3,
     departments: [
@@ -114,12 +116,13 @@ const layers = [
     subtitlePt: "Da Intuição para a Certeza Baseada em Dados",
     subtitleEn: "From Intuition to Data Certainty",
     classes: {
-      text: "text-warning",
-      bg: "bg-warning",
-      border: "border-warning/30",
-      bgSubtle: "bg-warning/5",
-      shadow: "shadow-[0_0_30px_rgba(245,158,11,0.2)]",
-      gradient: "from-warning/20 to-transparent",
+      text: "text-gold",
+      bg: "bg-gold",
+      border: "border-gold/30",
+      bgSubtle: "bg-gold/5",
+      shadow: "shadow-[0_0_30px_rgba(212,175,55,0.25)]",
+      gradient: "from-gold/20 to-transparent",
+      glow: "rgba(212,175,55,0.2)",
     },
     icon: Rocket,
     departments: [
@@ -165,9 +168,9 @@ export default function BeforeAfter() {
         style={{ opacity: glowOpacity }}
         className="absolute inset-0 z-0 pointer-events-none"
       >
-        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-success/10 blur-[150px] rounded-full" />
-        <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-accent/10 blur-[150px] rounded-full" />
-        <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-warning/10 blur-[150px] rounded-full" />
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-bronze/10 blur-[150px] rounded-full" />
+        <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-silver/10 blur-[150px] rounded-full" />
+        <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-gold/10 blur-[150px] rounded-full" />
       </motion.div>
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -188,8 +191,8 @@ export default function BeforeAfter() {
           </h2>
           <p className="text-xl text-muted max-w-3xl mx-auto font-medium">
             {t(
-              "Não instalamos ferramentas. Construímos camadas de inteligência que transformam o esforço braçal em lucratividade estratégica.",
-              "We don't install tools. We build intelligence layers that transform manual effort into strategic profitability."
+              "Em todo setor da sua empresa, atuamos em 3 camadas — Operacional, Tático e Estratégico. Em cada camada, aplicamos as 3 fases do método: Padronização, Supervisão e Automação.",
+              "In every sector of your company, we operate on 3 layers — Operational, Tactical, and Strategic. At each layer, we apply the 3 method phases: Standardization, Supervision, and Automation."
             )}
           </p>
         </motion.div>
@@ -203,7 +206,7 @@ export default function BeforeAfter() {
           {/* Central Path (Animated) - Path goes DOWN as you scroll, but logic is Operational -> Strategic */}
           <motion.div 
             style={{ height: pathHeight }}
-            className="absolute left-6 md:left-1/2 top-0 w-[2px] bg-gradient-to-b from-success via-accent to-warning shadow-[0_0_20px_rgba(255,255,255,0.2)] origin-top z-0 md:-translate-x-1/2"
+            className="absolute left-6 md:left-1/2 top-0 w-[2px] bg-gradient-to-b from-bronze via-silver to-gold shadow-[0_0_20px_rgba(255,255,255,0.2)] origin-top z-0 md:-translate-x-1/2"
           />
 
           <div className="space-y-32">
@@ -212,8 +215,19 @@ export default function BeforeAfter() {
               const isEven = idx % 2 === 0;
 
               return (
-                <div key={idx} className="relative flex flex-col md:flex-row items-center gap-12 md:gap-0">
-                  
+                <div key={idx} className="relative isolate flex flex-col md:flex-row items-center gap-12 md:gap-0">
+
+                  {/* Layer-specific background glow */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, margin: "-150px" }}
+                    transition={{ duration: 1.4, ease: "easeOut" }}
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute -z-10 rounded-full blur-[140px] w-[80%] h-[120%] top-1/2 -translate-y-1/2 ${isEven ? 'right-0' : 'left-0'}`}
+                    style={{ backgroundColor: layer.classes.glow }}
+                  />
+
                   {/* Node */}
                   <div className={`absolute left-6 md:left-1/2 top-0 w-6 h-6 -translate-x-[11px] md:-translate-x-3 rounded-full bg-background border-2 ${layer.classes.border} z-20 flex items-center justify-center ${layer.classes.shadow}`}>
                      <div className={`w-2 h-2 rounded-full ${layer.classes.bg} animate-pulse`} />
@@ -249,6 +263,9 @@ export default function BeforeAfter() {
 
                   {/* Right Side: Bento Grid (Desktop) / Cards (Mobile) */}
                   <div className={`w-full md:w-1/2 ${isEven ? 'md:pl-16' : 'md:pr-16 md:order-first'} pl-16 md:pl-0`}>
+                     <div className={`text-[10px] font-mono uppercase tracking-[0.25em] text-muted/60 mb-4 ${isEven ? '' : 'md:text-right'}`}>
+                        // {t("Exemplos por setor", "Examples by sector")}
+                     </div>
                      <div className="grid grid-cols-1 gap-6">
                         {layer.departments.map((dept, dIdx) => (
                           <motion.div 
@@ -265,7 +282,7 @@ export default function BeforeAfter() {
                              <div className="relative z-10">
                                 <div className="flex justify-between items-start mb-8">
                                    <h4 className="font-bold text-xl text-foreground/90">{t(dept.namePt, dept.nameEn)}</h4>
-                                   <div className={`text-3xl font-black ${layer.classes.text} tracking-tighter`}>
+                                   <div className="text-3xl font-black text-success tracking-tighter">
                                       {dept.metric}
                                    </div>
                                 </div>

@@ -6,9 +6,9 @@ import { TrendingUp } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 // Delay (s) before AggregateCard fades in after the section enters view.
-// Direction C uses staggered card animations (~1.5s total), so a short delay
-// is enough.
-const AGGREGATE_DELAY_S = 1.6;
+// Cascade animation: 4 pairs × (PAIR_DURATION 4.0s + PAIR_GAP 0.5s) + ENTER_OFFSET 0.8s
+// - last gap = 800 + 3*4500 + 4000 = 18300ms. Aggregate appears just after.
+const AGGREGATE_DELAY_S = 18.7;
 
 interface Props {
   inView: boolean;
@@ -41,55 +41,68 @@ export function AggregateCard({ inView }: Props) {
   return (
     <motion.div
       style={{ opacity, y }}
-      className="mt-12 max-w-6xl mx-auto flex flex-col md:flex-row items-stretch gap-6 glass rounded-[2.5rem] p-8 md:p-10 border-success/30"
+      className="relative glass-strong rounded-2xl p-8 md:p-12 border-2 border-success/30 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6),0_10px_30px_-8px_rgba(34,197,94,0.25)] overflow-hidden"
     >
-      <div className="flex-1 flex flex-col justify-center gap-2">
-        <span className="text-xs font-black uppercase tracking-[0.4em] text-success/80">
-          {t("Impacto Total Estimado", "Total Estimated Impact")}
-        </span>
-        <div className="text-4xl md:text-6xl font-black text-success tracking-tighter">
-          +R$ 287.500
-          <span className="text-lg md:text-2xl opacity-60 font-medium">/mês</span>
-        </div>
-        <span className="text-xs text-muted/80">
-          {t("4 setores · 12 automações · ROI em 6 meses", "4 sectors · 12 automations · 6mo ROI")}
+      {/* Soft success aura behind */}
+      <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-success/15 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-accent/10 blur-3xl pointer-events-none" />
+
+      {/* Blueprint-style monospace strip */}
+      <div className="relative z-10 flex items-center justify-between mb-8 text-[10px] font-mono uppercase tracking-[0.3em] text-success/60">
+        <span>// {t("Impacto Total Estimado", "Total Estimated Impact")}</span>
+        <span className="hidden md:inline">
+          A-001 · 8 {t("SETORES", "SECTORS")} · 24 {t("AUTOMAÇÕES", "AUTOMATIONS")}
         </span>
       </div>
 
-      <div className="hidden md:block w-px bg-white/10 self-stretch" />
-
-      <div className="flex-1 flex flex-col gap-3 justify-center">
-        <span className="text-xs uppercase tracking-widest text-muted">{t("Distribuição por camada", "Layer breakdown")}</span>
-        <div className="space-y-2">
-          <LayerBar label={t("Operacional", "Operational")} pct={40} color="var(--color-bronze)" />
-          <LayerBar label={t("Tático", "Tactical")} pct={35} color="var(--color-silver)" />
-          <LayerBar label={t("Estratégico", "Strategic")} pct={25} color="var(--color-gold)" />
+      <div className="relative z-10 grid md:grid-cols-[1fr_auto] gap-10 items-end">
+        {/* Hero numbers */}
+        <div>
+          <div className="text-xs font-bold uppercase tracking-[0.4em] text-success/70 mb-3">
+            {t("Retorno Anualizado", "Annualized Return")}
+          </div>
+          <div className="text-5xl md:text-7xl font-black text-success tracking-tighter leading-[0.95]">
+            +R$ 3,45M
+            <span className="text-xl md:text-3xl opacity-60 font-medium ml-1">/{t("ano", "yr")}</span>
+          </div>
+          <div className="mt-4 text-sm md:text-base text-foreground/70 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span>
+              {t("equivale a", "equals")}{" "}
+              <span className="text-success font-bold">+R$ 287.500</span>
+              <span className="text-muted">/{t("mês", "mo")}</span>
+            </span>
+            <span className="text-white/20">·</span>
+            <span>
+              <span className="text-foreground font-bold">{t("ROI em 6 meses", "ROI in 6 months")}</span>
+            </span>
+          </div>
         </div>
-      </div>
 
-      <div className="hidden md:block w-px bg-white/10 self-stretch" />
-
-      <div className="flex flex-col items-center justify-center gap-3">
+        {/* CTA */}
         <a
           href="#cta"
-          className="px-6 py-3 rounded-full bg-success text-background font-bold text-sm hover:scale-105 transition-transform inline-flex items-center gap-2"
+          className="px-7 py-4 rounded-full bg-success text-background font-bold text-sm md:text-base hover:scale-105 active:scale-100 transition-transform inline-flex items-center gap-2 shadow-[0_8px_24px_-6px_rgba(34,197,94,0.5)]"
         >
-          <TrendingUp size={16} />
+          <TrendingUp size={18} />
           {t("Quero esse mapa", "Get this map")}
         </a>
       </div>
+
+      {/* Blueprint corner ticks */}
+      <CornerTicks />
     </motion.div>
   );
 }
 
-function LayerBar({ label, pct, color }: { label: string; pct: number; color: string }) {
+function CornerTicks() {
+  const tick =
+    "absolute w-4 h-4 border-success/40 pointer-events-none";
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-xs text-muted w-20 shrink-0">{label}</span>
-      <div className="flex-1 h-2 rounded-full bg-white/5 overflow-hidden">
-        <div className="h-full" style={{ width: `${pct}%`, backgroundColor: color }} />
-      </div>
-      <span className="text-xs font-bold w-10 text-right" style={{ color }}>{pct}%</span>
-    </div>
+    <>
+      <span className={`${tick} top-2 left-2 border-l-2 border-t-2 rounded-tl-md`} />
+      <span className={`${tick} top-2 right-2 border-r-2 border-t-2 rounded-tr-md`} />
+      <span className={`${tick} bottom-2 left-2 border-l-2 border-b-2 rounded-bl-md`} />
+      <span className={`${tick} bottom-2 right-2 border-r-2 border-b-2 rounded-br-md`} />
+    </>
   );
 }

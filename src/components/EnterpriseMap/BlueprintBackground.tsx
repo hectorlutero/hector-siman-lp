@@ -4,24 +4,34 @@
  * 8-room blueprint backdrop — one room per sector, 4 columns × 2 rows.
  * Each room column aligns with the corresponding card column above/below
  * so cards visually anchor to their sector's room.
+ *
+ * Room color follows the sector card's animation phase (red → blue → green).
  */
 
-import { sectors } from "./data";
+import { motion } from "framer-motion";
+import { sectors, type SectorId } from "./data";
+import type { SectorPhase } from "./SectorCard";
 
 // Column boundaries (4 equal columns inside the building outer)
 const COL_X = [60, 380, 700, 1020, 1340] as const;
 const TOP_Y = [80, 230] as const; // [start, end]
 const BOTTOM_Y = [270, 410] as const;
 
+const PHASE_COLOR: Record<SectorPhase, { fill: string; stroke: string }> = {
+  idle: { fill: "#ef4444", stroke: "#fca5a5" }, // start red — sem automação
+  red: { fill: "#ef4444", stroke: "#fca5a5" },
+  blue: { fill: "#3b82f6", stroke: "#93c5fd" }, // azul — padronização
+  green: { fill: "#22c55e", stroke: "#86efac" }, // verde — automatizado
+};
+
 interface RoomEntry {
-  id: string;
+  id: SectorId;
   numLabel: string;
   name: string;
   col: 0 | 1 | 2 | 3;
-  row: 0 | 1; // 0 = top, 1 = bottom
+  row: 0 | 1;
 }
 
-// Map sectors (in display order) to room positions
 const SECTOR_ROOMS: RoomEntry[] = [
   { id: sectors[0].id, numLabel: "01", name: sectors[0].namePt.toUpperCase(), col: 0, row: 0 },
   { id: sectors[1].id, numLabel: "02", name: sectors[1].namePt.toUpperCase(), col: 1, row: 0 },
@@ -32,6 +42,10 @@ const SECTOR_ROOMS: RoomEntry[] = [
   { id: sectors[6].id, numLabel: "07", name: sectors[6].namePt.toUpperCase(), col: 2, row: 1 },
   { id: sectors[7].id, numLabel: "08", name: sectors[7].namePt.toUpperCase(), col: 3, row: 1 },
 ];
+
+interface BlueprintBackgroundProps {
+  phases: Record<SectorId, SectorPhase>;
+}
 
 function roomRect(room: RoomEntry) {
   const x1 = COL_X[room.col];
@@ -44,7 +58,7 @@ function roomRect(room: RoomEntry) {
 const OUTER_PATH =
   "M 60 100 L 240 100 L 240 80 L 1100 80 L 1100 100 L 1340 100 L 1340 390 L 1240 390 L 1240 410 L 160 410 L 160 390 L 60 390 Z";
 
-export function BlueprintBackground() {
+export function BlueprintBackground({ phases }: BlueprintBackgroundProps) {
   return (
     <svg
       viewBox="0 0 1400 480"
@@ -71,23 +85,45 @@ export function BlueprintBackground() {
       <rect width="1400" height="480" fill="url(#bp-grid-fine)" />
       <rect width="1400" height="480" fill="url(#bp-grid-major)" />
 
-      {/* GLOW LAYER */}
-      <g filter="url(#bp-glow)" opacity="0.7">
+      {/* GLOW LAYER — phase-driven color, animated */}
+      <g filter="url(#bp-glow)" opacity="0.75">
         {SECTOR_ROOMS.map((room) => {
           const r = roomRect(room);
+          const c = PHASE_COLOR[phases[room.id]];
           return (
-            <rect
+            <motion.rect
               key={`glow-${room.id}`}
               x={r.x}
               y={r.y}
               width={r.w}
               height={r.h}
-              fill="#3b82f6"
-              opacity={0.16}
+              animate={{ fill: c.fill }}
+              transition={{ duration: 1.0, ease: "easeOut" }}
+              opacity={0.18}
             />
           );
         })}
       </g>
+
+      {/* ROOM PHASE TINT — solid fill + edge, animated */}
+      {SECTOR_ROOMS.map((room) => {
+        const r = roomRect(room);
+        const c = PHASE_COLOR[phases[room.id]];
+        return (
+          <motion.rect
+            key={`tint-${room.id}`}
+            x={r.x}
+            y={r.y}
+            width={r.w}
+            height={r.h}
+            animate={{ fill: c.fill, stroke: c.stroke }}
+            transition={{ duration: 1.0, ease: "easeOut" }}
+            fillOpacity={0.1}
+            strokeWidth={0.7}
+            strokeOpacity={0.55}
+          />
+        );
+      })}
 
       {/* OUTER WALL — strong glow */}
       <path
@@ -145,24 +181,25 @@ export function BlueprintBackground() {
         })}
       </g>
 
-      {/* ROOM LABELS — sector name + number */}
-      <g
-        fontFamily="ui-monospace, monospace"
-        fill="#60a5fa"
-        textAnchor="middle"
-        opacity="0.7"
-      >
+      {/* ROOM LABELS — sector name + number, tinted by phase, animated */}
+      <g fontFamily="ui-monospace, monospace" textAnchor="middle">
         {SECTOR_ROOMS.map((room) => {
           const r = roomRect(room);
+          const c = PHASE_COLOR[phases[room.id]];
           return (
-            <g key={`lbl-${room.id}`}>
+            <motion.g
+              key={`lbl-${room.id}`}
+              animate={{ fill: c.stroke }}
+              transition={{ duration: 1.0, ease: "easeOut" }}
+              opacity={0.9}
+            >
               <text x={r.cx} y={r.cy - 8} fontSize="9" fontWeight="bold" letterSpacing="2">
                 {room.numLabel}
               </text>
               <text x={r.cx} y={r.cy + 8} fontSize="8" letterSpacing="1.5">
                 {room.name}
               </text>
-            </g>
+            </motion.g>
           );
         })}
       </g>
