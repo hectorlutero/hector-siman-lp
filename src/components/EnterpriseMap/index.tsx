@@ -18,7 +18,7 @@ export default function EnterpriseMap() {
       ref={sectionRef}
       aria-label="Mapa de impacto da automação por setor"
       id="enterprise-map"
-      className="relative blueprint-glow border-t border-white/5 py-32 px-4 overflow-hidden hidden md:block"
+      className="relative blueprint-glow border-t border-white/5 py-48 px-4 overflow-hidden hidden md:block"
     >
       {/* Ambient orbs — tinted blueprint blue */}
       <div className="aura-orb aura-orb-1" style={{ opacity: 0.35 }} />
@@ -31,7 +31,7 @@ export default function EnterpriseMap() {
 
       <div className="relative z-10">
         {/* Header */}
-        <div className="max-w-4xl mx-auto text-center mb-20">
+        <div className="max-w-4xl mx-auto text-center mb-32">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -67,16 +67,16 @@ export default function EnterpriseMap() {
           </motion.p>
         </div>
 
-        {/* Cards in Z-pattern grid (2x2 with offset on second row for diagonal flow) */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
+        {/* Cards in Z-pattern grid (2x2 with bigger offsets for breathing room) */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
           <SectorCard sector={sectors[0]} index={0} />
-          <SectorCard sector={sectors[1]} index={1} className="md:mt-12" />
-          <SectorCard sector={sectors[2]} index={2} className="md:-mt-4" />
-          <SectorCard sector={sectors[3]} index={3} className="md:mt-8" />
+          <SectorCard sector={sectors[1]} index={1} className="md:mt-24" />
+          <SectorCard sector={sectors[2]} index={2} className="md:-mt-8" />
+          <SectorCard sector={sectors[3]} index={3} className="md:mt-16" />
         </div>
 
         {/* Aggregate card */}
-        <div className="mt-20">
+        <div className="mt-32">
           <AggregateCard inView={inView} />
         </div>
       </div>
