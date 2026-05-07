@@ -43,10 +43,10 @@ export default function EnterpriseMap() {
         </div>
 
         <div className="w-full max-w-6xl mx-auto">
-          <div className="hidden lg:block w-full">
+          <div className="hidden md:block w-full">
             <FloorPlanDesktop inView={inView} />
           </div>
-          <div className="lg:hidden w-full">
+          <div className="md:hidden w-full max-w-md mx-auto">
             <FloorPlanMobile inView={inView} />
           </div>
         </div>
