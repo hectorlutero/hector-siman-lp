@@ -10,6 +10,12 @@
   --color-danger: #ef4444;
   --color-warning: #f59e0b;
   --color-muted: #94a3b8;
+  --color-bronze: #cd7f32;
+  --color-bronze-light: #e89758;
+  --color-silver: #c0c8d0;
+  --color-silver-light: #e2e8f0;
+  --color-gold: #d4af37;
+  --color-gold-light: #f5cc4d;
   --color-card: rgba(255, 255, 255, 0.05);
   --color-card-border: rgba(255, 255, 255, 0.1);
   --color-card-hover: rgba(255, 255, 255, 0.08);
