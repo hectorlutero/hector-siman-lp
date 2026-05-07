@@ -47,7 +47,8 @@ export interface Sector {
   nameEn: string;
   icon: LucideIcon;
   order: number;
-  geometry: RoomGeometry;
+  /** Optional — only used by the legacy floor-plan renderer (Direction A/B). */
+  geometry?: RoomGeometry;
   layers: { op: Layer; tat: Layer; est: Layer };
 }
 
@@ -84,7 +85,7 @@ export const LAYER_STYLE: Record<
   },
 };
 
-import { Megaphone, Zap, Headset, TrendingUp } from "lucide-react";
+import { Megaphone, Zap, Headset, TrendingUp, Briefcase, Cog, Users, ShieldCheck } from "lucide-react";
 import { DESKTOP_GEOMETRY } from "./geometry.desktop";
 import { MOBILE_GEOMETRY } from "./geometry.mobile";
 
@@ -294,6 +295,150 @@ export const sectors: Sector[] = [
         descEn: "M&A scenarios and strategic allocation",
         resultPt: "+R$ 2M/ano",
         resultEn: "+$400k/yr",
+      },
+    },
+  },
+  {
+    id: "diretoria",
+    namePt: "Diretoria",
+    nameEn: "Executive",
+    icon: Briefcase,
+    order: 5,
+    layers: {
+      op: {
+        key: "operacional",
+        titlePt: "Dashboards live",
+        titleEn: "Live dashboards",
+        descPt: "Métricas críticas em tempo real",
+        descEn: "Critical KPIs in real time",
+        resultPt: "10× decisão",
+        resultEn: "10× decisions",
+      },
+      tat: {
+        key: "tatico",
+        titlePt: "Alertas de variância",
+        titleEn: "Variance alerts",
+        descPt: "Alertas de desvio com causa raiz",
+        descEn: "Variance alerts with root cause",
+        resultPt: "+R$ 88k/mês",
+        resultEn: "+$15k/mo",
+      },
+      est: {
+        key: "estrategico",
+        titlePt: "Cenários macro",
+        titleEn: "Macro scenarios",
+        descPt: "Simulação de cenários com IA",
+        descEn: "AI-driven scenario planning",
+        resultPt: "+R$ 5M/ano",
+        resultEn: "+$1M/yr",
+      },
+    },
+  },
+  {
+    id: "operacoes",
+    namePt: "Operações",
+    nameEn: "Operations",
+    icon: Cog,
+    order: 6,
+    layers: {
+      op: {
+        key: "operacional",
+        titlePt: "Documentação automática",
+        titleEn: "Auto documentation",
+        descPt: "Mapeamento e SOPs gerados por IA",
+        descEn: "AI-generated process mapping & SOPs",
+        resultPt: "-50% onboarding",
+        resultEn: "-50% onboarding",
+      },
+      tat: {
+        key: "tatico",
+        titlePt: "Otimização de fluxos",
+        titleEn: "Workflow optimization",
+        descPt: "Identificação de gargalos invisíveis",
+        descEn: "Hidden bottleneck detection",
+        resultPt: "+35% throughput",
+        resultEn: "+35% throughput",
+      },
+      est: {
+        key: "estrategico",
+        titlePt: "Capacity planning",
+        titleEn: "Capacity planning",
+        descPt: "Simulação de capacidade futura",
+        descEn: "Future capacity simulation",
+        resultPt: "-25% CapEx",
+        resultEn: "-25% CapEx",
+      },
+    },
+  },
+  {
+    id: "rh",
+    namePt: "RH",
+    nameEn: "HR",
+    icon: Users,
+    order: 7,
+    layers: {
+      op: {
+        key: "operacional",
+        titlePt: "Triagem inteligente",
+        titleEn: "Smart screening",
+        descPt: "Triagem de currículos automatizada",
+        descEn: "Automated resume screening",
+        resultPt: "Semanas → horas",
+        resultEn: "Weeks → hours",
+      },
+      tat: {
+        key: "tatico",
+        titlePt: "Predição de turnover",
+        titleEn: "Turnover prediction",
+        descPt: "Análise preditiva de risco de saída",
+        descEn: "Predictive exit-risk analysis",
+        resultPt: "-20% turnover",
+        resultEn: "-20% turnover",
+      },
+      est: {
+        key: "estrategico",
+        titlePt: "Workforce planning",
+        titleEn: "Workforce planning",
+        descPt: "Planejamento de talento de longo prazo",
+        descEn: "Long-term talent planning",
+        resultPt: "-15% custo talento",
+        resultEn: "-15% talent cost",
+      },
+    },
+  },
+  {
+    id: "ti",
+    namePt: "TI & Segurança",
+    nameEn: "IT & Security",
+    icon: ShieldCheck,
+    order: 8,
+    layers: {
+      op: {
+        key: "operacional",
+        titlePt: "Automação de N1",
+        titleEn: "L1 automation",
+        descPt: "Resolução autônoma de chamados N1",
+        descEn: "Autonomous L1 ticket resolution",
+        resultPt: "80% sem humano",
+        resultEn: "80% no-touch",
+      },
+      tat: {
+        key: "tatico",
+        titlePt: "Detecção de anomalia",
+        titleEn: "Anomaly detection",
+        descPt: "Detecção proativa de incidentes",
+        descEn: "Proactive incident detection",
+        resultPt: "-60% incidentes",
+        resultEn: "-60% incidents",
+      },
+      est: {
+        key: "estrategico",
+        titlePt: "Zero-trust com IA",
+        titleEn: "AI zero-trust",
+        descPt: "Arquitetura adaptativa de segurança",
+        descEn: "Adaptive security architecture",
+        resultPt: "Compliance contínuo",
+        resultEn: "Continuous compliance",
       },
     },
   },

@@ -67,12 +67,16 @@ export default function EnterpriseMap() {
           </motion.p>
         </div>
 
-        {/* Cards in Z-pattern grid (2x2 with bigger offsets for breathing room) */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start justify-items-center md:justify-items-start [&>:nth-child(2)]:md:justify-self-end [&>:nth-child(4)]:md:justify-self-end">
+        {/* Cards in Z-pattern grid (2x4 with diagonal offsets for visual flow) */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-start justify-items-center md:justify-items-start [&>:nth-child(even)]:md:justify-self-end">
           <SectorCard sector={sectors[0]} index={0} />
-          <SectorCard sector={sectors[1]} index={1} className="md:mt-24" />
-          <SectorCard sector={sectors[2]} index={2} className="md:-mt-8" />
-          <SectorCard sector={sectors[3]} index={3} className="md:mt-16" />
+          <SectorCard sector={sectors[1]} index={1} className="md:mt-20" />
+          <SectorCard sector={sectors[2]} index={2} className="md:-mt-4" />
+          <SectorCard sector={sectors[3]} index={3} className="md:mt-12" />
+          <SectorCard sector={sectors[4]} index={4} className="md:mt-4" />
+          <SectorCard sector={sectors[5]} index={5} className="md:mt-24" />
+          <SectorCard sector={sectors[6]} index={6} className="md:-mt-4" />
+          <SectorCard sector={sectors[7]} index={7} className="md:mt-16" />
         </div>
 
         {/* Aggregate card */}
