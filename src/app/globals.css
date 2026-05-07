@@ -36,15 +36,13 @@ body {
 /* Glassmorphism utility */
 .glass {
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(26px) !important;
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px) !important;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-strong {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 

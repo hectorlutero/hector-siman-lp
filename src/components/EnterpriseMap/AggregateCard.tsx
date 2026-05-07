@@ -4,7 +4,11 @@ import { useEffect } from "react";
 import { motion, useMotionValue, useReducedMotion, animate } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { AGGREGATE_DELAY_S } from "./hooks/useSectorAnimation";
+
+// Delay (s) before AggregateCard fades in after the section enters view.
+// Direction C uses staggered card animations (~1.5s total), so a short delay
+// is enough.
+const AGGREGATE_DELAY_S = 1.6;
 
 interface Props {
   inView: boolean;

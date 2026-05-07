@@ -1,5 +1,6 @@
 // landing-page/src/components/EnterpriseMap/data.ts
 import type { LucideIcon } from "lucide-react";
+import { Megaphone, Zap, Headset, TrendingUp, Briefcase, Cog, Users, ShieldCheck } from "lucide-react";
 
 export type LayerKey = "operacional" | "tatico" | "estrategico";
 
@@ -8,7 +9,6 @@ export type SectorId =
   | "vendas"
   | "atendimento"
   | "financas"
-  // Fase 2 (não implementados nesta iteração mas tipados pra evolução):
   | "diretoria"
   | "operacoes"
   | "rh"
@@ -24,31 +24,12 @@ export interface Layer {
   resultEn: string;
 }
 
-export interface RoomGeometry {
-  desktopRect: { x: number; y: number; w: number; h: number };
-  mobileRect: { x: number; y: number; w: number; h: number };
-  desktopCenter: [number, number];
-  mobileCenter: [number, number];
-  desktopContainerPos: [number, number];
-  mobileContainerPos: [number, number];
-  desktopTracePath: string;
-  mobileTracePath: string;
-  desktopTraceVias: Array<[number, number]>;
-  mobileTraceVias: Array<[number, number]>;
-  desktopChipsPos: [number, number];
-  mobileChipsPos: [number, number];
-  desktopDoor: { wall: "n" | "s" | "e" | "w"; offset: number };
-  mobileDoor: { wall: "n" | "s" | "e" | "w"; offset: number };
-}
-
 export interface Sector {
   id: SectorId;
   namePt: string;
   nameEn: string;
   icon: LucideIcon;
   order: number;
-  /** Optional — only used by the legacy floor-plan renderer (Direction A/B). */
-  geometry?: RoomGeometry;
   layers: { op: Layer; tat: Layer; est: Layer };
 }
 
@@ -85,10 +66,6 @@ export const LAYER_STYLE: Record<
   },
 };
 
-import { Megaphone, Zap, Headset, TrendingUp, Briefcase, Cog, Users, ShieldCheck } from "lucide-react";
-import { DESKTOP_GEOMETRY } from "./geometry.desktop";
-import { MOBILE_GEOMETRY } from "./geometry.mobile";
-
 export const sectors: Sector[] = [
   {
     id: "marketing",
@@ -96,22 +73,6 @@ export const sectors: Sector[] = [
     nameEn: "Marketing",
     icon: Megaphone,
     order: 1,
-    geometry: {
-      desktopRect: DESKTOP_GEOMETRY.marketing.rect,
-      mobileRect: MOBILE_GEOMETRY.marketing.rect,
-      desktopCenter: DESKTOP_GEOMETRY.marketing.center,
-      mobileCenter: MOBILE_GEOMETRY.marketing.center,
-      desktopContainerPos: DESKTOP_GEOMETRY.marketing.containerPos,
-      mobileContainerPos: MOBILE_GEOMETRY.marketing.containerPos,
-      desktopTracePath: DESKTOP_GEOMETRY.marketing.tracePath,
-      mobileTracePath: MOBILE_GEOMETRY.marketing.tracePath,
-      desktopTraceVias: DESKTOP_GEOMETRY.marketing.traceVias,
-      mobileTraceVias: MOBILE_GEOMETRY.marketing.traceVias,
-      desktopChipsPos: DESKTOP_GEOMETRY.marketing.chipsPos,
-      mobileChipsPos: MOBILE_GEOMETRY.marketing.chipsPos,
-      desktopDoor: DESKTOP_GEOMETRY.marketing.door,
-      mobileDoor: MOBILE_GEOMETRY.marketing.door,
-    },
     layers: {
       op: {
         key: "operacional",
@@ -148,22 +109,6 @@ export const sectors: Sector[] = [
     nameEn: "Sales",
     icon: Zap,
     order: 2,
-    geometry: {
-      desktopRect: DESKTOP_GEOMETRY.vendas.rect,
-      mobileRect: MOBILE_GEOMETRY.vendas.rect,
-      desktopCenter: DESKTOP_GEOMETRY.vendas.center,
-      mobileCenter: MOBILE_GEOMETRY.vendas.center,
-      desktopContainerPos: DESKTOP_GEOMETRY.vendas.containerPos,
-      mobileContainerPos: MOBILE_GEOMETRY.vendas.containerPos,
-      desktopTracePath: DESKTOP_GEOMETRY.vendas.tracePath,
-      mobileTracePath: MOBILE_GEOMETRY.vendas.tracePath,
-      desktopTraceVias: DESKTOP_GEOMETRY.vendas.traceVias,
-      mobileTraceVias: MOBILE_GEOMETRY.vendas.traceVias,
-      desktopChipsPos: DESKTOP_GEOMETRY.vendas.chipsPos,
-      mobileChipsPos: MOBILE_GEOMETRY.vendas.chipsPos,
-      desktopDoor: DESKTOP_GEOMETRY.vendas.door,
-      mobileDoor: MOBILE_GEOMETRY.vendas.door,
-    },
     layers: {
       op: {
         key: "operacional",
@@ -200,22 +145,6 @@ export const sectors: Sector[] = [
     nameEn: "Customer Support",
     icon: Headset,
     order: 3,
-    geometry: {
-      desktopRect: DESKTOP_GEOMETRY.atendimento.rect,
-      mobileRect: MOBILE_GEOMETRY.atendimento.rect,
-      desktopCenter: DESKTOP_GEOMETRY.atendimento.center,
-      mobileCenter: MOBILE_GEOMETRY.atendimento.center,
-      desktopContainerPos: DESKTOP_GEOMETRY.atendimento.containerPos,
-      mobileContainerPos: MOBILE_GEOMETRY.atendimento.containerPos,
-      desktopTracePath: DESKTOP_GEOMETRY.atendimento.tracePath,
-      mobileTracePath: MOBILE_GEOMETRY.atendimento.tracePath,
-      desktopTraceVias: DESKTOP_GEOMETRY.atendimento.traceVias,
-      mobileTraceVias: MOBILE_GEOMETRY.atendimento.traceVias,
-      desktopChipsPos: DESKTOP_GEOMETRY.atendimento.chipsPos,
-      mobileChipsPos: MOBILE_GEOMETRY.atendimento.chipsPos,
-      desktopDoor: DESKTOP_GEOMETRY.atendimento.door,
-      mobileDoor: MOBILE_GEOMETRY.atendimento.door,
-    },
     layers: {
       op: {
         key: "operacional",
@@ -252,22 +181,6 @@ export const sectors: Sector[] = [
     nameEn: "Finance",
     icon: TrendingUp,
     order: 4,
-    geometry: {
-      desktopRect: DESKTOP_GEOMETRY.financas.rect,
-      mobileRect: MOBILE_GEOMETRY.financas.rect,
-      desktopCenter: DESKTOP_GEOMETRY.financas.center,
-      mobileCenter: MOBILE_GEOMETRY.financas.center,
-      desktopContainerPos: DESKTOP_GEOMETRY.financas.containerPos,
-      mobileContainerPos: MOBILE_GEOMETRY.financas.containerPos,
-      desktopTracePath: DESKTOP_GEOMETRY.financas.tracePath,
-      mobileTracePath: MOBILE_GEOMETRY.financas.tracePath,
-      desktopTraceVias: DESKTOP_GEOMETRY.financas.traceVias,
-      mobileTraceVias: MOBILE_GEOMETRY.financas.traceVias,
-      desktopChipsPos: DESKTOP_GEOMETRY.financas.chipsPos,
-      mobileChipsPos: MOBILE_GEOMETRY.financas.chipsPos,
-      desktopDoor: DESKTOP_GEOMETRY.financas.door,
-      mobileDoor: MOBILE_GEOMETRY.financas.door,
-    },
     layers: {
       op: {
         key: "operacional",
