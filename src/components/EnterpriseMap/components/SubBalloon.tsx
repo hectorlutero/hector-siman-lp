@@ -35,8 +35,8 @@ export function SubBalloon({
 
   const opacity = useTransform(
     sectorProgress,
-    [startProgress, startProgress + 0.04, endProgress, 1],
-    [0, 1, 1, 1],
+    [startProgress, startProgress + 0.04, endProgress, 0.92],
+    [0, 1, 1, 0],
   );
   const slideX = useTransform(
     sectorProgress,
