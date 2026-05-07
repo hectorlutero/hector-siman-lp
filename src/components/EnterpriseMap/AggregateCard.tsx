@@ -1,17 +1,38 @@
 "use client";
 
-import { motion, MotionValue, useTransform } from "framer-motion";
+import { useEffect } from "react";
+import { motion, useMotionValue, useReducedMotion, animate } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { AGGREGATE_DELAY_S } from "./hooks/useSectorAnimation";
 
 interface Props {
-  scrollYProgress: MotionValue<number>;
+  inView: boolean;
 }
 
-export function AggregateCard({ scrollYProgress }: Props) {
+export function AggregateCard({ inView }: Props) {
   const { t } = useLanguage();
-  const opacity = useTransform(scrollYProgress, [0.92, 0.98], [0, 1]);
-  const y = useTransform(scrollYProgress, [0.92, 0.98], [20, 0]);
+  const opacity = useMotionValue(0);
+  const y = useMotionValue(20);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (!inView) return;
+
+    if (prefersReducedMotion) {
+      opacity.set(1);
+      y.set(0);
+      return;
+    }
+
+    const opCtl = animate(opacity, 1, { duration: 0.6, delay: AGGREGATE_DELAY_S, ease: "easeOut" });
+    const yCtl = animate(y, 0, { duration: 0.6, delay: AGGREGATE_DELAY_S, ease: "easeOut" });
+
+    return () => {
+      opCtl.stop();
+      yCtl.stop();
+    };
+  }, [inView, prefersReducedMotion, opacity, y]);
 
   return (
     <motion.div

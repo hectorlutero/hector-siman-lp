@@ -1,6 +1,5 @@
 "use client";
 
-import { MotionValue } from "framer-motion";
 import { sectors } from "./data";
 import { MOBILE_OUTER_WALL_PATH, MOBILE_RECEPTION, MOBILE_ENTRANCE } from "./geometry.mobile";
 import { Room } from "./components/Room";
@@ -8,16 +7,16 @@ import { ContainerBalloon } from "./components/ContainerBalloon";
 import { Trace } from "./components/Trace";
 import { ChipsCluster } from "./components/ChipsCluster";
 import { DoorArc, computeHinge } from "./components/DoorArc";
-import { useSectorPhase } from "./hooks/useSectorPhase";
+import { useSectorAnimation } from "./hooks/useSectorAnimation";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface Props {
-  scrollYProgress: MotionValue<number>;
+  inView: boolean;
 }
 
 const VIEWBOX_MOBILE = "-30 0 540 320";
 
-export function FloorPlanMobile({ scrollYProgress }: Props) {
+export function FloorPlanMobile({ inView }: Props) {
   const { t } = useLanguage();
 
   return (
@@ -67,7 +66,7 @@ export function FloorPlanMobile({ scrollYProgress }: Props) {
           key={sector.id}
           sector={sector}
           sectorIndex={i}
-          scrollYProgress={scrollYProgress}
+          inView={inView}
           t={t}
         />
       ))}
@@ -78,15 +77,15 @@ export function FloorPlanMobile({ scrollYProgress }: Props) {
 function SectorRender({
   sector,
   sectorIndex,
-  scrollYProgress,
+  inView,
   t,
 }: {
   sector: typeof sectors[number];
   sectorIndex: number;
-  scrollYProgress: MotionValue<number>;
+  inView: boolean;
   t: (pt: string, en: string) => string;
 }) {
-  const sectorProgress = useSectorPhase(scrollYProgress, sectorIndex, 4);
+  const sectorProgress = useSectorAnimation(inView, sectorIndex);
   const door = computeHinge(
     sector.geometry.mobileRect,
     sector.geometry.mobileDoor.wall,

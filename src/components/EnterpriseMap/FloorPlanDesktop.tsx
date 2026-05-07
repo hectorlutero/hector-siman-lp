@@ -1,6 +1,5 @@
 "use client";
 
-import { MotionValue } from "framer-motion";
 import { sectors } from "./data";
 import {
   DESKTOP_OUTER_WALL_PATH,
@@ -13,16 +12,16 @@ import { ContainerBalloon } from "./components/ContainerBalloon";
 import { Trace } from "./components/Trace";
 import { ChipsCluster } from "./components/ChipsCluster";
 import { DoorArc, computeHinge } from "./components/DoorArc";
-import { useSectorPhase } from "./hooks/useSectorPhase";
+import { useSectorAnimation } from "./hooks/useSectorAnimation";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface Props {
-  scrollYProgress: MotionValue<number>;
+  inView: boolean;
 }
 
 const VIEWBOX = "-340 -40 920 380";
 
-export function FloorPlanDesktop({ scrollYProgress }: Props) {
+export function FloorPlanDesktop({ inView }: Props) {
   const { t } = useLanguage();
 
   return (
@@ -103,7 +102,7 @@ export function FloorPlanDesktop({ scrollYProgress }: Props) {
           key={sector.id}
           sector={sector}
           sectorIndex={i}
-          scrollYProgress={scrollYProgress}
+          inView={inView}
           t={t}
         />
       ))}
@@ -114,15 +113,15 @@ export function FloorPlanDesktop({ scrollYProgress }: Props) {
 function SectorRender({
   sector,
   sectorIndex,
-  scrollYProgress,
+  inView,
   t,
 }: {
   sector: typeof sectors[number];
   sectorIndex: number;
-  scrollYProgress: MotionValue<number>;
+  inView: boolean;
   t: (pt: string, en: string) => string;
 }) {
-  const sectorProgress = useSectorPhase(scrollYProgress, sectorIndex, 4);
+  const sectorProgress = useSectorAnimation(inView, sectorIndex);
   const door = computeHinge(
     sector.geometry.desktopRect,
     sector.geometry.desktopDoor.wall,
