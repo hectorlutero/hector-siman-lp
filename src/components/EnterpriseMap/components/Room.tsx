@@ -48,7 +48,7 @@ export function Room({ rect, center, namePt, nameEn, icon: Icon, sectorProgress,
         x={center[0]}
         y={center[1]}
         textAnchor="middle"
-        fontSize={9}
+        fontSize={12}
         fontWeight="bold"
         fontFamily="system-ui, sans-serif"
         style={{ fill: labelColor }}
@@ -57,9 +57,9 @@ export function Room({ rect, center, namePt, nameEn, icon: Icon, sectorProgress,
       </motion.text>
       <motion.text
         x={center[0]}
-        y={center[1] + 9}
+        y={center[1] + 12}
         textAnchor="middle"
-        fontSize={4.5}
+        fontSize={7}
         fontFamily="system-ui, sans-serif"
         fill="#ef4444"
         opacity={0.75}

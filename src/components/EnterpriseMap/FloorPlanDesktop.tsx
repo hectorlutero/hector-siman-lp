@@ -19,7 +19,7 @@ interface Props {
   inView: boolean;
 }
 
-const VIEWBOX = "-340 -40 920 380";
+const VIEWBOX = "-345 -15 600 365";
 
 export function FloorPlanDesktop({ inView }: Props) {
   const { t } = useLanguage();
@@ -49,7 +49,7 @@ export function FloorPlanDesktop({ inView }: Props) {
         x={DESKTOP_RECEPTION.x + DESKTOP_RECEPTION.w / 2}
         y={DESKTOP_RECEPTION.y + DESKTOP_RECEPTION.h / 2 + 2}
         textAnchor="middle"
-        fontSize={5}
+        fontSize={7}
         fill="#94a3b8"
         opacity={0.7}
         fontFamily="system-ui"

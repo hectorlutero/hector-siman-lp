@@ -12,11 +12,11 @@ interface ContainerBalloonProps {
   t: (pt: string, en: string) => string;
 }
 
-const CONTAINER_W = 300;
-const CONTAINER_H = 320;
-const HEADER_H = 34;
-const SUB_W = 268;
-const SUB_H = 78;
+const CONTAINER_W = 320;
+const CONTAINER_H = 340;
+const HEADER_H = 40;
+const SUB_W = 280;
+const SUB_H = 90;
 const SUB_GAP = 10;
 
 export function ContainerBalloon({ sector, x, y, sectorProgress, t }: ContainerBalloonProps) {
@@ -46,12 +46,12 @@ export function ContainerBalloon({ sector, x, y, sectorProgress, t }: ContainerB
           strokeWidth={1.5}
         />
         <rect x={x} y={y} width={CONTAINER_W} height={HEADER_H} rx={14} fill="rgba(34,197,94,0.10)" />
-        <rect x={x} y={y + 20} width={CONTAINER_W} height={14} fill="rgba(34,197,94,0.10)" />
+        <rect x={x} y={y + 22} width={CONTAINER_W} height={18} fill="rgba(34,197,94,0.10)" />
         <text
-          x={x + 16}
-          y={y + 22}
+          x={x + 18}
+          y={y + 24}
           fill="#22c55e"
-          fontSize={10}
+          fontSize={13}
           fontWeight="bold"
           fontFamily="system-ui"
           letterSpacing={2}

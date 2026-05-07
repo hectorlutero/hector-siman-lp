@@ -14,7 +14,7 @@ interface Props {
   inView: boolean;
 }
 
-const VIEWBOX_MOBILE = "-30 0 540 320";
+const VIEWBOX_MOBILE = "0 0 320 660";
 
 export function FloorPlanMobile({ inView }: Props) {
   const { t } = useLanguage();
@@ -43,7 +43,7 @@ export function FloorPlanMobile({ inView }: Props) {
         x={MOBILE_RECEPTION.x + MOBILE_RECEPTION.w / 2}
         y={MOBILE_RECEPTION.y + MOBILE_RECEPTION.h / 2 + 2}
         textAnchor="middle"
-        fontSize={6}
+        fontSize={8}
         fill="#94a3b8"
         opacity={0.7}
         fontFamily="system-ui"

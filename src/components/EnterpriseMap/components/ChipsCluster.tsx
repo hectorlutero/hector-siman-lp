@@ -25,12 +25,12 @@ export function ChipsCluster({ x, y, sectorProgress }: ChipsClusterProps) {
   return (
     <motion.g style={{ opacity }}>
       {chips.map((chip, i) => (
-        <g key={i} transform={`translate(${x}, ${y + i * 22})`}>
+        <g key={i} transform={`translate(${x}, ${y + i * 26})`}>
           <motion.g style={{ scale, transformOrigin: "center" }}>
-            <circle r={9} fill={chip.color} />
+            <circle r={11} fill={chip.color} />
             <text
               y={3.5}
-              fontSize={10}
+              fontSize={12}
               textAnchor="middle"
               fill="#0a0a1a"
               fontWeight="bold"

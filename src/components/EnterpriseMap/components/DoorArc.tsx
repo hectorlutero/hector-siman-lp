@@ -40,7 +40,7 @@ export function DoorArc({ hingeX, hingeY, wall, doorWidth = 12, bgColor = "#0a0a
       openingY1 = hingeY;
       openingX2 = hingeX + doorWidth;
       openingY2 = hingeY;
-      sweepFlag = 0;
+      sweepFlag = 1;
       break;
     case "s":
       slabX2 = hingeX + doorWidth;
@@ -51,7 +51,7 @@ export function DoorArc({ hingeX, hingeY, wall, doorWidth = 12, bgColor = "#0a0a
       openingY1 = hingeY;
       openingX2 = hingeX + doorWidth;
       openingY2 = hingeY;
-      sweepFlag = 1;
+      sweepFlag = 0;
       break;
     case "e":
       slabX2 = hingeX;
@@ -62,7 +62,7 @@ export function DoorArc({ hingeX, hingeY, wall, doorWidth = 12, bgColor = "#0a0a
       openingY1 = hingeY;
       openingX2 = hingeX;
       openingY2 = hingeY + doorWidth;
-      sweepFlag = 0;
+      sweepFlag = 1;
       break;
     case "w":
       slabX2 = hingeX;
@@ -73,7 +73,7 @@ export function DoorArc({ hingeX, hingeY, wall, doorWidth = 12, bgColor = "#0a0a
       openingY1 = hingeY;
       openingX2 = hingeX;
       openingY2 = hingeY + doorWidth;
-      sweepFlag = 1;
+      sweepFlag = 0;
       break;
   }
 
