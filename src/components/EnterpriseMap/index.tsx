@@ -68,7 +68,7 @@ export default function EnterpriseMap() {
         </div>
 
         {/* Cards in Z-pattern grid (2x2 with bigger offsets for breathing room) */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 justify-items-center md:justify-items-start [&>:nth-child(2)]:md:justify-self-end [&>:nth-child(4)]:md:justify-self-end">
           <SectorCard sector={sectors[0]} index={0} />
           <SectorCard sector={sectors[1]} index={1} className="md:mt-24" />
           <SectorCard sector={sectors[2]} index={2} className="md:-mt-8" />
