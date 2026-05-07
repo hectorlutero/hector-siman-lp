@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto grid sm:grid-cols-3 gap-8">
         <div>
           <div className="text-lg font-bold mb-3"><span className="text-accent">Hector</span> Siman</div>
-          <p className="text-xs text-muted leading-relaxed">{t("Consultoria em IA & Automação para empresas que querem escalar.", "AI & Automation Consulting for companies that want to scale.")}</p>
+          <p className="text-xs text-muted leading-relaxed">{t("Consultoria em IA & Automação para empresas que querem escalar.", "Strategic AI & Automation for businesses focused on scale.")}</p>
         </div>
         <div>
           <h4 className="text-sm font-bold mb-3">{t("Links", "Links")}</h4>

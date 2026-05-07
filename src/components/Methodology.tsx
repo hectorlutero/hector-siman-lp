@@ -16,7 +16,7 @@ const phases = [
     descPt:
       "A IA não salva processos caóticos. Primeiro, organizamos a casa. Mapeamos fluxos, documentamos o que está na cabeça das pessoas e eliminamos gargalos invisíveis.",
     descEn:
-      "AI doesn't fix chaotic processes. First, we organize. We map flows, document what's in people's heads, and eliminate invisible bottlenecks.",
+      "AI cannot fix broken processes. First, we establish structure. We map workflows, capture institutional knowledge, and eliminate hidden bottlenecks.",
     color: "text-accent",
     bg: "bg-accent/10",
     border: "border-accent/30",
@@ -26,11 +26,11 @@ const phases = [
     num: "02",
     icon: Users,
     titlePt: "Operação Assistida",
-    titleEn: "Assisted Operation",
+    titleEn: "Augmented Operations",
     descPt:
       "Não tiramos o humano da jogada. Colocamos a IA lado a lado com seu time. Eles tomam as decisões críticas, a IA acelera a execução mecânica.",
     descEn:
-      "We don't remove the human. We place AI side-by-side with your team. They make critical decisions, AI speeds up mechanical execution.",
+      "We keep the human in the loop. AI works alongside your team, handling the mechanical execution while they focus on critical decision-making.",
     color: "text-warning",
     bg: "bg-warning/10",
     border: "border-warning/30",
@@ -40,11 +40,11 @@ const phases = [
     num: "03",
     icon: Bot,
     titlePt: "Automação 24/7",
-    titleEn: "24/7 Automation",
+    titleEn: "Autonomous Systems",
     descPt:
       "Com o processo maduro e a IA treinada, viramos a chave. Tarefas repetitivas rodam sem supervisão, liberando seu time para pensar em estratégia.",
     descEn:
-      "With a mature process and trained AI, we flip the switch. Repetitive tasks run unsupervised, freeing your team for strategy.",
+      "Once processes are optimized and the AI is trained, we shift to full automation. Repetitive tasks run autonomously, freeing your team for strategy.",
     color: "text-success",
     bg: "bg-success/10",
     border: "border-success/30",
@@ -77,7 +77,7 @@ export default function Methodology() {
             <SmartCountUp 
               text={t(
                 "Automatizar o caos só gera um caos mais rápido. Construímos sua operação baseada em IA em 3 etapas sólidas.",
-                "Automating chaos just creates faster chaos. We build your AI-driven operation in 3 solid steps."
+                "Automating chaos only accelerates inefficiency. We build your AI-driven operation through three solid phases.",
               )}
               isVisible={isVisible}
             />

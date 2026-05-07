@@ -9,11 +9,11 @@ const painCards = [
   {
     icon: TrendingUp,
     titlePt: "Você sabe que IA é o futuro",
-    titleEn: "You know AI is the future",
+    titleEn: "The AI Imperative",
     descPt:
       "Existe uma clareza no mercado: quem não automatizar operações eventualmente ficará para trás. A transição deixou de ser opcional.",
     descEn:
-      "There is a clear consensus: those who don't automate operations will eventually fall behind. The transition is no longer optional.",
+      "Market consensus is clear: companies that fail to automate operations will fall behind. The transition is no longer optional.",
     color: "text-danger",
     bg: "bg-danger/10",
     borderColor: "border-danger/30",
@@ -21,11 +21,11 @@ const painCards = [
   {
     icon: UserX,
     titlePt: "Seu time tentou e travou",
-    titleEn: "Your team tried and stalled",
+    titleEn: "Implementation Friction",
     descPt:
       "Você delegou pro TI ou pra alguém do time. Testaram ferramentas, não chegou a lugar nenhum.",
     descEn:
-      "You delegated to IT or someone on the team. They tried tools, went nowhere.",
+      "You delegated AI to IT or a team member. They tested tools, but the initiative stalled without clear direction.",
     color: "text-warning",
     bg: "bg-warning/10",
     borderColor: "border-warning/30",
@@ -33,11 +33,11 @@ const painCards = [
   {
     icon: RefreshCcw,
     titlePt: "E o mercado não para",
-    titleEn: "And the market keeps moving",
+    titleEn: "Market Velocity",
     descPt:
       "Enquanto você tenta descobrir, seus concorrentes já estão usando IA pra vender mais e operar melhor.",
     descEn:
-      "While you're figuring it out, your competitors are already using AI to sell more and run leaner.",
+      "While you investigate, your competitors are already leveraging AI to increase sales and streamline operations.",
     color: "text-accent",
     bg: "bg-accent/10",
     borderColor: "border-accent/30",
@@ -48,33 +48,33 @@ const realityCards = [
   {
     icon: TrendingUp,
     titlePt: "IA ajuda a vender mais",
-    titleEn: "AI helps you sell more",
+    titleEn: "Scalable Sales",
     descPt:
       "Qualificação de leads automática, follow-up sem depender de memória humana, atendimento 24/7.",
     descEn:
-      "Automatic lead qualification, follow-up without human memory, 24/7 support.",
+      "Automated lead qualification, memory-independent follow-ups, and 24/7 customer support.",
     color: "text-accent",
     bg: "bg-accent/10",
   },
   {
     icon: DollarSign,
     titlePt: "Reduz custo operacional",
-    titleEn: "Cuts operational cost",
+    titleEn: "Operational Efficiency",
     descPt:
       "Tarefas de horas viram segundos. Menos erro humano, menos retrabalho.",
     descEn:
-      "Hours of tasks become seconds. Less human error, less rework.",
+      "Complex tasks completed in seconds. Drastically reduce human error and rework.",
     color: "text-success",
     bg: "bg-success/10",
   },
   {
     icon: Users,
     titlePt: "Escala sem contratar",
-    titleEn: "Scales without hiring",
+    titleEn: "Hiring Independence",
     descPt:
       "Volume dobra, custo fica o mesmo. Cresça sem inchar a folha de pagamento.",
     descEn:
-      "Volume doubles, cost stays flat. Grow without bloating payroll.",
+      "Double your volume while keeping costs flat. Scale without bloating your payroll.",
     color: "text-warning",
     bg: "bg-warning/10",
   },
@@ -101,7 +101,7 @@ export default function RealityCheck() {
               {t("Do Caos à Ordem.", "From Chaos to Order.")}
             </h3>
             <p className="text-muted text-sm">
-              {t("Estruturando operações desorganizadas com IA inteligente.", "Structuring messy operations with intelligent AI.")}
+              {t("Estruturando operações desorganizadas com IA inteligente.", "Turning chaotic operations into structured, AI-driven systems.")}
             </p>
           </div>
         </div>
@@ -166,12 +166,12 @@ export default function RealityCheck() {
               className="mb-10"
             >
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                {t("IA vende. Se alguém souber usar.", "AI sells. If someone knows how to use it.")}
+                {t("IA vende. Se alguém souber usar.", "AI Drives Growth. If Deployed Correctly.")}
               </h2>
               <p className="text-muted mb-6">
                 {t(
                   "A maioria das empresas testa um chatbot e para por aí. O resultado real vem quando a IA entra na operação de verdade — no CRM, no financeiro, no atendimento.",
-                  "Most companies test a chatbot and stop there. Real results come when AI enters the actual operation — CRM, finance, support."
+                  "Most companies experiment with a chatbot and stop there. Real impact happens when AI is integrated into core operations — CRM, finance, and support."
                 )}
               </p>
               

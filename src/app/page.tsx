@@ -4,6 +4,7 @@ import PartnersMarquee from "@/components/PartnersMarquee";
 import RealityCheck from "@/components/RealityCheck";
 import Methodology from "@/components/Methodology";
 import BeforeAfter from "@/components/BeforeAfter";
+import EnterpriseMap from "@/components/EnterpriseMap";
 import CaseStudy from "@/components/CaseStudy";
 import About from "@/components/About";
 import Technologies from "@/components/Technologies";
@@ -23,6 +24,7 @@ export default function Home() {
         <RealityCheck />
         <Methodology />
         <BeforeAfter />
+        <EnterpriseMap />
         <CaseStudy />
         <About />
         <Technologies />

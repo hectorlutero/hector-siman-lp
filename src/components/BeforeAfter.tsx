@@ -2,115 +2,144 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { TrendingUp, Users, Zap } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+import { TrendingUp, Users, Zap, BarChart3, ShieldCheck, Rocket } from "lucide-react";
+
+// Number Ticker Component for ROI
+const NumberTicker = ({ value, prefix = "", suffix = "" }: { value: string, prefix?: string, suffix?: string }) => {
+  const [displayValue, setDisplayValue] = useState(0);
+  const targetValue = parseInt(value.replace(/[^0-9]/g, ""));
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 2000;
+    const increment = targetValue / (duration / 16);
+    
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= targetValue) {
+        setDisplayValue(targetValue);
+        clearInterval(timer);
+      } else {
+        setDisplayValue(Math.floor(start));
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [targetValue]);
+
+  return <span>{prefix}{displayValue.toLocaleString()}{suffix}</span>;
+};
 
 const layers = [
   {
-    layerPt: "Estratégico",
-    layerEn: "Strategic",
-    subtitlePt: "Decisão & Impacto Financeiro",
-    subtitleEn: "Decision & Financial Impact",
-    classes: {
-      text: "text-warning",
-      bg: "bg-warning",
-      border: "border-warning",
-      bgSubtle: "bg-warning/10",
-      borderSubtle: "border-warning/20",
-      shadow: "shadow-[0_0_15px_rgba(245,158,11,0.4)]",
-      glow: "from-warning/10",
-    },
-    icon: TrendingUp,
-    departments: [
-      {
-        namePt: "Controladoria & Finanças",
-        nameEn: "Finance & Controlling",
-        metric: "+25%",
-        metricLabelPt: "Redução em Custos",
-        metricLabelEn: "Cost Reduction",
-        copyPt: "Decisões guiadas por análises em tempo real. A IA identifica gargalos instantaneamente, substituindo relatórios defasados.",
-        copyEn: "Decisions guided by real-time analysis. AI identifies bottlenecks instantly, replacing outdated reports."
-      },
-      {
-        namePt: "Diretoria de Vendas",
-        nameEn: "Sales Leadership",
-        metric: "95%",
-        metricLabelPt: "Precisão em Forecast",
-        metricLabelEn: "Forecast Accuracy",
-        copyPt: "Modelos preditivos antecipam demandas de mercado, permitindo estratégias de expansão muito mais seguras.",
-        copyEn: "Predictive models anticipate market demands, allowing for much safer expansion strategies."
-      }
-    ]
-  },
-  {
-    layerPt: "Tático",
-    layerEn: "Tactical",
-    subtitlePt: "Gestão & Qualificação de Tempo",
-    subtitleEn: "Management & Time Qualification",
-    classes: {
-      text: "text-accent",
-      bg: "bg-accent",
-      border: "border-accent",
-      bgSubtle: "bg-accent/10",
-      borderSubtle: "border-accent/20",
-      shadow: "shadow-[0_0_15px_rgba(139,92,246,0.4)]",
-      glow: "from-accent/10",
-    },
-    icon: Users,
-    departments: [
-      {
-        namePt: "Gestão de Pessoas (RH)",
-        nameEn: "HR & People",
-        metric: "40%",
-        metricLabelPt: "Tempo focado em Qualidade",
-        metricLabelEn: "Time focused on Quality",
-        copyPt: "Gestores deixam de ser tiradores de dúvidas (tarefa da IA) e passam a focar em cultura e desenvolvimento.",
-        copyEn: "Managers stop being Q&A bots (now handled by AI) and focus on culture and development."
-      },
-      {
-        namePt: "Logística & Supply",
-        nameEn: "Logistics & Supply Chain",
-        metric: "3x+",
-        metricLabelPt: "Velocidade de Planejamento",
-        metricLabelEn: "Planning Speed",
-        copyPt: "Rotas, frota e estoque otimizados antecipadamente. Os coordenadores gerenciam a estratégia, a máquina resolve o fluxo.",
-        copyEn: "Routes, fleet, and stock optimized in advance. Coordinators manage strategy, the machine solves the flow."
-      }
-    ]
-  },
-  {
-    layerPt: "Operacional",
-    layerEn: "Operational",
-    subtitlePt: "Execução & Redução de Esforço",
-    subtitleEn: "Execution & Effort Reduction",
+    level: "Operacional",
+    levelEn: "Operational",
+    titlePt: "O Fim do Trabalho Invisível",
+    titleEn: "The End of Invisible Work",
+    subtitlePt: "De Execução Manual para Fluxo Contínuo 24/7",
+    subtitleEn: "From Manual Execution to 24/7 Continuous Flow",
     classes: {
       text: "text-success",
       bg: "bg-success",
-      border: "border-success",
-      bgSubtle: "bg-success/10",
-      borderSubtle: "border-success/20",
-      shadow: "shadow-[0_0_15px_rgba(16,185,129,0.4)]",
-      glow: "from-success/10",
+      border: "border-success/30",
+      bgSubtle: "bg-success/5",
+      shadow: "shadow-[0_0_30px_rgba(16,185,129,0.2)]",
+      gradient: "from-success/20 to-transparent",
     },
     icon: Zap,
     departments: [
       {
-        namePt: "Backoffice & Administrativo",
+        namePt: "Backoffice & Admin",
         nameEn: "Backoffice & Admin",
-        metric: "40h",
-        metricLabelPt: "Redução de Trabalho Braçal",
-        metricLabelEn: "Manual Work Reduction",
-        copyPt: "Leitura de notas fiscais e atualizações de permissões feitas em milissegundos com 0% de erro humano.",
-        copyEn: "Invoice reading and permission updates done in milliseconds with 0% human error."
+        metric: "0%",
+        metricLabelPt: "Erro Humano e Retrabalho",
+        metricLabelEn: "Human Error & Rework",
+        copyPt: "Processamento de dados e documentos em milissegundos. O que era 'trabalho braçal' agora flui de forma impecável.",
+        copyEn: "Data and document processing in milliseconds. What used to be 'manual labor' now flows flawlessly."
       },
       {
-        namePt: "Atendimento & Operação",
-        nameEn: "Support & Operations",
-        metric: "2 Min",
+        namePt: "Atendimento & Suporte",
+        nameEn: "Support & CX",
+        metric: "2min",
         metricLabelPt: "Tempo de Resposta 24/7",
         metricLabelEn: "Response Time 24/7",
-        copyPt: "IA qualifica leads e agenda reuniões instantaneamente. O time foca apenas no relacionamento e fechamento.",
-        copyEn: "AI qualifies leads and books meetings instantly. The team focuses purely on relationship and closing."
+        copyPt: "Resolução imediata de dúvidas. O seu time só entra em cena quando a empatia e a negociação são indispensáveis.",
+        copyEn: "Immediate query resolution. Your team only steps in when empathy and negotiation are indispensable."
+      }
+    ]
+  },
+  {
+    level: "Tático",
+    levelEn: "Tactical",
+    titlePt: "Orquestração de Alta Performance",
+    titleEn: "High-Performance Orchestration",
+    subtitlePt: "De Gestores de Crise para Arquitetos de Processos",
+    subtitleEn: "From Crisis Managers to Process Architects",
+    classes: {
+      text: "text-accent",
+      bg: "bg-accent",
+      border: "border-accent/30",
+      bgSubtle: "bg-accent/5",
+      shadow: "shadow-[0_0_30px_rgba(139,92,246,0.2)]",
+      gradient: "from-accent/20 to-transparent",
+    },
+    icon: BarChart3,
+    departments: [
+      {
+        namePt: "Gestão de Pessoas (RH)",
+        nameEn: "People & HR",
+        metric: "+40%",
+        metricLabelPt: "Foco em Cultura e Retenção",
+        metricLabelEn: "Focus on Culture & Retention",
+        copyPt: "A IA cuida da triagem técnica e burocracia. O RH deixa de ser um departamento de papéis e passa a ser o motor de talentos.",
+        copyEn: "AI handles technical screening and bureaucracy. HR stops being a paper department and becomes a talent engine."
+      },
+      {
+        namePt: "Logística & Supply",
+        nameEn: "Logistics & Supply",
+        metric: "3x+",
+        metricLabelPt: "Velocidade de Processamento",
+        metricLabelEn: "Processing Speed",
+        copyPt: "Recalque de rotas e estoque em tempo real. A máquina resolve a complexidade para que o time foque na estratégia.",
+        copyEn: "Real-time route and stock recalculation. The machine solves complexity so the team can focus on strategy."
+      }
+    ]
+  },
+  {
+    level: "Estratégico",
+    levelEn: "Strategic",
+    titlePt: "Centro de Comando Preditivo",
+    titleEn: "Predictive Command Center",
+    subtitlePt: "Da Intuição para a Certeza Baseada em Dados",
+    subtitleEn: "From Intuition to Data Certainty",
+    classes: {
+      text: "text-warning",
+      bg: "bg-warning",
+      border: "border-warning/30",
+      bgSubtle: "bg-warning/5",
+      shadow: "shadow-[0_0_30px_rgba(245,158,11,0.2)]",
+      gradient: "from-warning/20 to-transparent",
+    },
+    icon: Rocket,
+    departments: [
+      {
+        namePt: "Finanças & ROI",
+        nameEn: "Finance & ROI",
+        metric: "+25%",
+        metricLabelPt: "Aumento na Margem de Lucro",
+        metricLabelEn: "Profit Margin Increase",
+        copyPt: "A IA identifica onde você está perdendo dinheiro antes mesmo do fechamento do mês. Decisões guiadas por previsibilidade real.",
+        copyEn: "AI identifies where you're losing money even before the month ends. Decisions guided by real predictability."
+      },
+      {
+        namePt: "Diretoria & Expansão",
+        nameEn: "Board & Expansion",
+        metric: "95%",
+        metricLabelPt: "Precisão em Forecast",
+        metricLabelEn: "Forecast Accuracy",
+        copyPt: "Simulação de cenários futuros seguros. Decisões de investimento agressivas baseadas no comportamento real do mercado.",
+        copyEn: "Secure future scenario simulation. Aggressive investment decisions based on real market behavior."
       }
     ]
   }
@@ -122,122 +151,143 @@ export default function BeforeAfter() {
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end center"]
+    offset: ["start end", "end start"]
   });
 
-  const pathHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  // Animated Path going from bottom to top (reversed scroll)
+  const pathHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.2, 0.5, 0.2]);
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden" id="resultados">
-      {/* Background Gradient Layer Simulation */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex flex-col opacity-20">
-        <div className="flex-1 bg-gradient-to-b from-warning/30 to-transparent" />
-        <div className="flex-1 bg-gradient-to-b from-transparent via-accent/30 to-transparent" />
-        <div className="flex-1 bg-gradient-to-t from-success/30 to-transparent" />
-      </div>
+    <section className="py-32 px-6 relative overflow-hidden" id="resultados">
+      {/* Dynamic Background Aura */}
+      <motion.div 
+        style={{ opacity: glowOpacity }}
+        className="absolute inset-0 z-0 pointer-events-none"
+      >
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-success/10 blur-[150px] rounded-full" />
+        <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-accent/10 blur-[150px] rounded-full" />
+        <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-warning/10 blur-[150px] rounded-full" />
+      </motion.div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-24"
+          className="text-center mb-32"
         >
-          <span className="text-xs font-bold uppercase text-accent tracking-widest mb-3 block">
-            {t("O Mapa da Empresa", "The Business Map")}
+          <span className="text-xs font-bold uppercase text-accent tracking-[0.3em] mb-4 block">
+            {t("Escada de Maturidade", "Maturity Ladder")}
           </span>
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight">
+          <h2 className="text-4xl sm:text-6xl font-black mb-8 leading-tight tracking-tighter">
             {t(
-              "A IA aumenta drasticamente a velocidade de entrega dos seus projetos.",
-              "AI drastically increases your project delivery speed."
+              "A Evolução da sua Operação.",
+              "The Evolution of your Operation."
             )}
           </h2>
-          <p className="text-lg text-muted max-w-2xl mx-auto">
+          <p className="text-xl text-muted max-w-3xl mx-auto font-medium">
             {t(
-              "Impacto medido e validado em três camadas de resolução dentro da sua operação, da base até a diretoria.",
-              "Impact measured and validated across three resolution layers within your operation, from floor to board."
+              "Não instalamos ferramentas. Construímos camadas de inteligência que transformam o esforço braçal em lucratividade estratégica.",
+              "We don't install tools. We build intelligence layers that transform manual effort into strategic profitability."
             )}
           </p>
         </motion.div>
 
-        {/* The Blueprint Map */}
-        <div ref={containerRef} className="relative max-w-5xl mx-auto">
+        {/* The Refinery Spine */}
+        <div ref={containerRef} className="relative max-w-5xl mx-auto flex flex-col">
           
-          {/* Central Spine (Background Track) */}
-          <div className="absolute left-6 md:left-[30%] top-8 bottom-12 w-[2px] bg-white/5" />
+          {/* Central Path (Background) */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-white/5 md:-translate-x-1/2" />
           
-          {/* Central Spine (Animated Light Path) */}
+          {/* Central Path (Animated) - Path goes DOWN as you scroll, but logic is Operational -> Strategic */}
           <motion.div 
             style={{ height: pathHeight }}
-            className="absolute left-6 md:left-[30%] top-8 w-[2px] bg-gradient-to-b from-warning via-accent to-success shadow-[0_0_15px_rgba(255,255,255,0.3)] origin-top z-0"
+            className="absolute left-6 md:left-1/2 top-0 w-[2px] bg-gradient-to-b from-success via-accent to-warning shadow-[0_0_20px_rgba(255,255,255,0.2)] origin-top z-0 md:-translate-x-1/2"
           />
 
-          <div className="space-y-16 sm:space-y-24">
+          <div className="space-y-32">
             {layers.map((layer, idx) => {
               const Icon = layer.icon;
+              const isEven = idx % 2 === 0;
+
               return (
-                <div key={idx} className="relative flex flex-col md:flex-row gap-8 md:gap-16">
+                <div key={idx} className="relative flex flex-col md:flex-row items-center gap-12 md:gap-0">
                   
-                  {/* Glowing Node on the Spine */}
-                  <div className={`absolute left-6 md:left-[30%] top-10 w-4 h-4 -translate-x-[7px] rounded-full bg-background border-2 ${layer.classes.border} z-10 flex items-center justify-center ${layer.classes.shadow}`}>
-                     <div className={`w-1.5 h-1.5 rounded-full ${layer.classes.bg} animate-pulse`} />
+                  {/* Node */}
+                  <div className={`absolute left-6 md:left-1/2 top-0 w-6 h-6 -translate-x-[11px] md:-translate-x-3 rounded-full bg-background border-2 ${layer.classes.border} z-20 flex items-center justify-center ${layer.classes.shadow}`}>
+                     <div className={`w-2 h-2 rounded-full ${layer.classes.bg} animate-pulse`} />
                   </div>
 
-                  {/* Left Column: Layer Details & Icon */}
+                  {/* Level Header (Mobile) */}
+                  <div className="pl-16 w-full md:hidden mb-4">
+                     <span className={`text-xs font-black uppercase tracking-widest ${layer.classes.text}`}>
+                        Level {idx + 1}: {t(layer.level, layer.levelEn)}
+                     </span>
+                  </div>
+
+                  {/* Left Side: Meta Info (Desktop) */}
                   <motion.div 
-                    initial={{ opacity: 0, x: -30 }}
+                    initial={{ opacity: 0, x: isEven ? -50 : 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6 }}
-                    className="pl-16 md:pl-0 md:w-[30%] md:pr-12 md:text-right pt-7 flex flex-col md:items-end"
+                    className={`hidden md:flex w-1/2 flex-col ${isEven ? 'items-end pr-16 text-right' : 'order-last items-start pl-16 text-left'}`}
                   >
-                     <div className={`relative w-24 h-24 md:w-32 md:h-32 rounded-[2rem] ${layer.classes.bgSubtle} border border-white/10 shadow-2xl mb-6 flex-shrink-0 group ${layer.classes.shadow} flex items-center justify-center overflow-hidden transition-all duration-500 hover:border-white/20 hover:shadow-3xl`}>
-                        {/* Ambient Glow */}
-                        <div className={`absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] ${layer.classes.glow} via-transparent to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-700`} />
-                        
-                        {/* Icon */}
-                        <Icon size={56} className={`${layer.classes.text} drop-shadow-[0_0_15px_currentColor] relative z-10 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-1`} strokeWidth={1.5} />
+                     <div className={`w-20 h-20 rounded-2xl ${layer.classes.bgSubtle} border border-white/5 flex items-center justify-center mb-6 ${layer.classes.shadow}`}>
+                        <Icon size={40} className={layer.classes.text} strokeWidth={1.5} />
                      </div>
-                     <h3 className={`text-3xl font-black ${layer.classes.text} uppercase tracking-tight`}>
-                       {t(layer.layerPt, layer.layerEn)}
+                     <span className={`text-sm font-bold uppercase tracking-[0.2em] mb-2 ${layer.classes.text}`}>
+                        {t(layer.level, layer.levelEn)}
+                     </span>
+                     <h3 className="text-3xl font-black mb-4 tracking-tight">
+                        {t(layer.titlePt, layer.titleEn)}
                      </h3>
-                     <p className="text-sm text-foreground font-semibold mt-2 opacity-80 uppercase tracking-wider">
-                       {t(layer.subtitlePt, layer.subtitleEn)}
+                     <p className="text-muted font-medium text-lg leading-relaxed max-w-sm">
+                        {t(layer.subtitlePt, layer.subtitleEn)}
                      </p>
                   </motion.div>
 
-                  {/* Right Column: Departments Grid */}
-                  <div className="pl-16 md:pl-8 md:w-[70%] grid sm:grid-cols-2 gap-6 pb-2">
-                     {layer.departments.map((dept, dIdx) => (
-                       <motion.div 
-                         key={dIdx} 
-                         initial={{ opacity: 0, y: 30 }}
-                         whileInView={{ opacity: 1, y: 0 }}
-                         viewport={{ once: true, margin: "-50px" }}
-                         transition={{ duration: 0.5, delay: dIdx * 0.15 }}
-                         className="glass rounded-2xl p-8 border-t border-card-border/50 hover:bg-white/[0.03] transition-colors relative overflow-hidden group"
-                       >
-                          {/* Ambient Glow */}
-                          <div className={`absolute -inset-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] ${layer.classes.glow} via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl`} />
-                          
-                          <div className="relative z-10">
-                             <h4 className="font-bold text-lg mb-6 text-foreground/90">{t(dept.namePt, dept.nameEn)}</h4>
-                             <div className="mb-5">
-                               <div className={`text-5xl font-extrabold ${layer.classes.text} leading-none mb-2 tracking-tighter drop-shadow-sm`}>
-                                 {dept.metric}
-                               </div>
-                               <div className="text-[10px] font-black uppercase tracking-widest text-muted">
-                                 {t(dept.metricLabelPt, dept.metricLabelEn)}
-                               </div>
+                  {/* Right Side: Bento Grid (Desktop) / Cards (Mobile) */}
+                  <div className={`w-full md:w-1/2 ${isEven ? 'md:pl-16' : 'md:pr-16 md:order-first'} pl-16 md:pl-0`}>
+                     <div className="grid grid-cols-1 gap-6">
+                        {layer.departments.map((dept, dIdx) => (
+                          <motion.div 
+                            key={dIdx} 
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: dIdx * 0.1 }}
+                            className="glass rounded-3xl p-8 border-white/5 hover:border-white/10 transition-all group relative overflow-hidden"
+                          >
+                             {/* Hover Glow */}
+                             <div className={`absolute -inset-1 bg-gradient-to-br ${layer.classes.gradient} opacity-0 group-hover:opacity-100 transition-opacity blur-2xl pointer-events-none`} />
+                             
+                             <div className="relative z-10">
+                                <div className="flex justify-between items-start mb-8">
+                                   <h4 className="font-bold text-xl text-foreground/90">{t(dept.namePt, dept.nameEn)}</h4>
+                                   <div className={`text-3xl font-black ${layer.classes.text} tracking-tighter`}>
+                                      {dept.metric}
+                                   </div>
+                                </div>
+                                
+                                <div className="mb-6">
+                                   <div className="text-[10px] font-black uppercase tracking-widest text-muted mb-1">
+                                      Impacto Localizado
+                                   </div>
+                                   <div className="text-xs font-bold text-foreground/70">
+                                      {t(dept.metricLabelPt, dept.metricLabelEn)}
+                                   </div>
+                                </div>
+
+                                <p className="text-sm text-muted leading-relaxed font-medium">
+                                   {t(dept.copyPt, dept.copyEn)}
+                                </p>
                              </div>
-                             <p className="text-sm text-muted leading-relaxed font-medium">
-                               {t(dept.copyPt, dept.copyEn)}
-                             </p>
-                          </div>
-                       </motion.div>
-                     ))}
+                          </motion.div>
+                        ))}
+                     </div>
                   </div>
+
                 </div>
               );
             })}
@@ -248,4 +298,3 @@ export default function BeforeAfter() {
     </section>
   );
 }
-

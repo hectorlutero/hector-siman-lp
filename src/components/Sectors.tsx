@@ -134,12 +134,12 @@ export default function Sectors() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            {t("Setores que atendemos", "Sectors we serve")}
+            {t("Setores que atendemos", "Industry Expertise")}
           </h2>
           <p className="text-muted max-w-xl mx-auto">
             {t(
               "Já passei por cada um desses setores. Conheço os gargalos de perto.",
-              "I've worked across every one of these sectors. I know the bottlenecks firsthand."
+              "With deep experience across these industries, I understand their unique operational bottlenecks firsthand."
             )}
           </p>
         </motion.div>

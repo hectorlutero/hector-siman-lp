@@ -13,7 +13,7 @@ export default function FinalCTA() {
         <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
           {t(
             "Enquanto você lê isso, um profissional caro na sua empresa está copiando dados de uma planilha para outra.",
-            "While you read this, an expensive professional in your company is copying data from one spreadsheet to another."
+            "While you read this, a high-value professional in your company is wasting time copying data between spreadsheets."
           )}
         </motion.h2>
         <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="text-muted mb-10">

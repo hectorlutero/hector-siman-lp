@@ -26,9 +26,9 @@ const caseStudies = [
       "Excesso de chamados 100% operacionais."
     ],
     problemEn: [
-      "12h/week drained from the technical team.",
-      "Critical bottleneck in opening new stores.",
-      "Excess of 100% operational tickets."
+      "12h/week lost to manual technical tasks.",
+      "Scalability bottleneck hindering new store openings.",
+      "Technical team overwhelmed by repetitive operational tickets."
     ],
     solutionPt: [
       "Agente IA provisiona acessos via API.",
@@ -36,9 +36,9 @@ const caseStudies = [
       "Tempo de execução cai para 5 minutos."
     ],
     solutionEn: [
-      "AI agent provisions access via API.",
-      "Ticket queue zeroed autonomously.",
-      "Execution time drops to 5 minutes."
+      "AI agent automates access provisioning via API.",
+      "Ticket queue processed autonomously.",
+      "Processing time reduced to just 5 minutes."
     ],
     quotePt: "\"A IA mapeia a base e aloca permissões com poucas instruções.\"",
     quoteEn: "\"AI maps the database and allocates permissions with few instructions.\"",
@@ -61,8 +61,8 @@ const caseStudies = [
       "Orçamento tradicional inviável (R$ 432.000)."
     ],
     problemEn: [
-      "Development cycle estimated at 18 months.",
-      "Traditional budget unfeasible (R$ 432,000)."
+      "Estimated 18-month development cycle.",
+      "Traditional development budget unfeasible (R$ 432,000)."
     ],
     solutionPt: [
       "Go-to-market alcançado em apenas 3 meses.",
@@ -71,8 +71,8 @@ const caseStudies = [
     ],
     solutionEn: [
       "Go-to-market achieved in just 3 months.",
-      "Final project cost reduced by 83% with AI.",
-      "Full test coverage automatically generated."
+      "Total project cost reduced by 83% using AI.",
+      "Automated test coverage integrated from day one."
     ],
     quotePt: "\"O custo e o tempo despencaram de forma simultânea, garantindo um lançamento rápido e tecnicamente impecável.\"",
     quoteEn: "\"Cost and time plummeted simultaneously, ensuring a fast and technically impeccable launch.\"",
@@ -95,8 +95,8 @@ const caseStudies = [
       "Gargalo cruzado entre editor, designer e SEO."
     ],
     problemEn: [
-      "8 hours to create 1 single high-performance article.",
-      "Cross-team bottleneck between editor, designer, and SEO."
+      "8 hours required to produce a single high-performance article.",
+      "Operational bottleneck between editing, design, and SEO teams."
     ],
     solutionPt: [
       "IA orquestra pesquisa, copy EEAT e imagens.",
@@ -104,12 +104,12 @@ const caseStudies = [
       "1 único operador gera até 40 posts por dia."
     ],
     solutionEn: [
-      "AI orchestrates research, EEAT copy, and images.",
-      "Production time reduced to 5 minutes.",
-      "1 single operator generates up to 40 posts per day."
+      "AI orchestrates research, EEAT-compliant copy, and visuals.",
+      "Production timeline slashed to 5 minutes.",
+      "A single operator now generates up to 40 posts daily."
     ],
     quotePt: "\"Reduzimos o trabalho de dias de uma equipe inteira para apenas 5 minutos, multiplicando a capacidade de entrega da agência.\"",
-    quoteEn: "\"We reduced days of work from an entire team to just 5 minutes, massively multiplying the agency's delivery capacity.\"",
+    quoteEn: "\"We transformed days of manual work into a 5-minute automated process, exponentially increasing the agency's delivery capacity.\"",
   }
 ];
 

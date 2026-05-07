@@ -29,7 +29,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight mb-8"
+          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight mb-8"
         >
           {lang === "pt" ? (
             <>
@@ -40,8 +40,8 @@ export default function Hero() {
           ) : (
             <>
               <span className="animate-text-shimmer">Everyone talks about AI.</span><br />
-              Few know how to <span className="text-gradient-accent">implement</span> it.<br />
-              Your <span className="text-gradient-accent">competitor</span> might be one of them.
+              Few know how to <span className="text-gradient-accent">deploy</span> it.<br />
+              Your <span className="text-gradient-accent">competitor</span> might be one step ahead.
             </>
           )}
         </motion.h1>
@@ -54,7 +54,7 @@ export default function Hero() {
         >
           {t(
             "Eu coloco IA pra rodar na sua empresa, treino seu time e acompanho até dar resultado.",
-            "I get AI running in your company, train your team, and follow through until it delivers."
+            "I deploy custom AI solutions for your business, train your team, and ensure measurable results."
           )}
         </motion.p>
 

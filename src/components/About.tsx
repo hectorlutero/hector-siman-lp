@@ -21,9 +21,9 @@ export default function About() {
 
   const bullets = [
     { pt: "Programação & Arquitetura de Agentes de IA", en: "Programming & AI Agent Architecture" },
-    { pt: "Conhecimento das limitações dos modelos", en: "Understanding of model limitations" },
-    { pt: "Treinamento e mentoria do time", en: "Team training and mentoring" },
-    { pt: "Experiência em operações reais — não só laboratório", en: "Real operations experience — not just lab" },
+    { pt: "Conhecimento das limitações dos modelos", en: "In-depth understanding of model limitations" },
+    { pt: "Treinamento e mentoria do time", en: "Team training & strategic mentoring" },
+    { pt: "Experiência em operações reais — não só laboratório", en: "Real-world operational experience — beyond the lab" },
   ];
 
   return (
@@ -62,7 +62,7 @@ export default function About() {
               <SmartCountUp 
                 text={t(
                   "Desenvolvedor Full Stack & Especialista em Arquitetura de Agentes de IA · 6+ anos",
-                  "Full Stack Developer & AI Agent Architecture Specialist · 6+ years"
+                  "Full Stack Developer & AI Agent Architect · 6+ Years of Experience"
                 )}
                 isVisible={isAboutInView}
               />
@@ -95,7 +95,7 @@ export default function About() {
               <p className="text-sm italic text-muted">
                 {t(
                   '"Eu implemento IA na sua empresa, treino seu time e acompanho até dar resultado. Programação, limitações dos modelos, mentoria — tudo numa mão só."',
-                  '"I implement AI in your company, train your team, and follow through until it delivers. Programming, model limitations, mentoring — all in one hand."'
+                  '"I deploy AI within your organization, train your team, and ensure measurable results. From programming to mentoring, I provide end-to-end expertise."'
                 )}
               </p>
             </div>
