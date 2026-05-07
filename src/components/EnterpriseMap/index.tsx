@@ -17,7 +17,7 @@ export default function EnterpriseMap() {
       ref={sectionRef}
       aria-label="Mapa de impacto da automação por setor"
       id="enterprise-map"
-      className="relative bg-background border-t border-white/5 py-24 px-4"
+      className="relative bg-background border-t border-white/5 py-24 px-4 hidden md:block"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
