@@ -26,7 +26,7 @@ export function SectorCard({ sector, index, className = "" }: SectorCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, delay: index * 0.12, ease: [0.25, 0.8, 0.25, 1] }}
-      className={`glass-strong rounded-xl p-4 max-w-md border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-[1.01] hover:-translate-y-0.5 group relative overflow-hidden ${className}`}
+      className={`glass-strong rounded-xl p-4 w-full border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-[1.01] hover:-translate-y-0.5 group relative overflow-hidden ${className}`}
     >
       {/* Accent glow */}
       <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-accent/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

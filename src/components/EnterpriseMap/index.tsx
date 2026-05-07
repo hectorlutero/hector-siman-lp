@@ -24,14 +24,9 @@ export default function EnterpriseMap() {
       <div className="aura-orb aura-orb-1" style={{ opacity: 0.35 }} />
       <div className="aura-orb aura-orb-2" style={{ opacity: 0.22 }} />
 
-      {/* Blueprint backdrop — glowing architectural drawing */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-60 z-0">
-        <BlueprintBackground />
-      </div>
-
-      <div className="relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="max-w-4xl mx-auto text-center mb-32">
+        <div className="max-w-4xl mx-auto text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -61,26 +56,35 @@ export default function EnterpriseMap() {
             className="text-muted max-w-2xl mx-auto text-base md:text-lg font-medium opacity-80"
           >
             {t(
-              "Cada setor da empresa tem 3 camadas onde a IA gera ROI real. O blueprint mostra a estrutura — os cards mostram onde o dinheiro está.",
-              "Every business sector has 3 layers where AI generates real ROI. The blueprint shows the structure — the cards show where the money is.",
+              "Cada setor da empresa tem 3 camadas onde a IA gera ROI real. Os cards estão alinhados com a sala correspondente no blueprint.",
+              "Every business sector has 3 layers where AI generates real ROI. Each card aligns with its room in the blueprint.",
             )}
           </motion.p>
         </div>
 
-        {/* Cards in Z-pattern grid (2x4 with diagonal offsets for visual flow) */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-start justify-items-center md:justify-items-start [&>:nth-child(even)]:md:justify-self-end">
+        {/* Top row: cards 01–04 (Marketing, Vendas, Atendimento, Diretoria) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 items-end mb-8">
           <SectorCard sector={sectors[0]} index={0} />
-          <SectorCard sector={sectors[1]} index={1} className="md:mt-20" />
-          <SectorCard sector={sectors[2]} index={2} className="md:-mt-4" />
-          <SectorCard sector={sectors[3]} index={3} className="md:mt-12" />
-          <SectorCard sector={sectors[4]} index={4} className="md:mt-4" />
-          <SectorCard sector={sectors[5]} index={5} className="md:mt-24" />
-          <SectorCard sector={sectors[6]} index={6} className="md:-mt-4" />
-          <SectorCard sector={sectors[7]} index={7} className="md:mt-16" />
+          <SectorCard sector={sectors[1]} index={1} />
+          <SectorCard sector={sectors[2]} index={2} />
+          <SectorCard sector={sectors[3]} index={3} />
+        </div>
+
+        {/* Blueprint inline — center of the diagram, columns aligned with cards */}
+        <div className="relative">
+          <BlueprintBackground />
+        </div>
+
+        {/* Bottom row: cards 05–08 (Finanças, Operações, RH, TI) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 items-start mt-8">
+          <SectorCard sector={sectors[4]} index={4} />
+          <SectorCard sector={sectors[5]} index={5} />
+          <SectorCard sector={sectors[6]} index={6} />
+          <SectorCard sector={sectors[7]} index={7} />
         </div>
 
         {/* Aggregate card */}
-        <div className="mt-32">
+        <div className="mt-24">
           <AggregateCard inView={inView} />
         </div>
       </div>
