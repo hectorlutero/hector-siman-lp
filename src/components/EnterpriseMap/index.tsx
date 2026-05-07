@@ -3,8 +3,9 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
-import { FloorPlanDesktop } from "./FloorPlanDesktop";
-import { FloorPlanMobile } from "./FloorPlanMobile";
+import { sectors } from "./data";
+import { SectorCard } from "./SectorCard";
+import { BlueprintBackground } from "./BlueprintBackground";
 import { AggregateCard } from "./AggregateCard";
 
 export default function EnterpriseMap() {
@@ -17,41 +18,67 @@ export default function EnterpriseMap() {
       ref={sectionRef}
       aria-label="Mapa de impacto da automação por setor"
       id="enterprise-map"
-      className="relative bg-background border-t border-white/5 py-24 px-4 hidden md:block"
+      className="relative bg-background border-t border-white/5 py-32 px-4 overflow-hidden hidden md:block"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
+      {/* Ambient orbs */}
+      <div className="aura-orb aura-orb-1" style={{ opacity: 0.15 }} />
+      <div className="aura-orb aura-orb-2" style={{ opacity: 0.12 }} />
+
+      {/* Blueprint backdrop — subtle, decorative */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-25 z-0">
+        <BlueprintBackground />
+      </div>
+
+      <div className="relative z-10">
+        {/* Header */}
+        <div className="max-w-4xl mx-auto text-center mb-20">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-4 inline-block px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20"
+            className="mb-6 inline-block px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20"
           >
             <span className="text-xs font-bold uppercase text-accent tracking-widest">
               {t("Oportunidades de Impacto", "Impact Opportunities")}
             </span>
           </motion.div>
-          <h2 className="text-3xl md:text-5xl font-black mb-3 tracking-tight">
+
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-6xl font-black mb-5 tracking-tight"
+          >
             {t("Onde o Dinheiro Está na Mesa", "Where the Money is on the Table")}
-          </h2>
-          <p className="text-muted max-w-2xl mx-auto text-base font-medium opacity-80">
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-muted max-w-2xl mx-auto text-base md:text-lg font-medium opacity-80"
+          >
             {t(
-              "Onde a IA gera ROI real em cada setor — em 3 camadas.",
-              "Where AI generates real ROI per sector — across 3 layers.",
+              "Cada setor da empresa tem 3 camadas onde a IA gera ROI real. O blueprint mostra a estrutura — os cards mostram onde o dinheiro está.",
+              "Every business sector has 3 layers where AI generates real ROI. The blueprint shows the structure — the cards show where the money is.",
             )}
-          </p>
+          </motion.p>
         </div>
 
-        <div className="w-full max-w-6xl mx-auto">
-          <div className="hidden md:block w-full">
-            <FloorPlanDesktop inView={inView} />
-          </div>
-          <div className="md:hidden w-full max-w-md mx-auto">
-            <FloorPlanMobile inView={inView} />
-          </div>
+        {/* Cards in Z-pattern grid (2x2 with offset on second row for diagonal flow) */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
+          <SectorCard sector={sectors[0]} index={0} />
+          <SectorCard sector={sectors[1]} index={1} className="md:mt-12" />
+          <SectorCard sector={sectors[2]} index={2} className="md:-mt-4" />
+          <SectorCard sector={sectors[3]} index={3} className="md:mt-8" />
         </div>
 
-        <AggregateCard inView={inView} />
+        {/* Aggregate card */}
+        <div className="mt-20">
+          <AggregateCard inView={inView} />
+        </div>
       </div>
     </section>
   );
