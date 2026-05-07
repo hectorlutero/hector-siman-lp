@@ -3,9 +3,9 @@
 import { useEffect } from "react";
 import { useMotionValue, useReducedMotion, animate, MotionValue } from "framer-motion";
 
-const SECTOR_DURATION_S = 3.5;
+const SECTOR_DURATION_S = 6;
 
-const SECTOR_DELAYS_S: number[] = [0, 3.5, 7, 10.5];
+const SECTOR_DELAYS_S: number[] = [0, 6, 12, 18];
 
 /**
  * Returns a MotionValue<number> 0..1 that animates from 0 to 1 over SECTOR_DURATION_S

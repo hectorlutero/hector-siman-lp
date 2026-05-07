@@ -5,7 +5,6 @@ import { MOBILE_OUTER_WALL_PATH, MOBILE_RECEPTION, MOBILE_ENTRANCE } from "./geo
 import { Room } from "./components/Room";
 import { ContainerBalloon } from "./components/ContainerBalloon";
 import { Trace } from "./components/Trace";
-import { ChipsCluster } from "./components/ChipsCluster";
 import { DoorArc, computeHinge } from "./components/DoorArc";
 import { useSectorAnimation } from "./hooks/useSectorAnimation";
 import { useLanguage } from "@/context/LanguageContext";
@@ -132,11 +131,6 @@ function SectorRender({
         y={sector.geometry.mobileContainerPos[1]}
         sectorProgress={sectorProgress}
         t={t}
-      />
-      <ChipsCluster
-        x={sector.geometry.mobileChipsPos[0]}
-        y={sector.geometry.mobileChipsPos[1]}
-        sectorProgress={sectorProgress}
       />
     </g>
   );

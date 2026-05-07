@@ -10,7 +10,6 @@ import {
 import { Room } from "./components/Room";
 import { ContainerBalloon } from "./components/ContainerBalloon";
 import { Trace } from "./components/Trace";
-import { ChipsCluster } from "./components/ChipsCluster";
 import { DoorArc, computeHinge } from "./components/DoorArc";
 import { useSectorAnimation } from "./hooks/useSectorAnimation";
 import { useLanguage } from "@/context/LanguageContext";
@@ -19,7 +18,7 @@ interface Props {
   inView: boolean;
 }
 
-const VIEWBOX = "-345 -15 600 365";
+const VIEWBOX = "0 0 800 600";
 
 export function FloorPlanDesktop({ inView }: Props) {
   const { t } = useLanguage();
@@ -168,11 +167,6 @@ function SectorRender({
         y={sector.geometry.desktopContainerPos[1]}
         sectorProgress={sectorProgress}
         t={t}
-      />
-      <ChipsCluster
-        x={sector.geometry.desktopChipsPos[0]}
-        y={sector.geometry.desktopChipsPos[1]}
-        sectorProgress={sectorProgress}
       />
     </g>
   );

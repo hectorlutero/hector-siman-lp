@@ -11,7 +11,6 @@ interface SubBalloonProps {
   height: number;
   sectorProgress: MotionValue<number>;
   startProgress: number;
-  endProgress: number;
   t: (pt: string, en: string) => string;
 }
 
@@ -28,15 +27,14 @@ export function SubBalloon({
   height,
   sectorProgress,
   startProgress,
-  endProgress,
   t,
 }: SubBalloonProps) {
   const style = LAYER_STYLE[layer.key];
 
   const opacity = useTransform(
     sectorProgress,
-    [startProgress, startProgress + 0.04, endProgress, 0.92],
-    [0, 1, 1, 0],
+    [startProgress, startProgress + 0.04],
+    [0, 1],
   );
   const slideX = useTransform(
     sectorProgress,
@@ -49,19 +47,19 @@ export function SubBalloon({
       <motion.g style={{ opacity }}>
         <motion.g style={{ x: slideX }}>
           <rect width={width} height={height} rx={8} fill={style.fill} stroke={style.stroke} strokeWidth={1.2} />
-          <rect width={width} height={24} rx={8} fill={style.headerBg} />
-          <rect y={18} width={width} height={6} fill={style.headerBg} />
-          <text x={14} y={17} fill={style.stroke} fontSize={13} fontWeight="bold" fontFamily="system-ui">
+          <rect width={width} height={20} rx={8} fill={style.headerBg} />
+          <rect y={14} width={width} height={6} fill={style.headerBg} />
+          <text x={12} y={14} fill={style.stroke} fontSize={11} fontWeight="bold" fontFamily="system-ui">
             {style.iconUnicode} {style.label}
           </text>
-          <text x={12} y={44} fill="#e2e8f0" fontSize={12} fontFamily="system-ui">
+          <text x={12} y={38} fill="#e2e8f0" fontSize={10} fontFamily="system-ui">
             {t(layer.descPt, layer.descEn)}
           </text>
           <text
             x={width - 12}
-            y={height - 10}
+            y={height - 8}
             fill="#22c55e"
-            fontSize={20}
+            fontSize={17}
             fontWeight="bold"
             fontFamily="system-ui"
             textAnchor="end"

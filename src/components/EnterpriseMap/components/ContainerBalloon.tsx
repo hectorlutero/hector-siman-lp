@@ -12,18 +12,18 @@ interface ContainerBalloonProps {
   t: (pt: string, en: string) => string;
 }
 
-const CONTAINER_W = 320;
-const CONTAINER_H = 340;
-const HEADER_H = 40;
-const SUB_W = 280;
-const SUB_H = 90;
-const SUB_GAP = 10;
+const CONTAINER_W = 240;
+const CONTAINER_H = 280;
+const HEADER_H = 30;
+const SUB_W = 220;
+const SUB_H = 70;
+const SUB_GAP = 6;
 
 export function ContainerBalloon({ sector, x, y, sectorProgress, t }: ContainerBalloonProps) {
   const containerOpacity = useTransform(
     sectorProgress,
-    [0.15, 0.18, 0.88, 0.95],
-    [0, 1, 1, 0],
+    [0.15, 0.18],
+    [0, 1],
   );
 
   const subStartY = HEADER_H + 16;
@@ -46,12 +46,12 @@ export function ContainerBalloon({ sector, x, y, sectorProgress, t }: ContainerB
           strokeWidth={1.5}
         />
         <rect x={x} y={y} width={CONTAINER_W} height={HEADER_H} rx={14} fill="rgba(34,197,94,0.10)" />
-        <rect x={x} y={y + 22} width={CONTAINER_W} height={18} fill="rgba(34,197,94,0.10)" />
+        <rect x={x} y={y + 18} width={CONTAINER_W} height={14} fill="rgba(34,197,94,0.10)" />
         <text
-          x={x + 18}
-          y={y + 24}
+          x={x + 14}
+          y={y + 20}
           fill="#22c55e"
-          fontSize={13}
+          fontSize={11}
           fontWeight="bold"
           fontFamily="system-ui"
           letterSpacing={2}
@@ -78,7 +78,6 @@ export function ContainerBalloon({ sector, x, y, sectorProgress, t }: ContainerB
         height={SUB_H}
         sectorProgress={sectorProgress}
         startProgress={0.25}
-        endProgress={0.88}
         t={t}
       />
       <SubBalloon
@@ -89,7 +88,6 @@ export function ContainerBalloon({ sector, x, y, sectorProgress, t }: ContainerB
         height={SUB_H}
         sectorProgress={sectorProgress}
         startProgress={0.45}
-        endProgress={0.88}
         t={t}
       />
       <SubBalloon
@@ -100,7 +98,6 @@ export function ContainerBalloon({ sector, x, y, sectorProgress, t }: ContainerB
         height={SUB_H}
         sectorProgress={sectorProgress}
         startProgress={0.65}
-        endProgress={0.88}
         t={t}
       />
     </g>

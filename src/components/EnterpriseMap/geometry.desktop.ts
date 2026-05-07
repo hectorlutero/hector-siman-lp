@@ -1,23 +1,20 @@
 // landing-page/src/components/EnterpriseMap/geometry.desktop.ts
-// Coordenadas em viewBox 260×200. Outline L-shape per spec §4.3.
+// Centered floor plan in 800×600 viewBox. Containers at 4 corners.
 
-export const DESKTOP_VIEWBOX = { width: 260, height: 200 };
+export const DESKTOP_VIEWBOX = { width: 800, height: 600 };
 
-// Outer wall path (clockwise from top-left)
+// Outer wall path (L-shape, shifted by translate (273, 205) from original)
 export const DESKTOP_OUTER_WALL_PATH =
-  "M 15 15 L 200 15 L 200 60 L 240 60 L 240 175 L 15 175 Z";
+  "M 288 220 L 473 220 L 473 265 L 513 265 L 513 380 L 288 380 Z";
 
-// Corridor T-shape rectangles
 export const DESKTOP_CORRIDOR = {
-  horizontal: { x: 15, y: 83, w: 225, h: 10 },
-  verticalEntry: { x: 105, y: 15, w: 10, h: 68 },
+  horizontal: { x: 288, y: 288, w: 225, h: 10 },
+  verticalEntry: { x: 378, y: 220, w: 10, h: 68 },
 };
 
-// Reception (área de apoio neutra)
-export const DESKTOP_RECEPTION = { x: 200, y: 60, w: 40, h: 23 };
+export const DESKTOP_RECEPTION = { x: 473, y: 265, w: 40, h: 23 };
 
-// Building entrance
-export const DESKTOP_ENTRANCE = { x: 106, y: 15, width: 8 };
+export const DESKTOP_ENTRANCE = { x: 379, y: 220, width: 8 };
 
 type RoomEntry = {
   rect: { x: number; y: number; w: number; h: number };
@@ -34,51 +31,51 @@ export const DESKTOP_GEOMETRY: Record<
   RoomEntry
 > = {
   marketing: {
-    rect: { x: 15, y: 15, w: 95, h: 65 },
-    center: [62, 47],
-    containerPos: [-330, 5],
-    tracePath: "M 15 47 L -10 47 L -10 70 L -40 70",
+    rect: { x: 288, y: 220, w: 95, h: 65 },
+    center: [335, 252],
+    containerPos: [20, 20],
+    tracePath: "M 288 252 L 270 252 L 270 150 L 260 150",
     traceVias: [
-      [-10, 47],
-      [-10, 70],
+      [270, 252],
+      [270, 150],
     ],
-    chipsPos: [85, 18],
+    chipsPos: [383, 224],
     door: { wall: "s", offset: 30 },
   },
   vendas: {
-    rect: { x: 120, y: 15, w: 80, h: 65 },
-    center: [160, 47],
-    containerPos: [-330, 5],
-    tracePath: "M 120 47 L 50 47 L 50 120 L -40 120",
+    rect: { x: 393, y: 220, w: 80, h: 65 },
+    center: [433, 252],
+    containerPos: [540, 20],
+    tracePath: "M 473 252 L 530 252 L 530 150 L 540 150",
     traceVias: [
-      [50, 47],
-      [50, 120],
+      [530, 252],
+      [530, 150],
     ],
-    chipsPos: [185, 18],
+    chipsPos: [395, 224],
     door: { wall: "w", offset: 35 },
   },
   atendimento: {
-    rect: { x: 15, y: 93, w: 95, h: 82 },
-    center: [62, 134],
-    containerPos: [-330, 5],
-    tracePath: "M 15 134 L -10 134 L -10 200 L -40 200",
+    rect: { x: 288, y: 298, w: 95, h: 82 },
+    center: [335, 339],
+    containerPos: [20, 320],
+    tracePath: "M 288 339 L 270 339 L 270 450 L 260 450",
     traceVias: [
-      [-10, 134],
-      [-10, 200],
+      [270, 339],
+      [270, 450],
     ],
-    chipsPos: [85, 100],
+    chipsPos: [383, 302],
     door: { wall: "n", offset: 45 },
   },
   financas: {
-    rect: { x: 120, y: 93, w: 120, h: 82 },
-    center: [180, 134],
-    containerPos: [-330, 5],
-    tracePath: "M 120 134 L 50 134 L 50 250 L -40 250",
+    rect: { x: 393, y: 298, w: 120, h: 82 },
+    center: [453, 339],
+    containerPos: [540, 320],
+    tracePath: "M 513 339 L 530 339 L 530 450 L 540 450",
     traceVias: [
-      [50, 134],
-      [50, 250],
+      [530, 339],
+      [530, 450],
     ],
-    chipsPos: [225, 100],
+    chipsPos: [395, 302],
     door: { wall: "n", offset: 30 },
   },
 };

@@ -22,8 +22,8 @@ export function Trace({ d, vias, startPoint, endPoint, sectorProgress }: TracePr
   }, [d]);
 
   const dashOffset = useTransform(sectorProgress, [0.15, 0.22], [pathLength, 0]);
-  const opacity = useTransform(sectorProgress, [0.15, 0.20, 0.88, 0.95], [0, 0.85, 0.85, 0]);
-  const viaOpacity = useTransform(sectorProgress, [0.20, 0.24, 0.88, 0.95], [0, 1, 1, 0]);
+  const opacity = useTransform(sectorProgress, [0.15, 0.20], [0, 0.85]);
+  const viaOpacity = useTransform(sectorProgress, [0.20, 0.24], [0, 1]);
 
   return (
     <g>
