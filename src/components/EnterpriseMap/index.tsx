@@ -24,8 +24,8 @@ export default function EnterpriseMap() {
       <div className="aura-orb aura-orb-1" style={{ opacity: 0.15 }} />
       <div className="aura-orb aura-orb-2" style={{ opacity: 0.12 }} />
 
-      {/* Blueprint backdrop — subtle, decorative */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-25 z-0">
+      {/* Blueprint backdrop — glowing architectural drawing */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-60 z-0">
         <BlueprintBackground />
       </div>
 
