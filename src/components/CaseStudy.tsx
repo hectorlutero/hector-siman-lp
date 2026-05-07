@@ -3,7 +3,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Quote, X, Check } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { SmartCountUp } from "./ui/SmartCountUp";
 
 // --- DATA ---
@@ -132,12 +132,12 @@ export default function CaseStudy() {
   };
 
   return (
-    <section className="py-32 px-6 relative bg-background">
+    <section className="py-32 px-6 relative bg-background overflow-hidden">
       {/* Immersive Background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_0%,transparent_100%)] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-accent/10 blur-[200px] rounded-full pointer-events-none opacity-50" />
-      
-      <div className="w-full max-w-[100vw] mx-auto relative z-10">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-accent/10 blur-[200px] rounded-full pointer-events-none opacity-50 max-w-full" />
+
+      <div className="w-full mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -148,7 +148,7 @@ export default function CaseStudy() {
           <span className="text-sm font-bold uppercase text-accent tracking-widest mb-4 block">
             {t("Estudos de Caso", "Case Studies")}
           </span>
-          <h2 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-4 tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-white to-white/60">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-white to-white/60 max-w-5xl mx-auto leading-[1.05]">
             {t(
               "Resultados Reais, Impacto Mensurável",
               "Real Results, Measurable Impact"
@@ -197,69 +197,65 @@ export default function CaseStudy() {
                 }}
                 className={`absolute w-full max-w-5xl px-4 sm:px-0 ${isCenter ? 'cursor-grab active:cursor-grabbing' : 'pointer-events-none'}`}
               >
-                {/* Active Card Glow */}
+                {/* Active card glow — toned down */}
                 {isCenter && (
-                  <div className="absolute inset-0 bg-accent/30 blur-[120px] -z-10 rounded-full transition-opacity duration-1000" />
+                  <div className="absolute inset-0 bg-accent/12 blur-[140px] -z-10 rounded-full transition-opacity duration-1000" />
                 )}
 
-                {/* THE CARD */}
-                <div className={`glass rounded-[2.5rem] border overflow-hidden transition-colors duration-500 bg-card ${isCenter ? 'border-white/20 shadow-[0_0_50px_rgba(139,92,246,0.15)]' : 'border-white/5'}`}>
-                  
+                {/* THE CARD — single glass surface, dividers only */}
+                <div className={`glass rounded-3xl border overflow-hidden transition-colors duration-500 ${isCenter ? 'border-white/15 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)]' : 'border-white/5'}`}>
+
                   {/* Card Header - Title Only */}
-                  <div className="px-8 py-6 sm:px-14 sm:py-8 border-b border-card-border bg-white/[0.04] relative">
-                    {/* Subtle top gradient line */}
-                    <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-accent/60 to-transparent opacity-60" />
-                    
+                  <div className="px-8 py-6 sm:px-12 sm:py-7 border-b border-white/5">
                     <div className="flex items-center gap-4">
-                      <div className="w-2 h-8 bg-accent rounded-full hidden md:block" />
-                      <h3 className="text-2xl md:text-3xl font-bold text-foreground leading-tight tracking-tight">
+                      <div className="w-1 h-7 bg-accent/60 rounded-full hidden md:block" />
+                      <h3 className="text-xl md:text-2xl font-semibold text-foreground leading-tight tracking-tight">
                         {t(caseItem.taglinePt, caseItem.taglineEn)}
                       </h3>
                     </div>
                   </div>
-                  
-                  {/* Top Metrics Banner */}
-                  <div className="p-8 sm:px-14 sm:py-8 border-b border-card-border bg-black/20 flex flex-wrap items-center justify-between gap-6 md:gap-10 lg:gap-8">
+
+                  {/* Metrics row — same surface, no extra background */}
+                  <div className="px-8 py-7 sm:px-12 sm:py-8 border-b border-white/5 flex flex-wrap items-baseline justify-between gap-6 md:gap-10">
                     <div>
-                      <div className="text-xs font-black uppercase tracking-widest text-success mb-2">
+                      <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-success/70 mb-1.5">
                         {t(caseItem.metricLabelPt, caseItem.metricLabelEn)}
                       </div>
                       <div className="flex flex-wrap items-center gap-3">
-                        <span className="text-4xl lg:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-success to-emerald-400 tracking-tighter">
+                        <span className="text-3xl lg:text-4xl font-bold text-success/90 tracking-tight tabular-nums">
                           <SmartCountUp text={t(caseItem.metricValuePt, caseItem.metricValueEn)} isVisible={isCenter} />
                         </span>
                         {caseItem.metricBadge && (
-                          <span className="text-sm md:text-base px-3 py-1 rounded-full bg-success/10 text-success border border-success/20 font-bold whitespace-nowrap">
+                          <span className="text-xs md:text-sm px-2.5 py-1 rounded-full bg-success/10 text-success/85 border border-success/20 font-semibold whitespace-nowrap">
                             <SmartCountUp text={caseItem.metricBadge} isVisible={isCenter} />
                           </span>
                         )}
                       </div>
                     </div>
-                    
+
                     {caseItem.stats.map((stat, i) => (
                       <div key={i}>
-                        <div className="text-xs font-black uppercase tracking-widest text-muted mb-2">
+                        <div className="text-[10px] font-mono uppercase tracking-[0.25em] text-muted/70 mb-1.5">
                           {t(stat.labelPt, stat.labelEn)}
                         </div>
-                        <div className="text-2xl lg:text-3xl font-bold text-foreground whitespace-nowrap">
+                        <div className="text-xl lg:text-2xl font-semibold text-foreground/90 whitespace-nowrap tabular-nums">
                           <SmartCountUp text={stat.val} isVisible={isCenter} />
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  {/* Body Details Section */}
-                  <div className="p-10 sm:p-14 grid md:grid-cols-2 gap-12">
+                  {/* Body — neutral bullets */}
+                  <div className="px-8 py-10 sm:px-12 sm:py-12 grid md:grid-cols-2 gap-10 md:gap-12">
                     <div>
-                      <span className="text-sm font-bold uppercase text-danger tracking-widest flex items-center gap-3 mb-6">
-                        <span className="w-2 h-2 rounded-full bg-danger animate-pulse" />
-                        {t("O Problema", "The Problem")}
+                      <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-danger/70 mb-5 block">
+                        {t("// O Problema", "// The Problem")}
                       </span>
-                      <ul className="space-y-4">
+                      <ul className="space-y-3">
                         {caseItem.problemPt.map((_, idx) => (
                           <li key={`prob-${idx}`} className="flex items-start gap-3">
-                            <X className="w-5 h-5 text-danger shrink-0 mt-0.5" />
-                            <span className="text-base md:text-lg text-muted font-medium leading-relaxed">
+                            <span className="w-1 h-1 rounded-full bg-danger/50 shrink-0 mt-2.5" aria-hidden="true" />
+                            <span className="text-sm md:text-base text-muted leading-relaxed">
                               <SmartCountUp text={t(caseItem.problemPt[idx], caseItem.problemEn[idx])} isVisible={isCenter} />
                             </span>
                           </li>
@@ -267,15 +263,14 @@ export default function CaseStudy() {
                       </ul>
                     </div>
                     <div>
-                      <span className="text-sm font-bold uppercase text-success tracking-widest flex items-center gap-3 mb-6">
-                        <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                        {t("A Solução", "The Solution")}
+                      <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-success/70 mb-5 block">
+                        {t("// A Solução", "// The Solution")}
                       </span>
-                      <ul className="space-y-4">
+                      <ul className="space-y-3">
                         {caseItem.solutionPt.map((_, idx) => (
                           <li key={`sol-${idx}`} className="flex items-start gap-3">
-                            <Check className="w-5 h-5 text-success shrink-0 mt-0.5" />
-                            <span className="text-base md:text-lg text-muted font-medium leading-relaxed">
+                            <span className="w-1 h-1 rounded-full bg-success/55 shrink-0 mt-2.5" aria-hidden="true" />
+                            <span className="text-sm md:text-base text-muted leading-relaxed">
                               <SmartCountUp text={t(caseItem.solutionPt[idx], caseItem.solutionEn[idx])} isVisible={isCenter} />
                             </span>
                           </li>
@@ -285,10 +280,10 @@ export default function CaseStudy() {
                   </div>
 
                   {/* Footer Quote */}
-                  <div className="bg-background/40 p-8 flex justify-center border-t border-card-border/50">
-                    <div className="max-w-3xl text-center px-4">
-                      <Quote className="mx-auto text-white/10 mb-4" size={32} />
-                      <p className="text-base md:text-lg italic text-muted/90 font-medium">
+                  <div className="px-8 py-7 sm:px-12 sm:py-8 flex justify-center border-t border-white/5">
+                    <div className="max-w-3xl text-center">
+                      <Quote className="mx-auto text-white/15 mb-3" size={20} />
+                      <p className="text-sm md:text-base italic text-muted/85 leading-relaxed">
                         {t(caseItem.quotePt, caseItem.quoteEn)}
                       </p>
                     </div>

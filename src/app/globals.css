@@ -25,12 +25,14 @@
 /* Base */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
 /* Glassmorphism utility */
@@ -223,14 +225,14 @@ body {
 .aura-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.4;
+  filter: blur(120px);
+  opacity: 0.18;
   animation: aura-spin 20s linear infinite;
   pointer-events: none;
 }
 
 .aura-orb-1 {
-  background: rgba(37, 99, 235, 0.4);
+  background: rgba(37, 99, 235, 0.25);
   width: 60vw;
   height: 60vw;
   top: -20%;
@@ -239,7 +241,7 @@ body {
 }
 
 .aura-orb-2 {
-  background: rgba(139, 92, 246, 0.3);
+  background: rgba(139, 92, 246, 0.18);
   width: 50vw;
   height: 50vw;
   bottom: -10%;
@@ -247,6 +249,45 @@ body {
   transform-origin: 40% 60%;
   animation-direction: reverse;
   animation-duration: 25s;
+}
+
+/* ── 3D animated grid (subtle, in motion) ─────────────────── */
+.hero-grid-3d {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+}
+.hero-grid-3d::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  transform: rotateX(58deg) translateZ(-40px);
+  transform-origin: 50% 50%;
+  animation: hero-grid-drift 26s linear infinite;
+  mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, rgba(0, 0, 0, 1) 25%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, rgba(0, 0, 0, 1) 25%, transparent 90%);
+  will-change: transform;
+}
+@keyframes hero-grid-drift {
+  0% {
+    transform: rotateX(58deg) translateZ(-40px) translateY(0);
+  }
+  100% {
+    transform: rotateX(58deg) translateZ(-40px) translateY(56px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-grid-3d::before {
+    animation: none;
+  }
 }
 
 /* Premium CTA Button */

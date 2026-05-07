@@ -101,9 +101,9 @@ export default function Methodology() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.7 }}
-                  className="w-full lg:w-1/2"
+                  className="w-full lg:w-2/5 max-w-lg"
                 >
-                  <div className="relative aspect-square md:aspect-[4/3] rounded-3xl glass border border-white/10 overflow-hidden group">
+                  <div className="relative aspect-square md:aspect-[4/3] rounded-2xl glass border border-white/10 overflow-hidden group">
                     {/* Abstract CSS Wireframes based on step */}
                     <div className="absolute inset-0 bg-background/50 flex flex-col items-center justify-center p-8">
                       {i === 0 && (

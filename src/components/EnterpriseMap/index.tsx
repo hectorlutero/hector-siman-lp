@@ -82,11 +82,15 @@ export default function EnterpriseMap() {
       ref={sectionRef}
       aria-label="Mapa de impacto da automação por setor"
       id="enterprise-map"
-      className="relative blueprint-glow border-t border-white/5 py-48 px-4 overflow-hidden hidden md:block"
+      className="relative blueprint-glow py-40 px-4 overflow-hidden hidden md:block"
     >
       {/* Ambient orbs — tinted blueprint blue */}
-      <div className="aura-orb aura-orb-1" style={{ opacity: 0.35 }} />
-      <div className="aura-orb aura-orb-2" style={{ opacity: 0.22 }} />
+      <div className="aura-orb aura-orb-1" style={{ opacity: 0.22 }} />
+      <div className="aura-orb aura-orb-2" style={{ opacity: 0.15 }} />
+
+      {/* Soft transitions — fade blueprint into neighboring sections */}
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background to-transparent pointer-events-none z-[5]" aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent pointer-events-none z-[5]" aria-hidden="true" />
 
       <div className="relative z-10">
         {/* Header */}

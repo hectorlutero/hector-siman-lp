@@ -9,11 +9,14 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-background overflow-hidden">
-      {/* Aura Orbs for Volumetric Lighting */}
+      {/* Aura Orbs for Volumetric Lighting (toned down) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="aura-orb aura-orb-1" />
         <div className="aura-orb aura-orb-2" />
       </div>
+
+      {/* 3D animated grid backdrop */}
+      <div className="hero-grid-3d" aria-hidden="true" />
 
       {/* Floating particles */}
       <div className="absolute inset-0 pointer-events-none z-0">
