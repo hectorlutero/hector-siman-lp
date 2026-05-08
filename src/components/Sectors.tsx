@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
+import { Button } from "./ui/Button";
 import {
   ShoppingCart,
   Truck,
@@ -193,6 +194,19 @@ export default function Sectors() {
             );
           })}
         </div>
+
+        {/* Section CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="mt-16 text-center"
+        >
+          <Button variant="tertiary" href="#enterprise-map">
+            {t("Ver oportunidades do meu setor", "See opportunities for my sector")}
+          </Button>
+        </motion.div>
       </div>
     </section>
   );

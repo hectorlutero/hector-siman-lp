@@ -2,34 +2,10 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
-import { TrendingUp, Users, Zap, BarChart3, ShieldCheck, Rocket, ArrowRight } from "lucide-react";
-
-// Number Ticker Component for ROI
-const NumberTicker = ({ value, prefix = "", suffix = "" }: { value: string, prefix?: string, suffix?: string }) => {
-  const [displayValue, setDisplayValue] = useState(0);
-  const targetValue = parseInt(value.replace(/[^0-9]/g, ""));
-
-  useEffect(() => {
-    let start = 0;
-    const duration = 2000;
-    const increment = targetValue / (duration / 16);
-    
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= targetValue) {
-        setDisplayValue(targetValue);
-        clearInterval(timer);
-      } else {
-        setDisplayValue(Math.floor(start));
-      }
-    }, 16);
-
-    return () => clearInterval(timer);
-  }, [targetValue]);
-
-  return <span>{prefix}{displayValue.toLocaleString()}{suffix}</span>;
-};
+import { useRef } from "react";
+import { Zap, BarChart3, Rocket } from "lucide-react";
+import { Highlight } from "./ui/Highlight";
+import { Button } from "./ui/Button";
 
 const layers = [
   {
@@ -37,8 +13,8 @@ const layers = [
     levelEn: "Operational",
     titlePt: "O Fim do Trabalho Invisível",
     titleEn: "The End of Invisible Work",
-    subtitlePt: "Da execução manual ao fluxo contínuo.",
-    subtitleEn: "From manual execution to continuous flow.",
+    subtitlePt: "Execução em fluxo contínuo, sem retrabalho.",
+    subtitleEn: "Continuous execution, zero rework.",
     classes: {
       text: "text-bronze",
       bg: "bg-bronze",
@@ -51,21 +27,19 @@ const layers = [
     icon: Zap,
     departments: [
       {
-        namePt: "Backoffice & Admin",
-        nameEn: "Backoffice & Admin",
-        metric: "0%",
-        metricLabelPt: "Erro Humano e Retrabalho",
-        metricLabelEn: "Human Error & Rework",
-        copyPt: "Dados e documentos processados em milissegundos. Sem retrabalho.",
-        copyEn: "Data and documents processed in milliseconds. Zero rework."
+        sectorPt: "Backoffice & Admin",
+        sectorEn: "Backoffice & Admin",
+        headlinePt: "Zero Erro Humano. Zero Retrabalho.",
+        headlineEn: "Zero Human Error. Zero Rework.",
+        copyPt: "Dados e documentos processados em milissegundos.",
+        copyEn: "Data and documents processed in milliseconds."
       },
       {
-        namePt: "Atendimento & Suporte",
-        nameEn: "Support & CX",
-        metric: "2min",
-        metricLabelPt: "Tempo de Resposta 24/7",
-        metricLabelEn: "Response Time 24/7",
-        copyPt: "Dúvidas resolvidas na hora. Seu time só entra quando empatia importa.",
+        sectorPt: "Atendimento & Suporte",
+        sectorEn: "Support & CX",
+        headlinePt: "Menos de 2 min de Tempo de Resposta, 24/7.",
+        headlineEn: "Sub-2 min Response Time, 24/7.",
+        copyPt: "Dúvidas resolvidas na hora. Seu time entra quando empatia importa.",
         copyEn: "Queries resolved instantly. Your team steps in only when empathy matters."
       }
     ]
@@ -75,8 +49,8 @@ const layers = [
     levelEn: "Tactical",
     titlePt: "Orquestração de Alta Performance",
     titleEn: "High-Performance Orchestration",
-    subtitlePt: "Da gestão de crise à arquitetura de processos.",
-    subtitleEn: "From crisis management to process architecture.",
+    subtitlePt: "Arquitetura de processos em tempo real.",
+    subtitleEn: "Process architecture, in real time.",
     classes: {
       text: "text-silver",
       bg: "bg-silver",
@@ -89,20 +63,18 @@ const layers = [
     icon: BarChart3,
     departments: [
       {
-        namePt: "Gestão de Pessoas (RH)",
-        nameEn: "People & HR",
-        metric: "+40%",
-        metricLabelPt: "Foco em Cultura e Retenção",
-        metricLabelEn: "Focus on Culture & Retention",
+        sectorPt: "Gestão de Pessoas (RH)",
+        sectorEn: "People & HR",
+        headlinePt: "+40% de Foco em Cultura e Retenção.",
+        headlineEn: "+40% Focus on Culture & Retention.",
         copyPt: "IA assume a burocracia. RH foca em cultura e retenção.",
         copyEn: "AI handles bureaucracy. HR focuses on culture and retention."
       },
       {
-        namePt: "Logística & Supply",
-        nameEn: "Logistics & Supply",
-        metric: "3x+",
-        metricLabelPt: "Velocidade de Processamento",
-        metricLabelEn: "Processing Speed",
+        sectorPt: "Logística & Supply",
+        sectorEn: "Logistics & Supply",
+        headlinePt: "3× Mais Velocidade no Processamento.",
+        headlineEn: "3× Faster Processing.",
         copyPt: "Rotas e estoque recalculados em tempo real. Time foca em estratégia.",
         copyEn: "Routes and stock recalculated in real time. Team focuses on strategy."
       }
@@ -113,8 +85,8 @@ const layers = [
     levelEn: "Strategic",
     titlePt: "Centro de Comando Preditivo",
     titleEn: "Predictive Command Center",
-    subtitlePt: "Da intuição à certeza dirigida por dados.",
-    subtitleEn: "From intuition to data-driven certainty.",
+    subtitlePt: "Decisão dirigida por dados, sem chute.",
+    subtitleEn: "Data-driven decisions, no guesswork.",
     classes: {
       text: "text-gold",
       bg: "bg-gold",
@@ -127,20 +99,18 @@ const layers = [
     icon: Rocket,
     departments: [
       {
-        namePt: "Finanças & ROI",
-        nameEn: "Finance & ROI",
-        metric: "+25%",
-        metricLabelPt: "Aumento na Margem de Lucro",
-        metricLabelEn: "Profit Margin Increase",
+        sectorPt: "Finanças & ROI",
+        sectorEn: "Finance & ROI",
+        headlinePt: "+25% na Margem de Lucro.",
+        headlineEn: "+25% Profit Margin.",
         copyPt: "Detecta vazamento de margem antes do fechamento do mês.",
         copyEn: "Detects margin leaks before month-end close."
       },
       {
-        namePt: "Diretoria & Expansão",
-        nameEn: "Board & Expansion",
-        metric: "95%",
-        metricLabelPt: "Precisão em Forecast",
-        metricLabelEn: "Forecast Accuracy",
+        sectorPt: "Diretoria & Expansão",
+        sectorEn: "Board & Expansion",
+        headlinePt: "95% de Precisão em Forecast.",
+        headlineEn: "95% Forecast Accuracy.",
         copyPt: "Cenários previstos com 95% de precisão. Decisão sem chute.",
         copyEn: "Scenarios forecast at 95% accuracy. Decisions without guesswork."
       }
@@ -149,7 +119,7 @@ const layers = [
 ];
 
 export default function BeforeAfter() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -181,18 +151,23 @@ export default function BeforeAfter() {
           className="text-center mb-32"
         >
           <span className="text-xs font-bold uppercase text-accent tracking-[0.3em] mb-4 block">
-            {t("Escada de Maturidade", "Maturity Ladder")}
+            {t("3 Camadas de Atuação", "3 Layers of Action")}
           </span>
           <h2 className="text-4xl sm:text-6xl font-black mb-8 leading-tight tracking-tighter">
             {t(
-              "A Evolução da sua Operação.",
-              "The Evolution of your Operation."
+              "Operacional, Tático e Estratégico — atuando juntos.",
+              "Operational, Tactical, and Strategic — working together."
             )}
           </h2>
           <p className="text-xl text-muted max-w-3xl mx-auto font-medium">
-            {t(
-              "Em todo setor da sua empresa, atuamos em 3 camadas — Operacional, Tático e Estratégico. Em cada camada, aplicamos as 3 fases do método: Padronização, Supervisão e Automação.",
-              "In every sector of your company, we operate on 3 layers — Operational, Tactical, and Strategic. At each layer, we apply the 3 method phases: Standardization, Supervision, and Automation."
+            {lang === "pt" ? (
+              <>
+                Em todo setor, a IA opera nas <Highlight>três camadas simultaneamente</Highlight>. Cada camada com sua <Highlight>ação</Highlight> e seu <Highlight>impacto</Highlight>.
+              </>
+            ) : (
+              <>
+                In every sector, AI operates across <Highlight>all three layers simultaneously</Highlight>. Each layer with its <Highlight>action</Highlight> and its <Highlight>impact</Highlight>.
+              </>
             )}
           </p>
         </motion.div>
@@ -280,22 +255,12 @@ export default function BeforeAfter() {
                              <div className={`absolute -inset-1 bg-gradient-to-br ${layer.classes.gradient} opacity-0 group-hover:opacity-100 transition-opacity blur-2xl pointer-events-none`} />
                              
                              <div className="relative z-10">
-                                <div className="flex justify-between items-start mb-8">
-                                   <h4 className="font-bold text-xl text-foreground/90">{t(dept.namePt, dept.nameEn)}</h4>
-                                   <div className="text-3xl font-black text-success tracking-tighter">
-                                      {dept.metric}
-                                   </div>
+                                <div className={`text-[10px] font-mono uppercase tracking-[0.3em] mb-3 ${layer.classes.text} opacity-80`}>
+                                   {t(dept.sectorPt, dept.sectorEn)}
                                 </div>
-                                
-                                <div className="mb-6">
-                                   <div className="text-[10px] font-black uppercase tracking-widest text-muted mb-1">
-                                      Impacto Localizado
-                                   </div>
-                                   <div className="text-xs font-bold text-foreground/70">
-                                      {t(dept.metricLabelPt, dept.metricLabelEn)}
-                                   </div>
-                                </div>
-
+                                <h4 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight leading-[1.15] mb-5">
+                                   {t(dept.headlinePt, dept.headlineEn)}
+                                </h4>
                                 <p className="text-sm text-muted leading-relaxed font-medium">
                                    {t(dept.copyPt, dept.copyEn)}
                                 </p>
@@ -327,13 +292,9 @@ export default function BeforeAfter() {
                 "These 3 layers apply to every sector in your company.",
               )}
             </p>
-            <a
-              href="#enterprise-map"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent/10 hover:bg-accent/15 border border-accent/30 hover:border-accent/50 text-accent font-semibold text-sm md:text-base transition-colors"
-            >
+            <Button variant="tertiary" href="#enterprise-map">
               {t("Ver onde isso vira ROI por setor", "See where this becomes ROI per sector")}
-              <ArrowRight size={16} />
-            </a>
+            </Button>
           </div>
         </motion.div>
 

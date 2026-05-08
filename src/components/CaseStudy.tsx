@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { SmartCountUp } from "./ui/SmartCountUp";
 import { CaseStudyModal } from "./CaseStudyModal";
+import { Button } from "./ui/Button";
 
 // --- DATA ---
 const caseStudies = [
@@ -302,6 +303,23 @@ export default function CaseStudy() {
             />
           ))}
         </div>
+
+        {/* Section CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="mt-16 md:mt-20 text-center"
+        >
+          <Button
+            variant="primary"
+            href="https://calendar.app.google/WQGLZTfmwWmbo5AP7"
+            external
+          >
+            {t("Conversar sobre meu caso", "Talk about my case")}
+          </Button>
+        </motion.div>
 
       </div>
 

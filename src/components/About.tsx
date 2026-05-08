@@ -5,9 +5,11 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { SmartCountUp } from "./ui/SmartCountUp";
+import { Highlight } from "./ui/Highlight";
+import { Button } from "./ui/Button";
 
 export default function About() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const aboutRef = useRef(null);
   const isAboutInView = useInView(aboutRef, { once: true, margin: "-100px" });
 
@@ -91,14 +93,23 @@ export default function About() {
             </div>
 
             {/* Quote */}
-            <div className="border-l-2 border-accent pl-4">
+            <div className="border-l-2 border-accent pl-4 mb-6">
               <p className="text-sm italic text-muted">
-                {t(
-                  '"Eu implemento IA na sua empresa, treino seu time e acompanho até dar resultado. Programação, limitações dos modelos, mentoria — tudo numa mão só."',
-                  '"I deploy AI within your organization, train your team, and ensure measurable results. From programming to mentoring, I provide end-to-end expertise."'
+                {lang === "pt" ? (
+                  <>&ldquo;Eu implemento IA na sua empresa, <Highlight>treino seu time</Highlight> e acompanho <Highlight>até dar resultado</Highlight>. Programação, limitações dos modelos, mentoria — tudo numa mão só.&rdquo;</>
+                ) : (
+                  <>&ldquo;I deploy AI within your organization, <Highlight>train your team</Highlight>, and ensure <Highlight>measurable results</Highlight>. From programming to mentoring, I provide end-to-end expertise.&rdquo;</>
                 )}
               </p>
             </div>
+
+            <Button
+              variant="secondary"
+              href="https://calendar.app.google/WQGLZTfmwWmbo5AP7"
+              external
+            >
+              {t("Marcar conversa com Hector", "Book a call with Hector")}
+            </Button>
           </div>
         </motion.div>
       </div>

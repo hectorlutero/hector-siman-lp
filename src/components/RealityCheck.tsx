@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { TrendingUp, UserX, RefreshCcw, DollarSign, Users } from "lucide-react";
 import Image from "next/image";
 import { Highlight } from "./ui/Highlight";
+import { Button } from "./ui/Button";
 
 const painCards = [
   {
@@ -122,9 +123,10 @@ export default function RealityCheck() {
                 {t("Isso te soa familiar?", "Does this sound familiar?")}
               </h2>
               <p className="text-muted text-lg">
-                {t(
-                  "Se você se identificou com pelo menos um, a gente precisa conversar.",
-                  "If even one of these hits home, we should talk."
+                {lang === "pt" ? (
+                  <>Se você se identificou com <Highlight>pelo menos um</Highlight>, a gente precisa conversar.</>
+                ) : (
+                  <>If <Highlight>even one</Highlight> of these hits home, we should talk.</>
                 )}
               </p>
             </motion.div>
@@ -214,6 +216,23 @@ export default function RealityCheck() {
                 );
               })}
             </div>
+
+            {/* Section CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5 }}
+              className="mt-10"
+            >
+              <Button
+                variant="primary"
+                href="https://calendar.app.google/WQGLZTfmwWmbo5AP7"
+                external
+              >
+                {t("Quero conversar", "Let's talk")}
+              </Button>
+            </motion.div>
           </div>
 
         </div>

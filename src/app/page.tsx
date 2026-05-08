@@ -5,7 +5,6 @@ import RealityCheck from "@/components/RealityCheck";
 import Methodology from "@/components/Methodology";
 import BeforeAfter from "@/components/BeforeAfter";
 import EnterpriseMap from "@/components/EnterpriseMap";
-import EnterpriseMapMobile from "@/components/EnterpriseMap/EnterpriseMapMobile";
 import CaseStudy from "@/components/CaseStudy";
 import About from "@/components/About";
 import Technologies from "@/components/Technologies";
@@ -26,7 +25,6 @@ export default function Home() {
         <Methodology />
         <BeforeAfter />
         <EnterpriseMap />
-        <EnterpriseMapMobile />
         <CaseStudy />
         <About />
         <Technologies />

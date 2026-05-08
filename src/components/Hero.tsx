@@ -3,6 +3,8 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { Highlight } from "./ui/Highlight";
+import { Button } from "./ui/Button";
 
 export default function Hero() {
   const { t, lang } = useLanguage();
@@ -55,9 +57,14 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted max-w-3xl mx-auto mb-8 sm:mb-12 font-medium"
         >
-          {t(
-            "Eu coloco IA pra rodar na sua empresa, treino seu time e acompanho até dar resultado.",
-            "I deploy custom AI solutions for your business, train your team, and ensure measurable results."
+          {lang === "pt" ? (
+            <>
+              Eu coloco IA pra rodar na sua empresa, <Highlight>treino seu time</Highlight> e acompanho <Highlight>até dar resultado</Highlight>.
+            </>
+          ) : (
+            <>
+              I deploy custom AI solutions for your business, <Highlight>train your team</Highlight>, and ensure <Highlight>measurable results</Highlight>.
+            </>
           )}
         </motion.p>
 
@@ -67,14 +74,14 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="flex flex-col sm:flex-row items-center justify-center gap-6"
         >
-          <a
+          <Button
+            variant="primary"
+            size="lg"
             href="https://calendar.app.google/WQGLZTfmwWmbo5AP7"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hero-cta px-8 sm:px-10 py-4 sm:py-5 rounded-2xl text-white font-bold text-base sm:text-lg"
+            external
           >
             {t("Conversar com Especialista", "Talk to an Expert")}
-          </a>
+          </Button>
 
           <a
             href="#problema"
