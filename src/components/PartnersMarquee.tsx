@@ -34,7 +34,7 @@ function PartnerLogo({ partner }: { partner: (typeof partners)[0] }) {
         alt={partner.name}
         width={180}
         height={56}
-        className="object-contain w-full h-full brightness-0 invert opacity-50 hover:opacity-90 transition-opacity duration-300"
+        className="object-contain w-full h-full brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
         onError={() => setImgError(true)}
         unoptimized
       />
@@ -50,7 +50,7 @@ export default function PartnersMarquee() {
       <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
       {/* Label */}
-      <p className="text-center text-xs text-muted/40 tracking-widest uppercase mb-8 font-medium">
+      <p className="text-center text-xs text-muted/70 tracking-widest uppercase mb-8 font-semibold">
         Empresas Parceiras
       </p>
 

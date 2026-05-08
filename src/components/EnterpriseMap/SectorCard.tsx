@@ -67,7 +67,6 @@ export function SectorCard({ sector, index, phase, onClick, className = "" }: Se
 
   return (
     <motion.div
-      layout
       initial={{ opacity: 0, y: 32, borderColor: PHASE_BORDER.idle, boxShadow: PHASE_SHADOW.idle }}
       animate={{
         opacity: visible ? 1 : 0,
@@ -159,7 +158,6 @@ function LayerRow({
 
   return (
     <motion.div
-      layout
       animate={{ borderColor: labelColor }}
       transition={{ duration: 0.9, ease: "easeOut" }}
       className="flex items-baseline gap-2 py-1.5 border-l-2 pl-2.5 rounded-r"
@@ -174,50 +172,45 @@ function LayerRow({
           <span>{labelText}</span>
         </motion.div>
 
-        {/* Title (short headline) — only in green */}
-        <AnimatePresence>
-          {isGreen && (
-            <motion.p
-              key="title"
-              initial={{ opacity: 0, y: -3 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="text-[13px] text-foreground/90 font-semibold leading-snug mt-0.5"
+        {/* Title slot — always rendered, opacity-driven so height stays constant */}
+        <motion.p
+          animate={{ opacity: isGreen ? 1 : 0, y: isGreen ? 0 : -3 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="text-[13px] text-foreground/90 font-semibold leading-snug mt-0.5"
+        >
+          {t(layer.titlePt, layer.titleEn)}
+        </motion.p>
+      </div>
+
+      {/* Right metric slot — fixed min-width prevents layout shift between phases */}
+      <div className="relative shrink-0 min-w-[110px] md:min-w-[120px] text-right">
+        <AnimatePresence mode="wait">
+          {phase === "red" && (
+            <motion.div
+              key="loss"
+              initial={{ opacity: 0, x: 8, scale: 0.92 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -6, scale: 0.92 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.8, 0.25, 1] }}
+              className="text-red-400 font-bold text-sm md:text-base whitespace-nowrap"
             >
-              {t(layer.titlePt, layer.titleEn)}
-            </motion.p>
+              {t(layer.gargaloMetricPt, layer.gargaloMetricEn)}
+            </motion.div>
+          )}
+          {isGreen && (
+            <motion.div
+              key="result"
+              initial={{ opacity: 0, x: 8, scale: 0.92 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 8 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
+              className="text-success font-bold text-sm md:text-base whitespace-nowrap"
+            >
+              {t(layer.resultPt, layer.resultEn)}
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
-
-      {/* Right column metric — gargalo loss (red) or automation result (green) */}
-      <AnimatePresence mode="wait">
-        {phase === "red" && (
-          <motion.div
-            key="loss"
-            initial={{ opacity: 0, x: 8, scale: 0.92 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: -6, scale: 0.92 }}
-            transition={{ duration: 0.5, ease: [0.25, 0.8, 0.25, 1] }}
-            className="text-red-400 font-bold text-sm md:text-base whitespace-nowrap shrink-0"
-          >
-            {t(layer.gargaloMetricPt, layer.gargaloMetricEn)}
-          </motion.div>
-        )}
-        {isGreen && (
-          <motion.div
-            key="result"
-            initial={{ opacity: 0, x: 8, scale: 0.92 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: 8 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
-            className="text-success font-bold text-sm md:text-base whitespace-nowrap shrink-0"
-          >
-            {t(layer.resultPt, layer.resultEn)}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.div>
   );
 }

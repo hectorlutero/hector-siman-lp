@@ -18,7 +18,7 @@ const techCategories = [
       { name: "OpenAI", slug: "openai", iconUrl: "https://api.iconify.design/simple-icons/openai.svg?color=white" },
       { name: "Anthropic", slug: "anthropic/white" },
       { name: "Google", slug: "google" },
-      { name: "Meta", slug: "meta/0668E1" }
+      { name: "xAI", slug: "x", iconUrl: "https://api.iconify.design/simple-icons/x.svg?color=white" }
     ],
   },
   {

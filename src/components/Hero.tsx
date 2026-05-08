@@ -32,7 +32,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight mb-8"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight mb-6 sm:mb-8"
         >
           {lang === "pt" ? (
             <>
@@ -53,7 +53,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-lg sm:text-xl md:text-2xl text-muted max-w-3xl mx-auto mb-12 font-medium"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted max-w-3xl mx-auto mb-8 sm:mb-12 font-medium"
         >
           {t(
             "Eu coloco IA pra rodar na sua empresa, treino seu time e acompanho até dar resultado.",
@@ -71,7 +71,7 @@ export default function Hero() {
             href="https://calendar.app.google/WQGLZTfmwWmbo5AP7"
             target="_blank"
             rel="noopener noreferrer"
-            className="hero-cta px-10 py-5 rounded-2xl text-white font-bold text-lg"
+            className="hero-cta px-8 sm:px-10 py-4 sm:py-5 rounded-2xl text-white font-bold text-base sm:text-lg"
           >
             {t("Conversar com Especialista", "Talk to an Expert")}
           </a>

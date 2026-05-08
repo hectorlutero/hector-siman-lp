@@ -17,6 +17,7 @@ import {
   MonitorPlay,
   FileText,
   Mic,
+  Scale,
 } from "lucide-react";
 
 const sectors = [
@@ -61,6 +62,13 @@ const sectors = [
     titleEn: "Finance",
     descPt: "Auditoria fiscal, contas a receber, compliance.",
     descEn: "Tax auditing, accounts receivable, compliance.",
+  },
+  {
+    icon: Scale,
+    titlePt: "Jurídico",
+    titleEn: "Legal",
+    descPt: "Análise contratual, automação de petições, due diligence assistida.",
+    descEn: "Contract analysis, petition automation, AI-assisted due diligence.",
   },
   {
     icon: Building,

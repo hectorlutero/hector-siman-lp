@@ -3,7 +3,7 @@
 import { useLanguage } from "@/context/LanguageContext";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { TrendingUp, Users, Zap, BarChart3, ShieldCheck, Rocket } from "lucide-react";
+import { TrendingUp, Users, Zap, BarChart3, ShieldCheck, Rocket, ArrowRight } from "lucide-react";
 
 // Number Ticker Component for ROI
 const NumberTicker = ({ value, prefix = "", suffix = "" }: { value: string, prefix?: string, suffix?: string }) => {
@@ -37,8 +37,8 @@ const layers = [
     levelEn: "Operational",
     titlePt: "O Fim do Trabalho Invisível",
     titleEn: "The End of Invisible Work",
-    subtitlePt: "De Execução Manual para Fluxo Contínuo 24/7",
-    subtitleEn: "From Manual Execution to 24/7 Continuous Flow",
+    subtitlePt: "Da execução manual ao fluxo contínuo.",
+    subtitleEn: "From manual execution to continuous flow.",
     classes: {
       text: "text-bronze",
       bg: "bg-bronze",
@@ -56,8 +56,8 @@ const layers = [
         metric: "0%",
         metricLabelPt: "Erro Humano e Retrabalho",
         metricLabelEn: "Human Error & Rework",
-        copyPt: "Processamento de dados e documentos em milissegundos. O que era 'trabalho braçal' agora flui de forma impecável.",
-        copyEn: "Data and document processing in milliseconds. What used to be 'manual labor' now flows flawlessly."
+        copyPt: "Dados e documentos processados em milissegundos. Sem retrabalho.",
+        copyEn: "Data and documents processed in milliseconds. Zero rework."
       },
       {
         namePt: "Atendimento & Suporte",
@@ -65,8 +65,8 @@ const layers = [
         metric: "2min",
         metricLabelPt: "Tempo de Resposta 24/7",
         metricLabelEn: "Response Time 24/7",
-        copyPt: "Resolução imediata de dúvidas. O seu time só entra em cena quando a empatia e a negociação são indispensáveis.",
-        copyEn: "Immediate query resolution. Your team only steps in when empathy and negotiation are indispensable."
+        copyPt: "Dúvidas resolvidas na hora. Seu time só entra quando empatia importa.",
+        copyEn: "Queries resolved instantly. Your team steps in only when empathy matters."
       }
     ]
   },
@@ -75,8 +75,8 @@ const layers = [
     levelEn: "Tactical",
     titlePt: "Orquestração de Alta Performance",
     titleEn: "High-Performance Orchestration",
-    subtitlePt: "De Gestores de Crise para Arquitetos de Processos",
-    subtitleEn: "From Crisis Managers to Process Architects",
+    subtitlePt: "Da gestão de crise à arquitetura de processos.",
+    subtitleEn: "From crisis management to process architecture.",
     classes: {
       text: "text-silver",
       bg: "bg-silver",
@@ -94,8 +94,8 @@ const layers = [
         metric: "+40%",
         metricLabelPt: "Foco em Cultura e Retenção",
         metricLabelEn: "Focus on Culture & Retention",
-        copyPt: "A IA cuida da triagem técnica e burocracia. O RH deixa de ser um departamento de papéis e passa a ser o motor de talentos.",
-        copyEn: "AI handles technical screening and bureaucracy. HR stops being a paper department and becomes a talent engine."
+        copyPt: "IA assume a burocracia. RH foca em cultura e retenção.",
+        copyEn: "AI handles bureaucracy. HR focuses on culture and retention."
       },
       {
         namePt: "Logística & Supply",
@@ -103,8 +103,8 @@ const layers = [
         metric: "3x+",
         metricLabelPt: "Velocidade de Processamento",
         metricLabelEn: "Processing Speed",
-        copyPt: "Recalque de rotas e estoque em tempo real. A máquina resolve a complexidade para que o time foque na estratégia.",
-        copyEn: "Real-time route and stock recalculation. The machine solves complexity so the team can focus on strategy."
+        copyPt: "Rotas e estoque recalculados em tempo real. Time foca em estratégia.",
+        copyEn: "Routes and stock recalculated in real time. Team focuses on strategy."
       }
     ]
   },
@@ -113,8 +113,8 @@ const layers = [
     levelEn: "Strategic",
     titlePt: "Centro de Comando Preditivo",
     titleEn: "Predictive Command Center",
-    subtitlePt: "Da Intuição para a Certeza Baseada em Dados",
-    subtitleEn: "From Intuition to Data Certainty",
+    subtitlePt: "Da intuição à certeza dirigida por dados.",
+    subtitleEn: "From intuition to data-driven certainty.",
     classes: {
       text: "text-gold",
       bg: "bg-gold",
@@ -132,8 +132,8 @@ const layers = [
         metric: "+25%",
         metricLabelPt: "Aumento na Margem de Lucro",
         metricLabelEn: "Profit Margin Increase",
-        copyPt: "A IA identifica onde você está perdendo dinheiro antes mesmo do fechamento do mês. Decisões guiadas por previsibilidade real.",
-        copyEn: "AI identifies where you're losing money even before the month ends. Decisions guided by real predictability."
+        copyPt: "Detecta vazamento de margem antes do fechamento do mês.",
+        copyEn: "Detects margin leaks before month-end close."
       },
       {
         namePt: "Diretoria & Expansão",
@@ -141,8 +141,8 @@ const layers = [
         metric: "95%",
         metricLabelPt: "Precisão em Forecast",
         metricLabelEn: "Forecast Accuracy",
-        copyPt: "Simulação de cenários futuros seguros. Decisões de investimento agressivas baseadas no comportamento real do mercado.",
-        copyEn: "Secure future scenario simulation. Aggressive investment decisions based on real market behavior."
+        copyPt: "Cenários previstos com 95% de precisão. Decisão sem chute.",
+        copyEn: "Scenarios forecast at 95% accuracy. Decisions without guesswork."
       }
     ]
   }
@@ -311,6 +311,32 @@ export default function BeforeAfter() {
           </div>
 
         </div>
+
+        {/* Bridge CTA — connects to EnterpriseMap (outside spine so the vertical line ends with the layers) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="mt-24 md:mt-32 text-center"
+        >
+          <div className="inline-block max-w-2xl mx-auto">
+            <p className="text-sm md:text-base text-muted/85 mb-4">
+              {t(
+                "Essas 3 camadas se aplicam a cada setor da sua empresa.",
+                "These 3 layers apply to every sector in your company.",
+              )}
+            </p>
+            <a
+              href="#enterprise-map"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent/10 hover:bg-accent/15 border border-accent/30 hover:border-accent/50 text-accent font-semibold text-sm md:text-base transition-colors"
+            >
+              {t("Ver onde isso vira ROI por setor", "See where this becomes ROI per sector")}
+              <ArrowRight size={16} />
+            </a>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );

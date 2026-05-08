@@ -4,6 +4,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 import { TrendingUp, UserX, RefreshCcw, DollarSign, Users } from "lucide-react";
 import Image from "next/image";
+import { Highlight } from "./ui/Highlight";
 
 const painCards = [
   {
@@ -81,7 +82,7 @@ const realityCards = [
 ];
 
 export default function RealityCheck() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   return (
     <section id="problema" className="py-24 px-6 relative max-w-7xl mx-auto">
@@ -168,10 +169,15 @@ export default function RealityCheck() {
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">
                 {t("IA vende. Se alguém souber usar.", "AI Drives Growth. If Deployed Correctly.")}
               </h2>
-              <p className="text-muted mb-6">
-                {t(
-                  "A maioria das empresas testa um chatbot e para por aí. O resultado real vem quando a IA entra na operação de verdade — no CRM, no financeiro, no atendimento.",
-                  "Most companies experiment with a chatbot and stop there. Real impact happens when AI is integrated into core operations — CRM, finance, and support."
+              <p className="text-muted mb-6 leading-relaxed">
+                {lang === "pt" ? (
+                  <>
+                    A maioria das empresas testa um chatbot e para por aí. O resultado real vem quando a IA entra na operação de verdade — no <Highlight>CRM</Highlight>, no <Highlight>financeiro</Highlight>, no <Highlight>atendimento</Highlight>.
+                  </>
+                ) : (
+                  <>
+                    Most companies experiment with a chatbot and stop there. Real impact happens when AI is integrated into core operations — <Highlight>CRM</Highlight>, <Highlight>finance</Highlight>, and <Highlight>support</Highlight>.
+                  </>
                 )}
               </p>
               

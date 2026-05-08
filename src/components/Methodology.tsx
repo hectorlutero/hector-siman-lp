@@ -101,64 +101,265 @@ export default function Methodology() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.7 }}
-                  className="w-full lg:w-2/5 max-w-lg"
+                  className="w-full max-w-md lg:w-2/5 lg:max-w-md mx-auto lg:mx-0"
                 >
-                  <div className="relative aspect-square md:aspect-[4/3] rounded-2xl glass border border-white/10 overflow-hidden group">
-                    {/* Abstract CSS Wireframes based on step */}
-                    <div className="absolute inset-0 bg-background/50 flex flex-col items-center justify-center p-8">
+                  <div className="relative aspect-[4/3] rounded-2xl glass border border-white/10 overflow-hidden group">
+                    {/* Abstract CSS Wireframes — fills the card */}
+                    <div className="absolute inset-0 bg-background/50 flex flex-col items-center justify-center p-2 sm:p-4 md:p-6">
+                      <div className="w-full h-full">
                       {i === 0 && (
-                        // Step 1: Standardization (Flow map & SOP fill)
-                        <div className="w-full h-full flex items-center justify-between p-4 opacity-100 gap-6">
-                          {/* Flow Mapping (Left) */}
-                          <div className="relative flex-1 h-full border border-white/10 rounded-xl bg-black/20 overflow-hidden">
-                            {/* Nodes */}
-                            {/* Start (Input) */}
-                            <div className="absolute left-[10%] top-[50%] -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-accent/80 bg-accent/20 z-10 shadow-[0_0_10px_rgba(37,99,235,0.4)]" />
-                            {/* Fork (Decision) */}
-                            <div className="absolute left-[30%] top-[50%] -translate-x-1/2 -translate-y-1/2 w-5 h-5 rotate-45 border-2 border-warning/80 bg-warning/20 z-10" />
-                            {/* Top Process */}
-                            <div className="absolute left-[50%] top-[25%] -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-md border-2 border-accent/60 bg-accent/10 z-10" />
-                            {/* Bottom Process */}
-                            <div className="absolute left-[50%] top-[75%] -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-md border-2 border-accent/60 bg-accent/10 z-10" />
-                            {/* Merge */}
-                            <div className="absolute left-[70%] top-[50%] -translate-x-1/2 -translate-y-1/2 w-5 h-5 rotate-45 border-2 border-warning/80 bg-warning/20 z-10" />
-                            {/* End (Conclusion) */}
-                            <div className="absolute left-[90%] top-[50%] -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 border-success/80 bg-success/20 z-10 flex items-center justify-center shadow-[0_0_10px_rgba(16,185,129,0.4)]">
-                              <div className="w-1.5 h-1.5 bg-success rounded-full" />
-                            </div>
+                        // Step 1: Standardization — git tree exploration + sync'd auto-writing SOP
+                        <div className="w-full h-full flex items-stretch gap-2 sm:gap-3 md:gap-4">
+                          {/* Flow Mapping (LEFT — 2/3) */}
+                          <div className="relative basis-2/3 h-full border border-accent/20 rounded-xl bg-accent/[0.03] overflow-hidden">
+                            {/* Visible blue grid bg */}
+                            <div className="absolute inset-0" style={{
+                              backgroundImage: 'linear-gradient(rgba(59, 130, 246, 0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.16) 1px, transparent 1px)',
+                              backgroundSize: '16px 16px'
+                            }} />
 
-                            {/* SVG Lines */}
-                            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-                              <line x1="10%" y1="50%" x2="30%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="2" strokeDasharray="4 4" />
-                              <line x1="30%" y1="50%" x2="50%" y2="25%" stroke="rgba(255,255,255,0.15)" strokeWidth="2" strokeDasharray="4 4" />
-                              <line x1="30%" y1="50%" x2="50%" y2="75%" stroke="rgba(255,255,255,0.15)" strokeWidth="2" strokeDasharray="4 4" />
-                              <line x1="50%" y1="25%" x2="70%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="2" strokeDasharray="4 4" />
-                              <line x1="50%" y1="75%" x2="70%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="2" strokeDasharray="4 4" />
-                              <line x1="70%" y1="50%" x2="90%" y2="50%" stroke="rgba(255,255,255,0.15)" strokeWidth="2" strokeDasharray="4 4" />
+                            {/* Tree topology — sigmoidal sprouts, branches end at unique tips, no merge-back */}
+                            <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 w-full h-full overflow-visible">
+                              {/* MAIN TRUNK — always visible */}
+                              <path d="M 5 50 L 95 50" fill="none" stroke="rgba(59,130,246,0.45)" strokeWidth="1" strokeLinecap="round" />
+
+                              {/* SEGMENT BASE TRACES + REVEAL OVERLAYS — line traces FAST (~half the pulse window) then stays bright */}
+                              {[
+                                // Branch 1 — pulse 0.04-0.22, line traces 0.06-0.13
+                                { d: "M 15 50 C 30 50 35 20 50 20 L 88 20", revealStart: 0.06, traceEnd: 0.13 },
+                                // Branch 2 — pulse 0.30-0.54, line traces 0.34-0.43
+                                { d: "M 22 50 C 37 50 37 70 52 70 L 88 70", revealStart: 0.34, traceEnd: 0.43 },
+                                // Branch 3 — pulse 0.62-0.88, line traces 0.77-0.82
+                                { d: "M 55 70 C 62 70 62 88 70 88 L 88 88", revealStart: 0.77, traceEnd: 0.82 },
+                              ].map((seg, idx) => (
+                                <g key={`seg-${idx}`}>
+                                  <path d={seg.d} fill="none" stroke="rgba(59,130,246,0.1)" strokeWidth="0.6" />
+                                  <motion.path
+                                    d={seg.d}
+                                    fill="none"
+                                    stroke="#3b82f6"
+                                    strokeWidth="1.2"
+                                    strokeLinecap="round"
+                                    pathLength={1}
+                                    initial={{ pathLength: 0, opacity: 0 }}
+                                    animate={{
+                                      pathLength: [0, 0, 1, 1, 1, 0],
+                                      opacity: [0, 0.9, 0.9, 0.9, 0, 0],
+                                    }}
+                                    transition={{
+                                      duration: 12,
+                                      repeat: Infinity,
+                                      ease: "linear",
+                                      times: [0, seg.revealStart, seg.traceEnd, 0.95, 0.96, 1],
+                                    }}
+                                  />
+                                </g>
+                              ))}
+
+                              {/* PULSES — P3 retraces trunk + B2 sigmoid + B2 plateau partial, then sub-branches to B3 tip */}
+                              {[
+                                // Pulse 1: trunk → fork@15 → sigmoid up → plateau y=20 → tip1
+                                { d: "M 5 50 L 15 50 C 30 50 35 20 50 20 L 88 20", pulseStart: 0.04, pulseEnd: 0.22 },
+                                // Pulse 2: trunk → fork@22 → symmetric sigmoid → plateau y=70 → tip2
+                                { d: "M 5 50 L 22 50 C 37 50 37 70 52 70 L 88 70", pulseStart: 0.30, pulseEnd: 0.54 },
+                                // Pulse 3: trunk → fork@22 → B2 sigmoid → B2 plateau (to x=55) → sub-fork → sigmoid down → plateau y=88 → tip3
+                                { d: "M 5 50 L 22 50 C 37 50 37 70 52 70 L 55 70 C 62 70 62 88 70 88 L 88 88", pulseStart: 0.62, pulseEnd: 0.88 },
+                              ].map((p, idx) => (
+                                <motion.path
+                                  key={`pulse-${idx}`}
+                                  d={p.d}
+                                  fill="none"
+                                  stroke="#93c5fd"
+                                  strokeWidth="2"
+                                  strokeDasharray="20 350"
+                                  strokeLinecap="round"
+                                  initial={{ opacity: 0 }}
+                                  animate={{
+                                    opacity: [0, 0, 1, 1, 0, 0],
+                                    strokeDashoffset: [50, 50, 50, -340, -340, -340],
+                                  }}
+                                  transition={{
+                                    duration: 12,
+                                    repeat: Infinity,
+                                    times: [0, p.pulseStart - 0.005, p.pulseStart, p.pulseEnd, p.pulseEnd + 0.005, 1],
+                                    ease: "linear",
+                                  }}
+                                />
+                              ))}
                             </svg>
 
-                            {/* Mapping Light */}
+                            {/* TRUNK COMMITS — always visible (start, 2 fork points, end) */}
+                            {[
+                              { left: "5%", top: "50%", endpoint: true },
+                              { left: "15%", top: "50%" },
+                              { left: "22%", top: "50%" },
+                              { left: "95%", top: "50%", endpoint: true },
+                            ].map((node, idx) => (
+                              <div
+                                key={`trunk-${idx}`}
+                                className={`absolute -translate-x-1/2 -translate-y-1/2 z-10 ${node.endpoint ? "w-3 h-3 rounded-full bg-accent shadow-[0_0_8px_rgba(59,130,246,0.7)]" : "w-1.5 h-1.5 rounded-full bg-accent/80 border border-accent"}`}
+                                style={{ left: node.left, top: node.top }}
+                              />
+                            ))}
+
+                            {/* BRANCH 1 COMMITS — curve + plateau y=20, revealed by pulse 1 */}
+                            {[
+                              { left: "35%", top: "30%", revealAt: 0.10 },
+                              { left: "55%", top: "20%", revealAt: 0.14 },
+                              { left: "70%", top: "20%", revealAt: 0.18 },
+                            ].map((node, idx) => (
+                              <motion.div
+                                key={`b1-${idx}`}
+                                className="absolute -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-accent/80 border border-accent z-10"
+                                style={{ left: node.left, top: node.top }}
+                                initial={{ opacity: 0.12 }}
+                                animate={{ opacity: [0.12, 0.12, 1, 1, 0.12, 0.12] }}
+                                transition={{
+                                  duration: 12,
+                                  repeat: Infinity,
+                                  times: [0, Math.max(0, node.revealAt - 0.02), node.revealAt, 0.96, 0.99, 1],
+                                }}
+                              />
+                            ))}
+
+                            {/* BRANCH 2 COMMITS — symmetric sigmoid then plateau y=70 from x=52 */}
+                            {[
+                              { left: "37%", top: "60%", revealAt: 0.39 },
+                              { left: "75%", top: "70%", revealAt: 0.50 },
+                              { left: "85%", top: "70%", revealAt: 0.53 },
+                            ].map((node, idx) => (
+                              <motion.div
+                                key={`b2-${idx}`}
+                                className="absolute -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-accent/80 border border-accent z-10"
+                                style={{ left: node.left, top: node.top }}
+                                initial={{ opacity: 0.12 }}
+                                animate={{ opacity: [0.12, 0.12, 1, 1, 0.12, 0.12] }}
+                                transition={{
+                                  duration: 12,
+                                  repeat: Infinity,
+                                  times: [0, Math.max(0, node.revealAt - 0.02), node.revealAt, 0.96, 0.99, 1],
+                                }}
+                              />
+                            ))}
+
+                            {/* SUB-FORK DIAMOND — at (55, 70), revealed when B2 line passes through it (~0.44) */}
                             <motion.div
-                              animate={{
-                                left: ["10%", "30%", "50%", "30%", "50%", "70%", "90%", "90%", "10%", "10%"],
-                                top: ["50%", "50%", "25%", "50%", "75%", "50%", "50%", "50%", "50%", "50%"],
-                                opacity: [1, 1, 1, 1, 1, 1, 1, 0, 0, 1],
-                                scale: [1, 1, 1.5, 1, 1, 1, 1.5, 0, 0, 1]
+                              className="absolute -translate-x-1/2 -translate-y-1/2 w-2 h-2 rotate-45 border border-accent bg-accent/30 z-10"
+                              style={{ left: "55%", top: "70%" }}
+                              initial={{ opacity: 0.12 }}
+                              animate={{ opacity: [0.12, 0.12, 1, 1, 0.12, 0.12] }}
+                              transition={{
+                                duration: 12,
+                                repeat: Infinity,
+                                times: [0, 0.42, 0.44, 0.96, 0.99, 1],
                               }}
-                              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 0.95, 0.99, 1] }}
-                              className="absolute w-3 h-3 -ml-1.5 -mt-1.5 bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,1)] z-20"
                             />
+
+                            {/* BRANCH 3 COMMITS — sub-sigmoid then plateau y=88 from x=70 */}
+                            {[
+                              { left: "62%", top: "79%", revealAt: 0.80 },
+                              { left: "78%", top: "88%", revealAt: 0.85 },
+                            ].map((node, idx) => (
+                              <motion.div
+                                key={`b3-${idx}`}
+                                className="absolute -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-accent/80 border border-accent z-10"
+                                style={{ left: node.left, top: node.top }}
+                                initial={{ opacity: 0.12 }}
+                                animate={{ opacity: [0.12, 0.12, 1, 1, 0.12, 0.12] }}
+                                transition={{
+                                  duration: 12,
+                                  repeat: Infinity,
+                                  times: [0, Math.max(0, node.revealAt - 0.02), node.revealAt, 0.96, 0.99, 1],
+                                }}
+                              />
+                            ))}
+
+                            {/* DESTINATION TIPS — at end of each plateau, revealed when pulse arrives */}
+                            {[
+                              { left: "88%", top: "20%", revealAt: 0.22 },
+                              { left: "88%", top: "70%", revealAt: 0.54 },
+                              { left: "88%", top: "88%", revealAt: 0.88 },
+                            ].map((tip, idx) => (
+                              <motion.div
+                                key={`tip-${idx}`}
+                                className="absolute -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 border-accent bg-accent/30 z-10 shadow-[0_0_8px_rgba(59,130,246,0.5)]"
+                                style={{ left: tip.left, top: tip.top }}
+                                initial={{ opacity: 0.12 }}
+                                animate={{ opacity: [0.12, 0.12, 1, 1, 0.12, 0.12] }}
+                                transition={{
+                                  duration: 12,
+                                  repeat: Infinity,
+                                  times: [0, Math.max(0, tip.revealAt - 0.02), tip.revealAt, 0.96, 0.99, 1],
+                                }}
+                              />
+                            ))}
+
                           </div>
 
-                          {/* POP Document (Right) */}
-                          <div className="w-[45%] h-full border-2 border-white/10 rounded-xl bg-white/5 p-4 flex flex-col gap-4 relative overflow-hidden">
-                            <div className="w-1/2 h-3 bg-white/20 rounded mb-2" />
-                            {/* Document lines filling */}
-                            <motion.div animate={{ scaleX: [0, 1, 1, 0] }} style={{ originX: 0 }} transition={{ duration: 4, repeat: Infinity, ease: "circInOut" }} className="h-2.5 bg-accent/80 rounded w-full" />
-                            <motion.div animate={{ scaleX: [0, 1, 1, 0] }} style={{ originX: 0 }} transition={{ duration: 4, delay: 0.3, repeat: Infinity, ease: "circInOut" }} className="h-2.5 bg-accent/80 rounded w-[85%]" />
-                            <motion.div animate={{ scaleX: [0, 1, 1, 0] }} style={{ originX: 0 }} transition={{ duration: 4, delay: 0.6, repeat: Infinity, ease: "circInOut" }} className="h-2.5 bg-accent/80 rounded w-[70%]" />
-                            <motion.div animate={{ scaleX: [0, 1, 1, 0] }} style={{ originX: 0 }} transition={{ duration: 4, delay: 0.9, repeat: Infinity, ease: "circInOut" }} className="h-2.5 bg-accent/80 rounded w-[90%]" />
-                            <motion.div animate={{ scaleX: [0, 1, 1, 0] }} style={{ originX: 0 }} transition={{ duration: 4, delay: 1.2, repeat: Infinity, ease: "circInOut" }} className="h-2.5 bg-accent/80 rounded w-[60%]" />
+                          {/* POP Document (RIGHT — 1/3) — each pulse triggers 4 lines */}
+                          <div className="basis-1/3 shrink-0 h-full border border-accent/20 rounded-xl bg-accent/[0.02] p-3 flex flex-col gap-2 relative overflow-hidden">
+                            <div className="flex items-center gap-1.5 mb-1">
+                              <ClipboardList size={11} className="text-accent/70 shrink-0" strokeWidth={2} />
+                              <div className="flex-1 h-px bg-accent/30" />
+                            </div>
+                            {([
+                              // Pulse 1 — 4 lines during 0.04-0.22, check after pulse ends
+                              { width: "100%", revealAt: 0.08, checkbox: true, checkAt: 0.24 },
+                              { width: "82%", revealAt: 0.13 },
+                              { width: "70%", revealAt: 0.17 },
+                              { width: "90%", revealAt: 0.22 },
+                              // Pulse 2 — 4 lines during 0.30-0.54, check after pulse ends
+                              { width: "75%", revealAt: 0.34, checkbox: true, checkAt: 0.56 },
+                              { width: "92%", revealAt: 0.40 },
+                              { width: "60%", revealAt: 0.47 },
+                              { width: "78%", revealAt: 0.54 },
+                              // Pulse 3 — 4 lines during 0.62-0.88, check after pulse ends
+                              { width: "85%", revealAt: 0.66, checkbox: true, checkAt: 0.90 },
+                              { width: "65%", revealAt: 0.73 },
+                              { width: "95%", revealAt: 0.80 },
+                              { width: "55%", revealAt: 0.88 },
+                            ] as { width: string; revealAt: number; checkbox?: boolean; checkAt?: number }[]).map((line, idx) => (
+                              <div key={idx} className="flex items-center gap-1.5">
+                                {line.checkbox && line.checkAt !== undefined ? (
+                                  <motion.div
+                                    className="relative w-2 h-2 border border-accent/55 rounded-[2px] shrink-0 flex items-center justify-center"
+                                    animate={{ backgroundColor: ["rgba(59,130,246,0)", "rgba(59,130,246,0)", "rgba(59,130,246,0.7)", "rgba(59,130,246,0.7)", "rgba(59,130,246,0)"] }}
+                                    transition={{
+                                      duration: 12,
+                                      repeat: Infinity,
+                                      times: [0, Math.max(0, line.checkAt - 0.01), line.checkAt, 0.96, 1],
+                                    }}
+                                  >
+                                    <motion.svg
+                                      viewBox="0 0 8 8"
+                                      className="absolute inset-0 w-full h-full"
+                                      animate={{ opacity: [0, 0, 1, 1, 0] }}
+                                      transition={{
+                                        duration: 12,
+                                        repeat: Infinity,
+                                        times: [0, Math.max(0, line.checkAt - 0.01), line.checkAt, 0.96, 1],
+                                      }}
+                                    >
+                                      <path d="M 1.5 4 L 3.5 6 L 6.5 2.5" fill="none" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                                    </motion.svg>
+                                  </motion.div>
+                                ) : (
+                                  <div className="w-1 h-1 rounded-full bg-accent/45 shrink-0 ml-0.5" />
+                                )}
+                                <motion.div
+                                  initial={{ scaleX: 0 }}
+                                  animate={{ scaleX: [0, 0, 1, 1, 0] }}
+                                  style={{ originX: 0, width: line.width }}
+                                  transition={{
+                                    duration: 12,
+                                    repeat: Infinity,
+                                    ease: [0.25, 0.8, 0.25, 1],
+                                    times: [0, Math.max(0, line.revealAt - 0.01), Math.min(0.95, line.revealAt + 0.025), 0.96, 1],
+                                  }}
+                                  className="h-1.5 bg-accent/60 rounded-full"
+                                />
+                              </div>
+                            ))}
                           </div>
                         </div>
                       )}
@@ -391,18 +592,43 @@ export default function Methodology() {
                                 className="absolute w-full h-[2px] bg-success/50 shadow-[0_0_15px_#10b981]"
                               />
                               
-                              {/* Core element */}
-                              <motion.div 
-                                animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
-                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                                className="w-[35%] h-[35%] border-2 border-success rotate-45 flex items-center justify-center bg-success/10 shadow-[0_0_15px_rgba(16,185,129,0.4)]"
+                              {/* Infinity core — pulse travels along the lemniscate forever */}
+                              <motion.svg
+                                viewBox="0 0 100 40"
+                                className="w-[88%] h-auto overflow-visible drop-shadow-[0_0_8px_rgba(16,185,129,0.55)]"
+                                animate={{ scale: [1, 1.06, 1], opacity: [0.85, 1, 0.85] }}
+                                transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                               >
-                                <motion.div 
-                                  animate={{ rotate: [0, 90, 180, 270, 360] }}
-                                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                                  className="w-[40%] h-[40%] bg-success/80 shadow-[0_0_10px_#10b981]" 
+                                {/* Base dim trace */}
+                                <path
+                                  d="M 50 20 C 38 2, 12 2, 8 20 C 4 38, 38 38, 50 20 C 62 2, 96 2, 92 20 C 88 38, 62 38, 50 20 Z"
+                                  fill="none"
+                                  stroke="rgba(16,185,129,0.35)"
+                                  strokeWidth="2.5"
+                                  strokeLinecap="round"
                                 />
-                              </motion.div>
+                                {/* Bright glow stroke (steady) */}
+                                <path
+                                  d="M 50 20 C 38 2, 12 2, 8 20 C 4 38, 38 38, 50 20 C 62 2, 96 2, 92 20 C 88 38, 62 38, 50 20 Z"
+                                  fill="none"
+                                  stroke="#10b981"
+                                  strokeWidth="1.6"
+                                  strokeOpacity="0.6"
+                                  strokeLinecap="round"
+                                />
+                                {/* Traveling pulse — strokeDashoffset loop */}
+                                <motion.path
+                                  d="M 50 20 C 38 2, 12 2, 8 20 C 4 38, 38 38, 50 20 C 62 2, 96 2, 92 20 C 88 38, 62 38, 50 20 Z"
+                                  fill="none"
+                                  stroke="#a7f3d0"
+                                  strokeWidth="3"
+                                  strokeLinecap="round"
+                                  strokeDasharray="22 240"
+                                  animate={{ strokeDashoffset: [262, 0] }}
+                                  transition={{ duration: 0.4, repeat: Infinity, ease: "linear" }}
+                                  style={{ filter: "drop-shadow(0 0 4px #10b981)" }}
+                                />
+                              </motion.svg>
                             </div>
 
                             {/* Decorative Nodes on Traces */}
@@ -413,6 +639,7 @@ export default function Methodology() {
                           </div>
                         </div>
                       )}
+                      </div>
                     </div>
 
                     {/* Overlay Glow */}
