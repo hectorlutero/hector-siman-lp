@@ -201,8 +201,15 @@ export default function Sectors() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
-          className="mt-16 text-center"
+          className="mt-16 flex flex-col items-center gap-5"
         >
+          <Button
+            variant="primary"
+            href="https://calendar.app.google/WQGLZTfmwWmbo5AP7"
+            external
+          >
+            {t("Conversar com Especialista", "Talk to an Expert")}
+          </Button>
           <Button variant="tertiary" href="#enterprise-map">
             {t("Ver oportunidades do meu setor", "See opportunities for my sector")}
           </Button>

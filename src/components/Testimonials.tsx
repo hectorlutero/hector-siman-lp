@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Quote } from "lucide-react";
 import { SmartCountUp } from "./ui/SmartCountUp";
+import { Button } from "./ui/Button";
 
 const testimonials = [
   {
@@ -126,6 +127,23 @@ export default function Testimonials() {
             "* Representative testimonials based on real projects. Names changed for confidentiality."
           )}
         </p>
+
+        {/* Section CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="mt-12 md:mt-16 text-center"
+        >
+          <Button
+            variant="primary"
+            href="https://calendar.app.google/WQGLZTfmwWmbo5AP7"
+            external
+          >
+            {t("Ser o próximo case", "Become the next case")}
+          </Button>
+        </motion.div>
       </div>
     </section>
   );

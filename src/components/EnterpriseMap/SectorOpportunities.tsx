@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Banknote, Headphones, Users, Scale, Briefcase, type LucideIcon } from "lucide-react";
+import { Banknote, Headphones, Users, Scale, Briefcase, Sparkles, type LucideIcon } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { Button } from "../ui/Button";
 
 interface Opportunity {
   impactPt: string;
@@ -269,6 +270,110 @@ export function SectorOpportunities() {
             </motion.div>
           );
         })}
+
+        {/* Meta-proof card — this very site, built using the method */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="relative rounded-2xl p-[1px] bg-gradient-to-br from-[#2563eb] via-[#7c3aed] to-[#2563eb] shadow-[0_0_50px_rgba(37,99,235,0.25),0_0_100px_rgba(124,58,237,0.18)]"
+        >
+          <div className="absolute -inset-8 -z-10 rounded-[2rem] bg-gradient-to-br from-[#2563eb]/20 via-[#7c3aed]/15 to-transparent blur-3xl pointer-events-none" />
+          <div className="relative rounded-2xl bg-background/95 backdrop-blur-xl p-6 md:p-10 overflow-hidden">
+            <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#7c3aed]/20 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-[#2563eb]/20 blur-3xl pointer-events-none" />
+
+            <div className="relative z-10">
+              <div className="flex items-start gap-4 md:gap-5 mb-6 md:mb-8">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-[#2563eb] to-[#7c3aed] border border-white/20 flex items-center justify-center shrink-0 shadow-[0_0_18px_rgba(37,99,235,0.4)]">
+                  <Sparkles size={22} className="text-white" strokeWidth={2} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.3em] text-accent mb-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                    {t("Prova ao vivo", "Live proof")}
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight leading-tight">
+                    {t("Inclusive este site é a prova.", "This very site is the proof.")}
+                  </h3>
+                  <p className="text-sm md:text-base text-foreground/80 mt-2 leading-snug max-w-2xl">
+                    {t(
+                      "Estratégia, copy, design e desenvolvimento — em 30 minutos. Trabalho de uma agência inteira, feito por um único profissional com a nossa metodologia.",
+                      "Strategy, copy, design, and development — in 30 minutes. An entire agency's worth of work, delivered by one professional using our method.",
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
+                {[
+                  {
+                    valuePt: "30 min",
+                    valueEn: "30 min",
+                    labelPt: "Tempo real de execução",
+                    labelEn: "Actual delivery time",
+                    accent: true,
+                  },
+                  {
+                    valuePt: "1–3 meses",
+                    valueEn: "1–3 months",
+                    labelPt: "Caminho tradicional",
+                    labelEn: "Traditional path",
+                  },
+                  {
+                    valuePt: "~99,7%",
+                    valueEn: "~99.7%",
+                    labelPt: "Tempo economizado",
+                    labelEn: "Time saved",
+                    accent: true,
+                  },
+                  {
+                    valuePt: "~US$ 48k",
+                    valueEn: "~US$ 48k",
+                    labelPt: "Custo evitado · taxa dev sênior EUA",
+                    labelEn: "Cost avoided · US senior dev rate",
+                    accent: true,
+                  },
+                ].map((stat, i) => (
+                  <div
+                    key={i}
+                    className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 md:p-5"
+                  >
+                    <div
+                      className={`text-2xl md:text-3xl font-bold leading-[1.1] tracking-tight tabular-nums mb-1.5 ${
+                        stat.accent
+                          ? "bg-gradient-to-br from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent"
+                          : "text-foreground/85"
+                      }`}
+                    >
+                      {t(stat.valuePt, stat.valueEn)}
+                    </div>
+                    <div className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] text-muted/65 leading-snug">
+                      {t(stat.labelPt, stat.labelEn)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 pt-5 md:pt-6 border-t border-white/[0.08]">
+                <p className="text-sm md:text-base text-muted/85 leading-relaxed flex-1">
+                  {t(
+                    "É a mesma metodologia que aplicamos na sua operação. O que demoraria meses passa a rodar em horas.",
+                    "It's the same method we apply to your operation. What used to take months now runs in hours.",
+                  )}
+                </p>
+                <Button
+                  variant="primary"
+                  href="https://calendar.app.google/WQGLZTfmwWmbo5AP7"
+                  external
+                >
+                  {t("Quero o mesmo na minha empresa", "I want this for my company")}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

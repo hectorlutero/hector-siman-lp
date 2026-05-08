@@ -43,7 +43,7 @@ const variantClass: Record<ButtonVariant, string> = {
   primary:
     "bg-gradient-to-br from-[#2563eb] to-[#7c3aed] text-white shadow-[0_0_18px_rgba(37,99,235,0.45)] hover:shadow-[0_0_32px_rgba(37,99,235,0.65),0_0_64px_rgba(124,58,237,0.2)] hover:-translate-y-0.5",
   secondary:
-    "bg-accent/10 hover:bg-accent/15 border border-accent/30 hover:border-accent/55 text-accent",
+    "bg-gradient-to-br from-[#2563eb] to-[#7c3aed] text-white shadow-[0_0_18px_rgba(37,99,235,0.45)] hover:shadow-[0_0_32px_rgba(37,99,235,0.65),0_0_64px_rgba(124,58,237,0.2)] hover:-translate-y-0.5",
   tertiary:
     "text-accent hover:text-accent-light !px-0 !py-1 !rounded-none !shadow-none bg-transparent border-0 text-sm md:text-base",
 };

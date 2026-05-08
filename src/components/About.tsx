@@ -17,8 +17,18 @@ export default function About() {
     t("Varejo", "Retail"),
     t("Transportes", "Transport"),
     "Business Intelligence",
-    "Marketing",
+    t("Agências de Marketing", "Marketing Agencies"),
     "Software Houses",
+    t("Finanças", "Finance"),
+    t("Jurídico", "Legal"),
+    t("Mercado Imobiliário", "Real Estate"),
+    t("Construção", "Construction"),
+    t("Saúde", "Health"),
+    t("Eventos", "Events"),
+    t("Mídias Sociais", "Social Media"),
+    "YouTube",
+    "Blogs",
+    "Podcasts",
   ];
 
   const bullets = [

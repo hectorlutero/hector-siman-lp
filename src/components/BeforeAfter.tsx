@@ -285,16 +285,25 @@ export default function BeforeAfter() {
           transition={{ duration: 0.6 }}
           className="mt-24 md:mt-32 text-center"
         >
-          <div className="inline-block max-w-2xl mx-auto">
-            <p className="text-sm md:text-base text-muted/85 mb-4">
+          <div className="inline-flex flex-col items-center max-w-2xl mx-auto">
+            <p className="text-sm md:text-base text-muted/85 mb-5">
               {t(
                 "Essas 3 camadas se aplicam a cada setor da sua empresa.",
                 "These 3 layers apply to every sector in your company.",
               )}
             </p>
-            <Button variant="tertiary" href="#enterprise-map">
-              {t("Ver onde isso vira ROI por setor", "See where this becomes ROI per sector")}
+            <Button
+              variant="primary"
+              href="https://calendar.app.google/WQGLZTfmwWmbo5AP7"
+              external
+            >
+              {t("Conversar com Especialista", "Talk to an Expert")}
             </Button>
+            <div className="mt-5">
+              <Button variant="tertiary" href="#enterprise-map">
+                {t("Ver onde isso vira ROI por setor", "See where this becomes ROI per sector")}
+              </Button>
+            </div>
           </div>
         </motion.div>
 

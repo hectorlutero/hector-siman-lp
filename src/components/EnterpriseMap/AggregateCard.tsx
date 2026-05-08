@@ -4,11 +4,7 @@ import { useEffect } from "react";
 import { motion, useMotionValue, useReducedMotion, animate } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-
-// Delay (s) before AggregateCard fades in after the section enters view.
-// Cascade animation: 4 pairs × (PAIR_DURATION 4.0s + PAIR_GAP 0.5s) + ENTER_OFFSET 0.8s
-// - last gap = 800 + 3*4500 + 4000 = 18300ms. Aggregate appears just after.
-const AGGREGATE_DELAY_S = 18.7;
+import { Button } from "../ui/Button";
 
 interface Props {
   inView: boolean;
@@ -29,8 +25,8 @@ export function AggregateCard({ inView }: Props) {
       return;
     }
 
-    const opCtl = animate(opacity, 1, { duration: 0.6, delay: AGGREGATE_DELAY_S, ease: "easeOut" });
-    const yCtl = animate(y, 0, { duration: 0.6, delay: AGGREGATE_DELAY_S, ease: "easeOut" });
+    const opCtl = animate(opacity, 1, { duration: 0.5, ease: "easeOut" });
+    const yCtl = animate(y, 0, { duration: 0.5, ease: "easeOut" });
 
     return () => {
       opCtl.stop();
@@ -79,13 +75,14 @@ export function AggregateCard({ inView }: Props) {
         </div>
 
         {/* CTA */}
-        <a
-          href="#cta"
-          className="px-7 py-4 rounded-full bg-success text-background font-bold text-sm md:text-base hover:scale-105 active:scale-100 transition-transform inline-flex items-center gap-2 shadow-[0_8px_24px_-6px_rgba(34,197,94,0.5)]"
+        <Button
+          variant="primary"
+          href="https://calendar.app.google/WQGLZTfmwWmbo5AP7"
+          external
+          leadingIcon={TrendingUp}
         >
-          <TrendingUp size={18} />
           {t("Quero esse mapa", "Get this map")}
-        </a>
+        </Button>
       </div>
 
       {/* Blueprint corner ticks */}

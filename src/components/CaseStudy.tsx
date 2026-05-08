@@ -161,7 +161,7 @@ export default function CaseStudy() {
         </motion.div>
 
         {/* 3D Carousel Container */}
-        <div className="relative w-full max-w-7xl mx-auto h-[420px] sm:h-[380px] md:h-[360px] flex justify-center mt-16" style={{ perspective: 2000 }}>
+        <div className="relative w-full max-w-7xl mx-auto h-[420px] sm:h-[380px] md:h-[480px] flex justify-center mt-16" style={{ perspective: 2000 }}>
           
           {caseStudies.map((caseItem, index) => {
             // Calculate relative offset (-1, 0, 1)
@@ -246,6 +246,36 @@ export default function CaseStudy() {
                         </div>
                       </div>
                     ))}
+                  </div>
+
+                  {/* Desktop-only detail row — problem + solution snippets */}
+                  <div className="hidden md:grid grid-cols-2 gap-8 px-10 pb-6 pt-2 border-t border-white/5">
+                    <div>
+                      <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-danger/70 mb-3">
+                        // {t("O Problema", "The Problem")}
+                      </div>
+                      <ul className="space-y-2">
+                        {caseItem.problemPt.slice(0, 2).map((_, i) => (
+                          <li key={i} className="flex items-start gap-2.5 text-sm text-muted leading-relaxed">
+                            <span className="w-1 h-1 rounded-full bg-danger/55 shrink-0 mt-2" aria-hidden="true" />
+                            <span>{t(caseItem.problemPt[i], caseItem.problemEn[i])}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-success/70 mb-3">
+                        // {t("A Solução", "The Solution")}
+                      </div>
+                      <ul className="space-y-2">
+                        {caseItem.solutionPt.slice(0, 2).map((_, i) => (
+                          <li key={i} className="flex items-start gap-2.5 text-sm text-muted leading-relaxed">
+                            <span className="w-1 h-1 rounded-full bg-success/60 shrink-0 mt-2" aria-hidden="true" />
+                            <span>{t(caseItem.solutionPt[i], caseItem.solutionEn[i])}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
 
                   {/* CTA — opens modal with full details */}

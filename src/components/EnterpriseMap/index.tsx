@@ -17,10 +17,8 @@ export default function EnterpriseMap() {
     <section
       aria-label="Mapa de oportunidades de impacto por setor"
       id="enterprise-map"
-      className="relative blueprint-glow py-32 md:py-40 px-4 overflow-hidden"
+      className="relative py-32 md:py-40 px-4 overflow-hidden"
     >
-      <div className="aura-orb aura-orb-1" style={{ opacity: 0.18 }} />
-      <div className="aura-orb aura-orb-2" style={{ opacity: 0.12 }} />
 
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background to-transparent pointer-events-none z-[5]" aria-hidden="true" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent pointer-events-none z-[5]" aria-hidden="true" />
@@ -107,9 +105,13 @@ export default function EnterpriseMap() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.55, ease: [0.25, 0.8, 0.25, 1] }}
-              className="mt-20 md:mt-24"
+              className="relative blueprint-glow mt-20 md:mt-24 rounded-3xl overflow-hidden"
             >
-              <BlueprintMapReveal active={showBlueprint} />
+              <div className="aura-orb aura-orb-1" style={{ opacity: 0.18 }} />
+              <div className="aura-orb aura-orb-2" style={{ opacity: 0.12 }} />
+              <div className="relative z-10">
+                <BlueprintMapReveal active={showBlueprint} />
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
